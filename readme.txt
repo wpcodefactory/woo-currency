@@ -1,10 +1,10 @@
-  === WBW Currency Switcher for WooCommerce ===
+=== WBW Currency Switcher for WooCommerce ===
 Contributors: woobewoo
 Tags: currency switcher, WooCommerce currency switcher, multi currency, currency converter, currency, converter, WooCommerce
 Donate link: https://woobewoo.com/product/woo-currency/
 Tested up to: 6.8
 Stable tag: 2.1.6
- 
+
 WBW Currency Switcher for WooCommerce allows customers to switch products prices to any currencies. Get rates converted in the real-time with dynamic currency switcher
 
 == Description ==
@@ -41,22 +41,20 @@ The plugin comes with three additional modes– tooltip, currency rates, and cur
 * [Increase the cart conversion](https://woobewoo.com/feature/shopping-cart-conversion-rate?utm_source=wordpress&utm_medium=cartconversion&utm_campaign=currency "Shopping cart conversion rate")
 Store conversion rates could be improved up to 30% if you let the customers see the prices in a preferred currency. You don’t lose customers just because they don’t have the option to pay in their native currency.
 * [Geo IP rules](https://woobewoo.com/feature/geo-ip-rules "Geo IP rules")**
-When Geo IP rules feature is on, Currencies Switcher will automatically identify your customers’ countries by their IP address and they will see products in their country’s currency. Besides, using custom settings you can specify the definition of the currency yourself, just select your list of countries for each currency. 
+When Geo IP rules feature is on, Currencies Switcher will automatically identify your customers’ countries by their IP address and they will see products in their country’s currency. Besides, using custom settings you can specify the definition of the currency yourself, just select your list of countries for each currency.
 * [Mobile Friendly](https://woobewoo.com/feature/mobile-friendly/ "Mobile Friendly")
  With our plugin, you can have two versions of currency switcher, rates, and converter for your website : one for smartphones, one for desktops and laptops. The plugin automatically identifies the device accessing your website and then automatically display a mobile-optimized version to the user. You can choose the devices that will display modules: mobile, desktops, or both. A nice bonus is an opportunity to choose the size of the screen on which your site will be displayed in a mobile version.
- 
- ** - Pro features
 
+ ** - Pro features
 
 = Support and suggestions for WBW Currency Switcher for WooCommerce Plugin =
 
 If you have suggestions for Currency Switcher Plugin, please contact us via [Contact Form](https://woobewoo.com/contact-us?utm_source=wordpress&utm_medium=contactus&utm_campaign=currency "Contact Us") on a website.
 
 Video tutorial on how to set up WBW Currency Switcher for WooCommerce Plugin
-[youtube https://youtu.be/lJ2r1AbRmJU] 
+[youtube https://youtu.be/lJ2r1AbRmJU]
 
-
-== Installation == 
+== Installation ==
 
 a) VIA FTP
 Download zip archive with plugin
@@ -85,10 +83,10 @@ Press the Activate button
 = How do I get started? =
 
 1. Move to WooCommerce > Setting > Currency.
-2. In the Currency tab firstly you need to set your WooCommerce shop basic currency. Then choose currencies you want to add from drop-down lists and set the exchange rate for each currency. 
-3. In the Options tab select the rate using these interactive platforms and grab the latest exchange rates. 
+2. In the Currency tab firstly you need to set your WooCommerce shop basic currency. Then choose currencies you want to add from drop-down lists and set the exchange rate for each currency.
+3. In the Options tab select the rate using these interactive platforms and grab the latest exchange rates.
 4. Move to the Design settings of Switcher, Converter, Rates or Tooltip modules and set the type, position, colour settings etc.
-5. In Display Rules set the page to display switcher: on All pages, on selected pages, product categories, custom post types. 
+5. In Display Rules set the page to display switcher: on All pages, on selected pages, product categories, custom post types.
 Also, once you set the options, you can display WooCommerce Currency as a widget in "Appearance" > Widget.
 
 Follow this tutorial [Getting Started with WBW Currency Switcher for WooCommerce plugin](https://woobewoo.com/documentation/getting-started-with-woocommerce-currency-plugin?utm_source=wordpress&utm_medium=GettingStarted&utm_campaign=currency "Getting Started with WBW Currency Switcher for WooCommerce plugin") for more detailed instructions.
@@ -97,7 +95,7 @@ Follow this tutorial [Getting Started with WBW Currency Switcher for WooCommerce
 
 WBW Currency Switcher for WooCommerce plugin created special tab Currency in the WooCommerce Settings menu. You can follow the link in plugin window to move there, or go there manually via WooCommerce plugin. Follow this tutorial [Main Settings](https://woobewoo.com/documentation/currency-main-settings?utm_source=wordpress&utm_medium=main-settings&utm_campaign=currency "Main Settings") and you can easily set the Currency Switcher plugin.
 
-= Will transactions are processed in the base currency or in the chosen currency? = 
+= Will transactions are processed in the base currency or in the chosen currency? =
 Currency conversions are estimated and should be used for informational purposes only. Purchases still using your WooCommerce store’s base currency itself. Read more about [Manual / automatic exchange rate for each currency](https://woobewoo.com/feature/manual-automatic-exchange-rate-for-each-currency?utm_source=wordpress&utm_medium=exchangerate&utm_campaign=currency "Manual / automatic exchange rate for each currency")
 
 = How can I add currency switcher to my shop? =
@@ -126,12 +124,11 @@ Large or small, desktop or handheld, WBW Currency Switcher for WooCommerce is fu
 = How to update the currency by the latest exchange rate? =
 The plugin uses the Cryptocompare and Free Converter platforms which are providing the latest exchange rates, and substitute displayed prices in real-time. You can update the currency Manually or Automatically (Pro). Automatic update option comes with a selection of period for currency updates: every minute, hourly, twice a day, daily, weekly or manually.
 
-
 == Screenshots ==
 1. Currency Switcher demo
 2. Rates, Switcher and Converter examples on the Shop page
 3. WBW Currency Switcher for WooCommerce Plugin admin panel. Currencies settings
-4. WBW Currency Switcher for WooCommerce Plugin admin panel. Options 
+4. WBW Currency Switcher for WooCommerce Plugin admin panel. Options
 5. Admin panel. Frontend Switcher Design
 6. Admin panel. Frontend Switcher types: simple (vertical & horizontal), rotating, floating.
 7. Admin panel. Frontend Switcher Display rules
@@ -140,15 +137,17 @@ The plugin uses the Cryptocompare and Free Converter platforms which are providi
 10. Admin panel. Currency Rates settings
 11. Admin panel. Geo IP Rules
 12. Admin panel. Custom flags
-13. Admin panel. Custom Currencies 
+13. Admin panel. Custom Currencies
 
 == Changelog ==
+
+= 2.1.7 - 20/07/2025 =
+ * WC tested up to: 10.0.
 
 = 2.1.6 =
  * Fixed switcher with GEOIP
  * Fixed Checkout Blocks
 
- 
 = 2.1.5 =
  * Fixed link View details
  * Minor code fix
@@ -166,7 +165,7 @@ The plugin uses the Cryptocompare and Free Converter platforms which are providi
  * Minor code fix
 
 = 2.1.1 =
-* Code optimization
+ * Code optimization
 
 = 2.1.0 =
  * Minor code fix
@@ -182,7 +181,7 @@ The plugin uses the Cryptocompare and Free Converter platforms which are providi
  * Fixed compatibility with Variation Swatches for WooCommerce
 
 = 2.0.6 =
- * Minor code fix 
+ * Minor code fix
 
 = 2.0.5 =
  * Added compatibility with YITH WooCommerce Product Add-ons & Extra Options
@@ -233,7 +232,7 @@ The plugin uses the Cryptocompare and Free Converter platforms which are providi
 = 1.9.3 =
  * Fixed problem with HPOS
  * Minor code fix
- 
+
 = 1.9.2 =
  * Minor code fix
 
@@ -261,7 +260,7 @@ The plugin uses the Cryptocompare and Free Converter platforms which are providi
 = 1.8.4 =
  * Fixed converter styles
  * Minor issues fix
- 
+
 = 1.8.3 =
  * Minor issues fix
 
@@ -312,7 +311,7 @@ The plugin uses the Cryptocompare and Free Converter platforms which are providi
  * Minor issues fix
 
 = 1.6.8 =
- * Added Currency Convertion API
+ * Added Currency Conversion API
  * Minor issues fix
 
 = 1.6.7 =
@@ -369,7 +368,7 @@ The plugin uses the Cryptocompare and Free Converter platforms which are providi
 
 = 1.5.4 =
  * Minor issues fix
- 
+
 = 1.5.3 =
  * Fixed error on the 404 page
  * Added a shortcode which is display extended switcher
@@ -574,9 +573,9 @@ The plugin uses the Cryptocompare and Free Converter platforms which are providi
  * Fixes  Display Rules, Disable URl
  * Fixed currency switch on mobile issue
  * Add Gravity Forms support issue
- * Fixed Gravity Forms support for checkout page issue 
+ * Fixed Gravity Forms support for checkout page issue
  * Fixes display rules issue
- 
+
 = 1.1.4 =
  * Add gitignore
  * Remove idea path
@@ -636,7 +635,6 @@ The plugin uses the Cryptocompare and Free Converter platforms which are providi
  * Converter block overlay fix
  * Minor issues fix
 
-
 = 1.0.6 =
  * Add custom flag Pro feature
  * Add flags rotating and other
@@ -657,7 +655,7 @@ The plugin uses the Cryptocompare and Free Converter platforms which are providi
  * Small fix for notice (check empty value)
  * Add feature GeoIpRules
  * Add fix CSS for theme Storefront and other
- * Added Ajax Preview 
+ * Added Ajax Preview
  * Remove redirect and add jquery link changer
  * Minor issues fix
 
