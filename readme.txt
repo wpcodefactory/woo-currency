@@ -141,7 +141,8 @@ The plugin uses the Cryptocompare and Free Converter platforms which are providi
 
 == Changelog ==
 
-= 2.1.7 - 20/07/2025 =
+= 2.1.7 - 21/07/2025 =
+ * Removed __autoload from PHPMailerAutoload.php to avoid errors.
  * WC tested up to: 10.0.
 
 = 2.1.6 =
