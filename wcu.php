@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: WBW Currency Switcher for WooCommerce
- * Description: WBW Currency Switcher for WooCommerce allows the customers switch products prices to any currencies. Get rates converted in the real time with dynamic currency switcher
- * Version: 2.1.7
+ * Description: WBW Currency Switcher for WooCommerce allows the customers switch products prices to any currencies. Get rates converted in the real time with dynamic currency switcher.
+ * Version: 2.1.8
  * Author: woobewoo
  * Author URI: https://woobewoo.com
  * WC requires at least: 3.4.0
@@ -12,17 +12,22 @@
  **/
 
 /**
- * Base config constants and functions
+ * Base config constants and functions.
  */
 require_once(dirname(__FILE__). DIRECTORY_SEPARATOR. 'config.php');
 require_once(dirname(__FILE__). DIRECTORY_SEPARATOR. 'functions.php');
+
+/**
+ * HPOS.
+ */
 add_action( 'before_woocommerce_init', function() {
 	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
 		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
 	}
 } );
+
 /**
- * Connect all required core classes
+ * Connect all required core classes.
  */
 importClassWcu('dbWcu');
 importClassWcu('installerWcu');
@@ -36,8 +41,9 @@ importClassWcu('dispatcherWcu');
 importClassWcu('fieldWcu');
 importClassWcu('tableWcu');
 importClassWcu('frameWcu');
+
 /**
- * @deprecated since version 1.0.1
+ * @deprecated since version 1.0.1.
  */
 importClassWcu('langWcu');
 importClassWcu('reqWcu');
@@ -51,11 +57,13 @@ importClassWcu('utilsWcu');
 importClassWcu('modInstallerWcu');
 importClassWcu('installerDbUpdaterWcu');
 importClassWcu('dateWcu');
+
 /**
- * Check plugin version - maybe we need to update database, and check global errors in request
+ * Check plugin version - maybe we need to update database, and check global errors in request.
  */
 installerWcu::update();
 errorsWcu::init();
+
 /**
  * Start application
  */

@@ -8,11 +8,13 @@
 defined( 'ABSPATH' ) || exit;
 
 global $wpdb;
+
 if (!defined('WPLANG') || WPLANG == '') {
 	define('WCU_WPLANG', 'en_GB');
 } else {
 	define('WCU_WPLANG', WPLANG);
 }
+
 if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 
 define('WCU_PLUG_NAME', basename(dirname(__FILE__)));
@@ -56,7 +58,7 @@ define('WCU_CURRENT', 'current');
 define('WCU_EOL', "\n");
 
 define('WCU_PLUGIN_INSTALLED', true);
-define('WCU_VERSION', '2.1.7');
+define('WCU_VERSION', '2.1.8');
 define('WCU_DEV_VER', 1);
 define('WCU_USER', 'user');
 
@@ -76,20 +78,24 @@ define('WCU_ALL', 'all');
 
 define('WCU_METHODS', 'methods');
 define('WCU_USERLEVELS', 'userlevels');
+
 /**
  * Framework instance code
  */
 define('WCU_CODE', 'wcu');
 
 define('WCU_LANG_CODE', 'woo-currency');
+
 /**
  * Plugin name
  */
 define('WCU_WP_PLUGIN_NAME', 'WooCurrency');
+
 /**
  * Allow minification
  */
 define('WCU_MINIFY_ASSETS', false);
+
 /**
  * Custom defined for plugin
  */
