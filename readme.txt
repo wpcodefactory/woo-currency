@@ -142,558 +142,558 @@ The plugin uses the Cryptocompare and Free Converter platforms which are providi
 == Changelog ==
 
 = 2.1.8 - 29/07/2025 =
- * Dev - Coding standards improved.
+* Dev - Coding standards improved.
 
 = 2.1.7 - 21/07/2025 =
- * Removed __autoload from PHPMailerAutoload.php to avoid errors.
- * WC tested up to: 10.0.
+* Fix - Removed __autoload from PHPMailerAutoload.php to avoid errors.
+* WC tested up to: 10.0.
 
 = 2.1.6 =
- * Fixed switcher with GEOIP
- * Fixed Checkout Blocks
+* Fixed switcher with GEOIP
+* Fixed Checkout Blocks
 
 = 2.1.5 =
- * Fixed link View details
- * Minor code fix
+* Fixed link View details
+* Minor code fix
 
 = 2.1.4 =
- * Fixed shipping total for cart-blocks
- * Fixed shipping costs for cart-blocks
- * Minor code fix
+* Fixed shipping total for cart-blocks
+* Fixed shipping costs for cart-blocks
+* Minor code fix
 
 = 2.1.3 =
- * Minor code fix
+* Minor code fix
 
 = 2.1.2 =
- * Added compatibility with Woocommerce Checkout-block
- * Minor code fix
+* Added compatibility with Woocommerce Checkout-block
+* Minor code fix
 
 = 2.1.1 =
- * Code optimization
+* Code optimization
 
 = 2.1.0 =
- * Minor code fix
+* Minor code fix
 
 = 2.0.9 =
- * Fixed compatibility with WooCommerce PayPal Payments
+* Fixed compatibility with WooCommerce PayPal Payments
 
 = 2.0.8 =
- * Minor code fix
+* Minor code fix
 
 = 2.0.7 =
- * Fixed compatibility with WC Blocks Cart/Checkout
- * Fixed compatibility with Variation Swatches for WooCommerce
+* Fixed compatibility with WC Blocks Cart/Checkout
+* Fixed compatibility with Variation Swatches for WooCommerce
 
 = 2.0.6 =
- * Minor code fix
+* Minor code fix
 
 = 2.0.5 =
- * Added compatibility with YITH WooCommerce Product Add-ons & Extra Options
- * Minor code fix
+* Added compatibility with YITH WooCommerce Product Add-ons & Extra Options
+* Minor code fix
 
 = 2.0.4 =
- * Added compatibility with Woodmart Theme - fixed cart subtotal for manual prices
- * Minor code fix
+* Added compatibility with Woodmart Theme - fixed cart subtotal for manual prices
+* Minor code fix
 
 = 2.0.2 =
- * Fixed conflict with WP Statistics
- * Minor code fix
+* Fixed conflict with WP Statistics
+* Minor code fix
 
 = 2.0.2 =
- * Fix for Finance Yahoo
- * Minor code fix
+* Fix for Finance Yahoo
+* Minor code fix
 
 = 2.0.1 =
- * Fixed Finance Yahoo
+* Fixed Finance Yahoo
 
 = 2.0.0 =
- * Minor code optimizations
+* Minor code optimizations
 
 = 1.9.9 =
- * Minor code fix
+* Minor code fix
 
 = 1.9.8 =
- * Minor code fix
- * Currency provider stopped working - added notification and use last course vaues
+* Minor code fix
+* Currency provider stopped working - added notification and use last course vaues
 
 = 1.9.7 =
- * Minor code fix
+* Minor code fix
 
 = 1.9.6 =
- * Fixed geo ip option
- * Fixed dropdown switcher
+* Fixed geo ip option
+* Fixed dropdown switcher
 
 = 1.9.5 =
- * Fixed cents round
- * Added thousand and decimal separators for each currency
- * Fixed custom symbols
- * Fixed dropdown currency widget by window resize
+* Fixed cents round
+* Added thousand and decimal separators for each currency
+* Fixed custom symbols
+* Fixed dropdown currency widget by window resize
 
 = 1.9.4 =
- * Added compatibility with Elementor menu mini cart
- * Minor code fix
+* Added compatibility with Elementor menu mini cart
+* Minor code fix
 
 = 1.9.3 =
- * Fixed problem with HPOS
- * Minor code fix
+* Fixed problem with HPOS
+* Minor code fix
 
 = 1.9.2 =
- * Minor code fix
+* Minor code fix
 
 = 1.9.1 =
- * Minor code fix
+* Minor code fix
 
 = 1.9.0 =
- * Minor code optimizations
+* Minor code optimizations
 
 = 1.8.9 =
- * Minor code fix
+* Minor code fix
 
 = 1.8.8 =
- * Compatibility improvement
+* Compatibility improvement
 
 = 1.8.7 =
- * Minor code fix
+* Minor code fix
 
 = 1.8.6 =
- * Minor code optimizations
+* Minor code optimizations
 
 = 1.8.5 =
- * Minor code fix
+* Minor code fix
 
 = 1.8.4 =
- * Fixed converter styles
- * Minor issues fix
+* Fixed converter styles
+* Minor issues fix
 
 = 1.8.3 =
- * Minor issues fix
+* Minor issues fix
 
 = 1.8.2 =
- * Fixed price decimals for emails
+* Fixed price decimals for emails
 
 = 1.8.1 =
- * HPOS compatibility improvement
- * Minor issues fix
+* HPOS compatibility improvement
+* Minor issues fix
 
 = 1.8.0 =
- * Fixed deprecated functions
- * Fixed compatibility with HPOS
+* Fixed deprecated functions
+* Fixed compatibility with HPOS
 
 = 1.7.9 =
- * Added compatibility with HPOS
+* Added compatibility with HPOS
 
 = 1.7.8 =
- * Minor code optimization
+* Minor code optimization
 
 = 1.7.7 =
- * Minor issues fix
+* Minor issues fix
 
 = 1.7.6 =
- * Minor issues fix
+* Minor issues fix
 
 = 1.7.5 =
- * Minor issues fix
+* Minor issues fix
 
 = 1.7.4 =
- * Added COP and SVC
- * Minor issues fix
+* Added COP and SVC
+* Minor issues fix
 
 = 1.7.3 =
- * Minor issues fix
+* Minor issues fix
 
 = 1.7.2 =
- * Fixed exchange rates by European central bank
+* Fixed exchange rates by European central bank
 
 = 1.7.1 =
- * Cookie fix
+* Cookie fix
 
 = 1.7.0 =
- * Minor issues fix
+* Minor issues fix
 
 = 1.6.9 =
- * Fix for plugin WooCommerce PayPal Payments
- * Minor issues fix
+* Fix for plugin WooCommerce PayPal Payments
+* Minor issues fix
 
 = 1.6.8 =
- * Added Currency Conversion API
- * Minor issues fix
+* Added Currency Conversion API
+* Minor issues fix
 
 = 1.6.7 =
- * Fixed getting price when saving
+* Fixed getting price when saving
 
 = 1.6.6 =
- * Added html escaping when saving options
- * Fixed location detection automatic by IP
- * Minor issues fix
+* Added html escaping when saving options
+* Fixed location detection automatic by IP
+* Minor issues fix
 
 = 1.6.5 =
- * Fixed get rate with finance_yahoo
- * Fixed case with empty manual price field
+* Fixed get rate with finance_yahoo
+* Fixed case with empty manual price field
 
 = 1.6.4 =
- * Readme update
- * Minor issues fix
+* Readme update
+* Minor issues fix
 
 = 1.6.3 =
- * Minor issues fix
+* Minor issues fix
 
 = 1.6.2 =
- * Added limit on number decimal places in the converter
- * Minor issues fix
+* Added limit on number decimal places in the converter
+* Minor issues fix
 
 = 1.6.1 =
- * Minor issues fix
+* Minor issues fix
 
 = 1.6.0 =
- * Fix for shortcodes
- * Minor issues fix
+* Fix for shortcodes
+* Minor issues fix
 
 = 1.5.9 =
- * Fixed dropdown switcher widget
- * Minor issues fix
+* Fixed dropdown switcher widget
+* Minor issues fix
 
 = 1.5.8 =
- * Added saving current rate in order
- * Added convertor for Paynet
- * Fixed update order price
- * Minor issues fix
+* Added saving current rate in order
+* Added convertor for Paynet
+* Fixed update order price
+* Minor issues fix
 
 = 1.5.7 =
- * Minor issues fix
+* Minor issues fix
 
 = 1.5.6 =
- * Fixed get country code
- * Fixed condition for initialization .msdropdown
- * Fixed PayPal from cart
+* Fixed get country code
+* Fixed condition for initialization .msdropdown
+* Fixed PayPal from cart
 
 = 1.5.5 =
- * Fixed refund
- * Minor issues fix
+* Fixed refund
+* Minor issues fix
 
 = 1.5.4 =
- * Minor issues fix
+* Minor issues fix
 
 = 1.5.3 =
- * Fixed error on the 404 page
- * Added a shortcode which is display extended switcher
- * Plugin renamed to "WBW Currency Switcher for WooCommerce"
+* Fixed error on the 404 page
+* Added a shortcode which is display extended switcher
+* Plugin renamed to "WBW Currency Switcher for WooCommerce"
 
 = 1.5.2 =
- * Fix editing the currency symbol
- * Fixed resetting currency to default when paying with paypal
- * Fixed Get rate from yahoo
- * Fixed get rate European Central Bank
- * Fixed get rate
- * Added set main currency for search robots
- * Fixed error activation
+* Fix editing the currency symbol
+* Fixed resetting currency to default when paying with paypal
+* Fixed Get rate from yahoo
+* Fixed get rate European Central Bank
+* Fixed get rate
+* Added set main currency for search robots
+* Fixed error activation
 
 = 1.5.1 =
- * Added rounding for rates widget
- * Fixed floating switcher
- * Fix admin meta checkbox
- * Fix addJSVar
+* Added rounding for rates widget
+* Fixed floating switcher
+* Fix admin meta checkbox
+* Fix addJSVar
 
 = 1.5.0 =
- * Minor issues fix
+* Minor issues fix
 
 = 1.4.9 =
- * Fix for unavailable products by region
- * Fix plugins page notice
- * Fix manual prices
- * Minor issues fix
+* Fix for unavailable products by region
+* Fix plugins page notice
+* Fix manual prices
+* Minor issues fix
 
 = 1.4.8 =
- * Added compatible with WooCommerce Blocks
- * Added Manual Currency Prices for products
- * Added Product Table plugin compatibility
- * Added checkbox unavailable region in products
+* Added compatible with WooCommerce Blocks
+* Added Manual Currency Prices for products
+* Added Product Table plugin compatibility
+* Added checkbox unavailable region in products
 
 = 1.4.7 =
- * Minor issues fix
+* Minor issues fix
 
 = 1.4.6 =
- * Minor issues fix
+* Minor issues fix
 
 = 1.4.5 =
- * Minor issues fix
+* Minor issues fix
 
 = 1.4.4 =
- * Add additional shortcode for a frontend switcher display
- * Minor issues fix
+* Add additional shortcode for a frontend switcher display
+* Minor issues fix
 
 = 1.4.3 =
- * Fixes for show popup option
- * Fixes for curly braces in php 7.4
+* Fixes for show popup option
+* Fixes for curly braces in php 7.4
 
 = 1.4.2 =
- * Fixes for max call stack error with all currencies
- * Add display symbol optionality to widget type view
- * Added popup message option
- * Small fixes for geoip
- * Fixes for popup switcher
- * Fixes for paypal gateway
- * Fix Wc Layered Nav Filters widget prices
- * Minor issues fix
+* Fixes for max call stack error with all currencies
+* Add display symbol optionality to widget type view
+* Added popup message option
+* Small fixes for geoip
+* Fixes for popup switcher
+* Fixes for paypal gateway
+* Fix Wc Layered Nav Filters widget prices
+* Minor issues fix
 
 = 1.4.1 =
- * Fixes for Printful shipping plugin
- * Fixes for tabs notice
- * Minor issues fix
+* Fixes for Printful shipping plugin
+* Fixes for tabs notice
+* Minor issues fix
 
 = 1.4.0 =
- * Remove custom symbol notice
- * Fixes for check/uncheck option and remove some commented code
- * Fixes for WooCommerce pricing slider filter
- * Minor issues fix
+* Remove custom symbol notice
+* Fixes for check/uncheck option and remove some commented code
+* Fixes for WooCommerce pricing slider filter
+* Minor issues fix
 
 = 1.3.9 =
- * Readme update
- * Set default currencies after deactivation
- * Change Venezuelan currency
- * Added XCD currency
- * Fixes for SEO links
- * Fixes for flags alt
- * Fixed option Hide cents
- * Added currency symbols for Rotating switcher
+* Readme update
+* Set default currencies after deactivation
+* Change Venezuelan currency
+* Added XCD currency
+* Fixes for SEO links
+* Fixes for flags alt
+* Fixed option Hide cents
+* Added currency symbols for Rotating switcher
 
 = 1.3.8 =
- * Fixes for rotating selected color
- * Fixes for notice in pro
- * Fixes for custom symbols mod
+* Fixes for rotating selected color
+* Fixes for notice in pro
+* Fixes for custom symbols mod
 
 = 1.3.7 =
- * Fixes for variation prices
- * Change cdn url
- * Hide woobewoo-for-all-admin style
- * Change link updater
- * Added exchange fee option
- * Fixes for template script loader
- * Fixes for exchange fee
- * Fixes slimscroll notice
+* Fixes for variation prices
+* Change cdn url
+* Hide woobewoo-for-all-admin style
+* Change link updater
+* Added exchange fee option
+* Fixes for template script loader
+* Fixes for exchange fee
+* Fixes slimscroll notice
 
 = 1.3.6 =
- * Fix for Change currency at checkout
- * Minor issues fix
+* Fix for Change currency at checkout
+* Minor issues fix
 
 = 1.3.5 =
- * Fixes for shop order list
- * Minor issues fix
+* Fixes for shop order list
+* Minor issues fix
 
 = 1.3.4 =
- * After point feature add
- * Added currency symbol support to switcher widget
- * Minor issues fix
+* After point feature add
+* Added currency symbol support to switcher widget
+* Minor issues fix
 
 = 1.3.3 =
- * Added Jamaica currency
- * Fixes for img flags
- * Added poloniex aggregator
- * Added finance yahoo aggregator
- * Added cbr and pb aggregators
- * Add Narodowy Bank Polski aggregator
- * Added National Bank of Romania aggregator
- * Added fixer aggregator
- * Added Currencylayer aggregator
- * Added Open Exchange Rates aggregator
- * Fixes for tooltip
- * Converter ie fixes
+* Added Jamaica currency
+* Fixes for img flags
+* Added poloniex aggregator
+* Added finance yahoo aggregator
+* Added cbr and pb aggregators
+* Add Narodowy Bank Polski aggregator
+* Added National Bank of Romania aggregator
+* Added fixer aggregator
+* Added Currencylayer aggregator
+* Added Open Exchange Rates aggregator
+* Fixes for tooltip
+* Converter ie fixes
 
 = 1.3.2 =
- * Added compability with WooCommerce Extra Product Options
- * Change sxgeo file
- * Hide license tab in multisite
- * Fixes for save not auto rated values
- * Minor issues fix
+* Added compability with WooCommerce Extra Product Options
+* Change sxgeo file
+* Hide license tab in multisite
+* Fixes for save not auto rated values
+* Minor issues fix
 
 = 1.3.1 =
- * Code review
+* Code review
 
 = 1.3.0 =
- * Minor issues fix
+* Minor issues fix
 
 = 1.2.9 =
- * Updates for WooCommerce 3.9.0
+* Updates for WooCommerce 3.9.0
 
 = 1.2.8 =
- * Code review
+* Code review
 
 = 1.2.7 =
- * Minor issues fix
+* Minor issues fix
 
 = 1.2.6 =
- * Fixed dashboard styles
- * Minor issues fix
+* Fixed dashboard styles
+* Minor issues fix
 
 = 1.2.5 =
- * Fix total price in admin panel
- * Add fix for order-pay page
- * Minor issues fix
+* Fix total price in admin panel
+* Add fix for order-pay page
+* Minor issues fix
 
 = 1.2.4 =
- * Tooltips fix
- * Currency converter vertical layout fix
- * Fix for PayPal
- * Fix for Symbol selector
+* Tooltips fix
+* Currency converter vertical layout fix
+* Fix for PayPal
+* Fix for Symbol selector
 
 = 1.2.3 =
- * Minor issues fix
+* Minor issues fix
 
 = 1.2.2 =
- * Small fix for CSS Preview
- * Added compatibility WooCommerce PayPal Gateway
+* Small fix for CSS Preview
+* Added compatibility WooCommerce PayPal Gateway
 
 = 1.2.1 =
- * Add round cents
- * Minor issues fix
+* Add round cents
+* Minor issues fix
 
 = 1.2.0 =
- * Added chosen to switcher widged
- * Added slimscroll for floating
+* Added chosen to switcher widged
+* Added slimscroll for floating
 
 = 1.1.9 =
- * Fix Bridge Theme
- * Add flags
- * Fix CSS for Template GeneratePress
- * Fixed admin order currency
- * Fixed order price, fixed capability for gforms
- * Fixed switcher styles
- * Remove save_post hook
- * Fixed currency rates style bug
+* Fix Bridge Theme
+* Add flags
+* Fix CSS for Template GeneratePress
+* Fixed admin order currency
+* Fixed order price, fixed capability for gforms
+* Fixed switcher styles
+* Remove save_post hook
+* Fixed currency rates style bug
 
 = 1.1.8 =
- * Minor issues fix
+* Minor issues fix
 
 = 1.1.7 =
- * WooCommerce update test
- * Minor issues fix
+* WooCommerce update test
+* Minor issues fix
 
 = 1.1.6 =
- * Update readme.txt
- * Minor issues fix
+* Update readme.txt
+* Minor issues fix
 
 = 1.1.5 =
- * fixes for new wp translations
- * Hotfix connectLang function
- * Fixes  Display Rules, Disable URl
- * Fixed currency switch on mobile issue
- * Add Gravity Forms support issue
- * Fixed Gravity Forms support for checkout page issue
- * Fixes display rules issue
+* fixes for new wp translations
+* Hotfix connectLang function
+* Fixes  Display Rules, Disable URl
+* Fixed currency switch on mobile issue
+* Add Gravity Forms support issue
+* Fixed Gravity Forms support for checkout page issue
+* Fixes display rules issue
 
 = 1.1.4 =
- * Add gitignore
- * Remove idea path
- * Fixed image zoom issue
- * Minor issues fix
+* Add gitignore
+* Remove idea path
+* Fixed image zoom issue
+* Minor issues fix
 
 = 1.1.3 =
- * Fix for exclude mod
- * Fix for PayPal Express Checkout
- * Minor issues fix
+* Fix for exclude mod
+* Fix for PayPal Express Checkout
+* Minor issues fix
 
 = 1.1.2 =
- * Added control PayPal supported currencies
- * Added support for 2checkout pluggin
- * Disable WCU for WCFM page
- * Add Options Disable WCU by URI from Textarea
- * Fix notice and fix disabled Geo IP Rules
- * Comment deprecated Function woocommerce_cart_hash
- * Add shortcodes for converter,switcher,rates
- * Add link and text for promo notice
- * Update readme
- * Fix woofilter price by change currency
- * Added SGD currency
- * Minor issues fix
+* Added control PayPal supported currencies
+* Added support for 2checkout pluggin
+* Disable WCU for WCFM page
+* Add Options Disable WCU by URI from Textarea
+* Fix notice and fix disabled Geo IP Rules
+* Comment deprecated Function woocommerce_cart_hash
+* Add shortcodes for converter,switcher,rates
+* Add link and text for promo notice
+* Update readme
+* Fix woofilter price by change currency
+* Added SGD currency
+* Minor issues fix
 
 = 1.1.1 =
- * Feature currency agregator
- * Fix deactivation dialog
- * Fix conflict with datatable deactivation gialog
- * Minor issues fix
+* Feature currency agregator
+* Fix deactivation dialog
+* Fix conflict with datatable deactivation gialog
+* Minor issues fix
 
 = 1.1.0 =
- * Added currency change at checkout
- * Fix CSS deactive popup only for woocurrency
- * Fix for hidding button under switcher popup
- * Add validation A-z for custom currency
- * Fix for manual rate for currency
- * Minor issues fix
+* Added currency change at checkout
+* Fix CSS deactive popup only for woocurrency
+* Fix for hidding button under switcher popup
+* Add validation A-z for custom currency
+* Fix for manual rate for currency
+* Minor issues fix
 
 = 1.0.9 =
- * Fix for Tooltip Hover
- * Fix custom flag upload js notice and added tested up + requires WC to header wcu.php
- * Add custom currency translit, fix currency converter select align, fix chosen placeholders, fix notices in currency flag
- * Minor issues fix
+* Fix for Tooltip Hover
+* Fix custom flag upload js notice and added tested up + requires WC to header wcu.php
+* Add custom currency translit, fix currency converter select align, fix chosen placeholders, fix notices in currency flag
+* Minor issues fix
 
 = 1.0.8 =
- * Add Manual Rate
- * Some fix for margin
- * Fir for FF tooltip
- * Fix tooltip console notice
- * Minor issues fix
+* Add Manual Rate
+* Some fix for margin
+* Fir for FF tooltip
+* Fix tooltip console notice
+* Minor issues fix
 
 = 1.0.7 =
- * Add MXN currency
- * Add Free Converter API key field
- * Add screenshots
- * Converter block overlay fix
- * Minor issues fix
+* Add MXN currency
+* Add Free Converter API key field
+* Add screenshots
+* Converter block overlay fix
+* Minor issues fix
 
 = 1.0.6 =
- * Add custom flag Pro feature
- * Add flags rotating and other
- * Screenshots update
- * Add PRO custom currency
- * Minor issues fix
+* Add custom flag Pro feature
+* Add flags rotating and other
+* Screenshots update
+* Add PRO custom currency
+* Minor issues fix
 
 = 1.0.5 =
- * Readme update
- * Add Feature Currency Switcher Simple Classic and Dropdown
- * Screenshots update
- * Add feature Currency Switcher Rotating and Floating
- * Add flags PRO and currency switcher feature
- * Add feature CurrencyRates Module
- * Added CurrencyConverter Module
- * Code refactoring
- * Add module tooltip feature
- * Small fix for notice (check empty value)
- * Add feature GeoIpRules
- * Add fix CSS for theme Storefront and other
- * Added Ajax Preview
- * Remove redirect and add jquery link changer
- * Minor issues fix
+* Readme update
+* Add Feature Currency Switcher Simple Classic and Dropdown
+* Screenshots update
+* Add feature Currency Switcher Rotating and Floating
+* Add flags PRO and currency switcher feature
+* Add feature CurrencyRates Module
+* Added CurrencyConverter Module
+* Code refactoring
+* Add module tooltip feature
+* Small fix for notice (check empty value)
+* Add feature GeoIpRules
+* Add fix CSS for theme Storefront and other
+* Added Ajax Preview
+* Remove redirect and add jquery link changer
+* Minor issues fix
 
 = 1.0.4 =
- * Fix of adding of a new currency. Update of displaying of currencies list in the admin area
- * Update wcu.php
- * Update readme.txt
- * add install.xml in the pro version
- * fixed errors in all module
- * delete trash in the installer class
- * add constant WCU_DEFAULT_CURRENCY to config, remove not need comments
- * fixed js in a geo_settings module (many alerts)
- * make tab content for currency module
- * Add feature LivePreview CurrencySwitcher
- * Fix small issue with lost tag
- * Add feature Show/Hide Cents of Front to Currency
- * Add currency NZD, KHD, AUD
- * Add Feature Custom Symbol for PRO
- * Added highlight currencies form validation on the client side. Removed notice about supsystic
- * Minor issues fix
+* Fix of adding of a new currency. Update of displaying of currencies list in the admin area
+* Update wcu.php
+* Update readme.txt
+* add install.xml in the pro version
+* fixed errors in all module
+* delete trash in the installer class
+* add constant WCU_DEFAULT_CURRENCY to config, remove not need comments
+* fixed js in a geo_settings module (many alerts)
+* make tab content for currency module
+* Add feature LivePreview CurrencySwitcher
+* Fix small issue with lost tag
+* Add feature Show/Hide Cents of Front to Currency
+* Add currency NZD, KHD, AUD
+* Add Feature Custom Symbol for PRO
+* Added highlight currencies form validation on the client side. Removed notice about supsystic
+* Minor issues fix
 
 = 1.0.3 =
- * Option for searching currency name and symbol
- * Add Brazil Real Currency
- * Fix displaying currency switcher on the frontend
- * Add option for Currency Switcher - Display Mode
- * Minor issues fix
+* Option for searching currency name and symbol
+* Add Brazil Real Currency
+* Fix displaying currency switcher on the frontend
+* Add option for Currency Switcher - Display Mode
+* Minor issues fix
 
 = 1.0.2 =
- * Add of option for Currency Switcher: Offset
- * Fixed double tooltips display.
- * Add Switcher name
- * Add of auto changing of currency symbol after a change of currency name. Add of auto changing of currency title after a change of currency name if they were equal.
- * Fix of displaying currency switcher on pages with pagination for WooCommerce Storefront theme.
+* Add of option for Currency Switcher: Offset
+* Fixed double tooltips display.
+* Add Switcher name
+* Add of auto changing of currency symbol after a change of currency name. Add of auto changing of currency title after a change of currency name if they were equal.
+* Fix of displaying currency switcher on pages with pagination for WooCommerce Storefront theme.
 
 = 1.0.1 / 18.06.2018
- * First release
+* First release
