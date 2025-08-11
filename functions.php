@@ -206,10 +206,10 @@ if(!function_exists('json_encode_utf_normal')) {
 			$with_keys = false;
 			$n = count($value);
 			for ($i = 0, reset($value); $i < $n; $i++, next($value)) {
-						if (key($value) !== $i) {
-				  $with_keys = true;
-				  break;
-						}
+				if (key($value) !== $i) {
+					$with_keys = true;
+					break;
+				}
 			}
 		} elseif (is_object($value)) {
 			$with_keys = true;
