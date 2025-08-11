@@ -8,7 +8,8 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Set first letter in a string as UPPERCASE
+ * Set first letter in a string as UPPERCASE.
+ *
  * @param string $str string to modify
  * @return string string with first Uppercase letter
  */
@@ -17,8 +18,9 @@ if(!function_exists('strFirstUp')) {
 		return strtoupper(substr($str, 0, 1)).strtolower(substr($str, 1, strlen($str)));
 	}
 }
+
 /**
- * Deprecated - class must be created
+ * Deprecated - class must be created.
  */
 if(!function_exists('dateToTimestampWcu')) {
 	function dateToTimestampWcu($date) {
@@ -28,8 +30,10 @@ if(!function_exists('dateToTimestampWcu')) {
 		return mktime(0, 0, 0, $a[1], $a[0], $a[2]);
 	}
 }
+
 /**
- * Generate random string name
+ * Generate random string name.
+ *
  * @param int $lenFrom min len
  * @param int $lenTo max len
  * @return string random string with length from $lenFrom to $lenTo
@@ -46,6 +50,7 @@ if(!function_exists('getRandName')) {
 		return $res;
 	}
 }
+
 if(!function_exists('importWcu')) {
 	function importWcu($path) {
 		if(file_exists($path)) {
@@ -55,6 +60,7 @@ if(!function_exists('importWcu')) {
 		return false;
 	}
 }
+
 if(!function_exists('setDefaultParams')) {
 	function setDefaultParams($params, $default) {
 		foreach($default as $k => $v) {
@@ -63,6 +69,7 @@ if(!function_exists('setDefaultParams')) {
 		return $params;
 	}
 }
+
 if(!function_exists('importClassWcu')) {
 	function importClassWcu($class, $path = '') {
 		if(!class_exists($class)) {
@@ -97,9 +104,11 @@ if(!function_exists('importClassWcu')) {
 		return false;
 	}
 }
+
 /**
- * Check if class name exist with prefix or not
- * @param strin $class preferred class name
+ * Check if class name exist with prefix or not.
+ *
+ * @param string $class preferred class name
  * @return string existing class name
  */
 if(!function_exists('toeGetClassNameWcu')) {
@@ -114,8 +123,10 @@ if(!function_exists('toeGetClassNameWcu')) {
 		return $className;
 	}
 }
+
 /**
- * Create object of specified class
+ * Create object of specified class.
+ *
  * @param string $class class that you want to create
  * @param array $params array of arguments for class __construct function
  * @return object new object of specified class
@@ -128,7 +139,7 @@ if(!function_exists('toeCreateObjWcu')) {
 			$reflection = new ReflectionClass($className);
 			try {
 				$obj = $reflection->newInstanceArgs($params);
-			} catch (ReflectionException $e) {	// If class have no constructor
+			} catch (ReflectionException $e) { // If class have no constructor
 				$obj = $reflection->newInstanceArgs();
 			}
 		} else {
@@ -138,8 +149,10 @@ if(!function_exists('toeCreateObjWcu')) {
 		return $obj;
 	}
 }
+
 /**
- * Redirect user to specified location. Be advised that it should redirect even if headers alredy sent.
+ * Redirect user to specified location. Be advised that it should redirect even if headers already sent.
+ *
  * @param string $url where page must be redirected
  */
 if(!function_exists('redirectWcu')) {
@@ -152,6 +165,7 @@ if(!function_exists('redirectWcu')) {
 		exit();
 	}
 }
+
 if(!function_exists('in_array_array')) {
 	function in_array_array($needle, $haystack) {
 		if(is_array($needle)) {
@@ -164,6 +178,7 @@ if(!function_exists('in_array_array')) {
 			return in_array_array($needle, $haystack);
 	}
 }
+
 if(!function_exists('json_encode_utf_normal')) {
 	function json_encode_utf_normal($value) {
 		if (is_int($value)) {
@@ -212,8 +227,9 @@ if(!function_exists('json_encode_utf_normal')) {
 		}
 	}
 }
+
 /**
- * Prepares the params values to store into db
+ * Prepares the params values to store into db.
  *
  * @param array $d $_POST array
  * @return array
@@ -247,6 +263,7 @@ if(!function_exists('prepareParamsWcu')) {
 		return $d;
 	}
 }
+
 if(!function_exists('prepareFieldCodeWcu')) {
 	function prepareFieldCodeWcu($string) {
 		$string = preg_replace("/[^a-zA-Z0-9\s]/"," ",$string);
@@ -261,8 +278,10 @@ if(!function_exists('prepareFieldCodeWcu')) {
 		return $code;
 	}
 }
+
 /**
- * Recursive implode of array
+ * Recursive implode of array.
+ *
  * @param string $glue imploder
  * @param array $array array to implode
  * @return string imploded array in string
@@ -286,9 +305,12 @@ if(!function_exists('recImplode')) {
 		return $res;
 	}
 }
+
 if(!function_exists('toeObjectToArray')) {
 	function toeObjectToArray($data) {
-		if ((! is_array($data)) and (! is_object($data))) return $data; //$data;
+		if ((! is_array($data)) and (! is_object($data))) {
+			return $data;
+		}
 		$result = array();
 		$data = (array) $data;
 		foreach ($data as $key => $value) {
@@ -301,8 +323,10 @@ if(!function_exists('toeObjectToArray')) {
 		return $result;
 	}
 }
+
 /**
- * Correct apply array_map even if array contains sub-arrays
+ * Correct apply array_map even if array contains sub-arrays.
+ *
  * @param array $array - input array
  * @return array - result array with array_map applied
  */
@@ -322,14 +346,16 @@ if(!function_exists('toeMultArrayMap')) {
 		return $array;
 	}
 }
+
 /**
- * Twig require this function, but it is present not on all servers
+ * Twig require this function, but it is present not on all servers.
  */
 if(!function_exists('hash')) {
 	function hash($method, $data) {
 		return md5($data);
 	}
 }
+
 if(!function_exists('ctype_alpha')) {
 	function ctype_alpha($text) {
 		return (bool) preg_match('/[^\pL]+/', $text);
@@ -353,4 +379,3 @@ if(!function_exists('escHtmlRecursively')) {
 		return $options;
 	}
 }
-/*****/
