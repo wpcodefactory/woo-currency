@@ -44,7 +44,7 @@ if(!function_exists('getRandName')) {
 		$len = mt_rand($lenFrom, $lenTo);
 		if($len) {
 			for($i = 0; $i < $len; $i++) {
-				$res .= chr(mt_rand(97, 122));	/*rand symbol from a to z*/
+				$res .= chr(mt_rand(97, 122)); /*rand symbol from a to z*/
 			}
 		}
 		return $res;
@@ -90,25 +90,6 @@ if(!function_exists('importClassWcu')) {
 				$path = WCU_CLASSES_DIR. $classFile. '.php';
 			}
 			return importWcu($path);
-		} else {    //If such class already exist - let's check does this is our plugin class or someone else
-			/*if(class_exists('ReflectionClass')) {   //ReflectionClass supported begining from php5
-				$reflection = new ReflectionClass($class);
-				$classFile = $reflection->getFileName();
-				if(strpos($classFile, WCU_DIR) === false) {   //Class is not in our plugin directory
-					$conflictWith = substr($classFile, strpos($classFile, 'plugins') + strlen('plugins'. DS));
-					$conflictWith = substr($conflictWith, 0, strpos($conflictWith, DS));
-					$plugins = get_option('active_plugins');
-					if(!empty($plugins)) {
-						for($i = 0; $i < count($plugins); $i++) {
-							if(strpos($plugins[$i], WCU_PLUG_NAME) !== false) {   //Let's remove our plugin from list of active plugins
-								unset($plugins[$i]);
-							}
-						}
-						update_option( 'active_plugins', $plugins );
-					}
-					exit('Sorry, but we have conflict with class name <b style="color: red;">'. $class. '</b> in one of your already installed plugins <b style="color: red;">'. $conflictWith. '</b> located at '. $classFile. '. This means that you can not have both two plugins at one time.');
-				}
-			}*/
 		}
 		return false;
 	}
@@ -182,8 +163,9 @@ if(!function_exists('in_array_array')) {
 	function in_array_array($needle, $haystack) {
 		if(is_array($needle)) {
 			foreach($needle as $n) {
-				if(in_array($n, $haystack))
+				if(in_array($n, $haystack)) {
 					return true;
+				}
 			}
 			return false;
 		} else
@@ -199,8 +181,11 @@ if(!function_exists('json_encode_utf_normal')) {
 		if (is_int($value)) {
 			return (string)$value;
 		} elseif (is_string($value)) {
-			$value = str_replace(array('\\', '/', '"', "\r", "\n", "\b", "\f", "\t"),
-								 array('\\\\', '\/', '\"', '\r', '\n', '\b', '\f', '\t'), $value);
+			$value = str_replace(
+				array('\\', '/', '"', "\r", "\n", "\b", "\f", "\t"),
+				array('\\\\', '\/', '\"', '\r', '\n', '\b', '\f', '\t'),
+				$value
+			);
 			$convmap = array(0x80, 0xFFFF, 0, 0xFFFF);
 			$result = "";
 			for ($i = strlen($value) - 1; $i >= 0; $i--) {
@@ -254,7 +239,6 @@ if(!function_exists('prepareParamsWcu')) {
 		if (!empty($d['params'])) {
 			if (isset($d['params']['options'])) {
 				$options = $d['params']['options'];
-				//unset($d['params']['options']);
 			}
 			if (is_array($d['params'])) {
 				$params = utilsWcu::jsonEncode($d['params']);
@@ -390,19 +374,14 @@ if(!function_exists('ctype_alpha')) {
  * escHtmlRecursively.
  */
 if(!function_exists('escHtmlRecursively')) {
-
 	function escHtmlRecursively( $options ) {
-
 		foreach ( $options as $key => $value ) {
-
 			if ( is_array( $value ) ) {
 				$options[ $key ] = escHtmlRecursively( $value );
 			} elseif ( is_string( $value ) ) {
 				$options[ $key ] = esc_html( $value );
 			}
-
 		}
-
 		return $options;
 	}
 }
