@@ -24,8 +24,9 @@ if(!function_exists('strFirstUp')) {
  */
 if(!function_exists('dateToTimestampWcu')) {
 	function dateToTimestampWcu($date) {
-		if(empty($a))
+		if(empty($a)) {
 			return false;
+		}
 		$a = explode(WCU_DATE_DL, $date);
 		return mktime(0, 0, 0, $a[1], $a[0], $a[2]);
 	}
@@ -104,12 +105,13 @@ if(!function_exists('importClassWcu')) {
 if(!function_exists('toeGetClassNameWcu')) {
 	function toeGetClassNameWcu($class) {
 		$className = '';
-		if(class_exists($class. strFirstUp(WCU_CODE)))
+		if(class_exists($class. strFirstUp(WCU_CODE))) {
 			$className = $class. strFirstUp(WCU_CODE);
-		else if(class_exists(WCU_CLASS_PREFIX. $class))
+		} else if(class_exists(WCU_CLASS_PREFIX. $class)) {
 			$className = WCU_CLASS_PREFIX. $class;
-		else
+		} else {
 			$className = $class;
+		}
 		return $className;
 	}
 }
@@ -168,8 +170,9 @@ if(!function_exists('in_array_array')) {
 				}
 			}
 			return false;
-		} else
+		} else {
 			return in_array_array($needle, $haystack);
+		}
 	}
 }
 
@@ -252,8 +255,9 @@ if(!function_exists('prepareParamsWcu')) {
 			$params = utilsWcu::jsonEncode($d['params']);
 			$d['params'] = $params;
 		}
-		if(empty($options))
+		if(empty($options)) {
 			$options = array('value' => array('EMPTY'), 'data' => array());
+		}
 		if(isset($d['code'])) {
 			if ($d['code'] == '') {
 				$d['code'] = prepareFieldCodeWcu($d['label']).'_'.rand(0, 9999999);
@@ -295,13 +299,15 @@ if(!function_exists('recImplode')) {
 		$count = count($array);
 		foreach($array as $el) {
 			$str = '';
-			if(is_array($el))
+			if(is_array($el)) {
 				$str = recImplode('', $el);
-			else
+			} else {
 				$str = $el;
+			}
 			$res .= $str;
-			if($i < ($count-1))
+			if($i < ($count-1)) {
 				$res .= $glue;
+			}
 			$i++;
 		}
 		return $res;
@@ -319,11 +325,14 @@ if(!function_exists('toeObjectToArray')) {
 		$result = array();
 		$data = (array) $data;
 		foreach ($data as $key => $value) {
-			if (is_object($value)) $value = (array) $value;
-			if (is_array($value))
+			if (is_object($value)) {
+				$value = (array) $value;
+			}
+			if (is_array($value)) {
 				$result[$key] = toeObjectToArray($value);
-			else
+			} else {
 				$result[$key] = $value;
+			}
 		}
 		return $result;
 	}
