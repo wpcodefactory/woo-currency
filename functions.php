@@ -51,6 +51,9 @@ if(!function_exists('getRandName')) {
 	}
 }
 
+/**
+ * importWcu.
+ */
 if(!function_exists('importWcu')) {
 	function importWcu($path) {
 		if(file_exists($path)) {
@@ -61,6 +64,9 @@ if(!function_exists('importWcu')) {
 	}
 }
 
+/**
+ * setDefaultParams.
+ */
 if(!function_exists('setDefaultParams')) {
 	function setDefaultParams($params, $default) {
 		foreach($default as $k => $v) {
@@ -70,6 +76,9 @@ if(!function_exists('setDefaultParams')) {
 	}
 }
 
+/**
+ * importClassWcu.
+ */
 if(!function_exists('importClassWcu')) {
 	function importClassWcu($class, $path = '') {
 		if(!class_exists($class)) {
@@ -166,6 +175,9 @@ if(!function_exists('redirectWcu')) {
 	}
 }
 
+/**
+ * in_array_array.
+ */
 if(!function_exists('in_array_array')) {
 	function in_array_array($needle, $haystack) {
 		if(is_array($needle)) {
@@ -179,6 +191,9 @@ if(!function_exists('in_array_array')) {
 	}
 }
 
+/**
+ * json_encode_utf_normal.
+ */
 if(!function_exists('json_encode_utf_normal')) {
 	function json_encode_utf_normal($value) {
 		if (is_int($value)) {
@@ -264,6 +279,9 @@ if(!function_exists('prepareParamsWcu')) {
 	}
 }
 
+/**
+ * prepareFieldCodeWcu.
+ */
 if(!function_exists('prepareFieldCodeWcu')) {
 	function prepareFieldCodeWcu($string) {
 		$string = preg_replace("/[^a-zA-Z0-9\s]/"," ",$string);
@@ -306,6 +324,9 @@ if(!function_exists('recImplode')) {
 	}
 }
 
+/**
+ * toeObjectToArray.
+ */
 if(!function_exists('toeObjectToArray')) {
 	function toeObjectToArray($data) {
 		if ((! is_array($data)) and (! is_object($data))) {
@@ -356,12 +377,18 @@ if(!function_exists('hash')) {
 	}
 }
 
+/**
+ * ctype_alpha.
+ */
 if(!function_exists('ctype_alpha')) {
 	function ctype_alpha($text) {
 		return (bool) preg_match('/[^\pL]+/', $text);
 	}
 }
 
+/**
+ * escHtmlRecursively.
+ */
 if(!function_exists('escHtmlRecursively')) {
 
 	function escHtmlRecursively( $options ) {
