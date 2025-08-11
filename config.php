@@ -15,7 +15,9 @@ if (!defined('WPLANG') || WPLANG == '') {
 	define('WCU_WPLANG', WPLANG);
 }
 
-if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
+if(!defined('DS')) {
+	define('DS', DIRECTORY_SEPARATOR);
+}
 
 define('WCU_PLUG_NAME', basename(dirname(__FILE__)));
 define('WCU_DIR', WP_PLUGIN_DIR. DS. WCU_PLUG_NAME. DS);
@@ -58,7 +60,7 @@ define('WCU_CURRENT', 'current');
 define('WCU_EOL', "\n");
 
 define('WCU_PLUGIN_INSTALLED', true);
-define('WCU_VERSION', '2.1.8');
+define('WCU_VERSION', '2.1.9');
 define('WCU_DEV_VER', 1);
 define('WCU_USER', 'user');
 
@@ -80,24 +82,24 @@ define('WCU_METHODS', 'methods');
 define('WCU_USERLEVELS', 'userlevels');
 
 /**
- * Framework instance code
+ * Framework instance code.
  */
 define('WCU_CODE', 'wcu');
 
 define('WCU_LANG_CODE', 'woo-currency');
 
 /**
- * Plugin name
+ * Plugin name.
  */
 define('WCU_WP_PLUGIN_NAME', 'WooCurrency');
 
 /**
- * Allow minification
+ * Allow minification.
  */
 define('WCU_MINIFY_ASSETS', false);
 
 /**
- * Custom defined for plugin
+ * Custom defined for plugin.
  */
 define('WCU_COMMON', 'common');
 define('WCU_FB_LIKE', 'fb_like');
