@@ -20,6 +20,46 @@ class promoViewWcu extends viewWcu {
 	public $pluginSlug;
 
 	/**
+	 * mainLink.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	public $mainLink;
+
+	/**
+	 * faqList.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	public $faqList;
+
+	/**
+	 * serverSettings.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	public $serverSettings;
+
+	/**
+	 * news.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	public $news;
+
+	/**
+	 * contactFields.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	public $contactFields;
+
+	/**
 	 * displayAdminFooter.
 	 */
 	public function displayAdminFooter() {
