@@ -2,12 +2,22 @@
 /**
  * WBW Currency Switcher for WooCommerce - promoViewWcu Class
  *
+ * @version 2.2.0
+ *
  * @author  woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
 class promoViewWcu extends viewWcu {
+
+	/**
+	 * pluginSlug.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	public $pluginSlug;
 
 	/**
 	 * displayAdminFooter.
