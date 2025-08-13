@@ -67,7 +67,14 @@ class optionsViewWcu extends viewWcu {
 	 */
 	public $mainLink;
 
+	/**
+	 * _news.
+	 */
 	private $_news = array();
+
+	/**
+	 * getNewFeatures.
+	 */
 	public function getNewFeatures() {
 		$res = array();
 		$readmePath = WCU_DIR. 'readme.txt';
@@ -88,7 +95,11 @@ class optionsViewWcu extends viewWcu {
 		}
 		return $res;
 	}
-    public function getAdminPage() {
+
+	/**
+	 * getAdminPage.
+	 */
+	public function getAdminPage() {
 		$tabs = $this->getModule()->getTabs();
 		$activeTab = $this->getModule()->getActiveTab();
 		$content = 'No tab content found - ERROR';
@@ -114,6 +125,10 @@ class optionsViewWcu extends viewWcu {
 
         parent::display('optionsAdminPage');
     }
+
+	/**
+	 * sortOptsSet.
+	 */
 	public function sortOptsSet($a, $b) {
 		if($a['weight'] > $b['weight'])
 			return -1;
@@ -121,10 +136,18 @@ class optionsViewWcu extends viewWcu {
 			return 1;
 		return 0;
 	}
+
+	/**
+	 * getTabContent.
+	 */
 	public function getTabContent() {
 		frameWcu::_()->addScript('admin.mainoptions', $this->getModule()->getModPath(). 'js/admin.mainoptions.js');
 		return parent::getContent('optionsAdminMain');
 	}
+
+	/**
+	 * serverSettings.
+	 */
 	public function serverSettings() {
 		global $wpdb;
 		$this->assign('systemInfo', array(
@@ -144,6 +167,10 @@ class optionsViewWcu extends viewWcu {
         ));
 		return parent::display('_serverSettings');
 	}
+
+	/**
+	 * getSettingsTabContent.
+	 */
 	public function getSettingsTabContent() {
 		frameWcu::_()->addScript('admin.settings', $this->getModule()->getModPath(). 'js/admin.settings.js');
 		frameWcu::_()->getModule('templates')->loadJqueryUi();
@@ -153,4 +180,5 @@ class optionsViewWcu extends viewWcu {
 		$this->assign('exportAllSubscribersUrl', uriWcu::mod('subscribe', 'getWpCsvList'));
 		return parent::getContent('optionsSettingsTabContent');
 	}
+
 }
