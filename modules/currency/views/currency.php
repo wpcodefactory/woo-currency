@@ -123,6 +123,9 @@ class currencyViewWcu extends viewWcu {
 	 */
 	public $moduleIsPro;
 
+	/**
+	 * getCurrencyTabContent.
+	 */
 	public function getCurrencyTabContent() {
 
 		$module = $this->getModule();
@@ -172,6 +175,9 @@ class currencyViewWcu extends viewWcu {
 		parent::display('currencyTabContent');
 	}
 
+	/**
+	 * getChildrenOneTab.
+	 */
 	public function getChildrenOneTab($array) {
 		$module = $this->getModule();
 		$model = $this->getModel();
@@ -188,6 +194,9 @@ class currencyViewWcu extends viewWcu {
 		parent::display('childrenOneTab');
 	}
 
+	/**
+	 * getChildrenMultipleTab.
+	 */
 	public function getChildrenMultipleTab($array) {
 		$module = $this->getModule();
 		$model = $this->getModel();
@@ -207,6 +216,9 @@ class currencyViewWcu extends viewWcu {
 		parent::display('childrenMultipleTab');
 	}
 
+	/**
+	 * _prepareOptionsParams.
+	 */
 	public function _prepareOptionsParams($options, $defOptions) {
 		$optionsParams = $this->getModule()->getOptionsParams();
 
@@ -240,6 +252,9 @@ class currencyViewWcu extends viewWcu {
 		return $optionsParams;
 	}
 
+	/**
+	 * isDisplayElem.
+	 */
 	function isDisplayElem($value, $params) {
 		$display = '';
 		$showArr = array_filter(explode(',', str_replace('all', '', !empty($params['row_show']) ? $params['row_show'] : '')));
