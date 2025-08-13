@@ -1,5 +1,72 @@
 <?php
+/**
+ * WBW Currency Switcher for WooCommerce - optionsViewWcu Class
+ *
+ * @version 2.2.0
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class optionsViewWcu extends viewWcu {
+
+	/**
+	 * tabs.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	public $tabs;
+
+	/**
+	 * activeTab.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	public $activeTab;
+
+	/**
+	 * content.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	public $content;
+
+	/**
+	 * mainUrl.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	public $mainUrl;
+
+	/**
+	 * activeParentTabs.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	public $activeParentTabs;
+
+	/**
+	 * breadcrumbs.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	public $breadcrumbs;
+
+	/**
+	 * mainLink.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	public $mainLink;
+
 	private $_news = array();
 	public function getNewFeatures() {
 		$res = array();
