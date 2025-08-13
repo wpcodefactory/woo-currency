@@ -1,11 +1,25 @@
 <?php
+/**
+ * WBW Currency Switcher for WooCommerce - promoViewWcu Class
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class promoViewWcu extends viewWcu {
 
+	/**
+	 * displayAdminFooter.
+	 */
 	public function displayAdminFooter() {
 		$this->assign('pluginSlug', frameWcu::_()->getModule('adminmenu')->getMainSlug());
 		parent::display('adminFooter');
 	}
 
+	/**
+	 * getOverviewTabContent.
+	 */
 	public function getOverviewTabContent() {
 		frameWcu::_()->getModule('templates')->loadJqueryUi();
 
@@ -20,14 +34,23 @@ class promoViewWcu extends viewWcu {
 		return parent::getContent('overviewTabContent');
 	}
 
+	/**
+	 * getFaqList.
+	 */
 	public function getFaqList() {
 		return array();
 	}
 
+	/**
+	 * getMostFaqList.
+	 */
 	public function getMostFaqList() {
 		return array();
 	}
 
+	/**
+	 * getNewsContent.
+	 */
 	public function getNewsContent() {
 		return '';
 		/*$getData = wp_remote_get('http://woobewoo.com/news/main.html');
@@ -47,6 +70,9 @@ class promoViewWcu extends viewWcu {
 		return $content;*/
 	}
 
+	/**
+	 * getServerSettings.
+	 */
 	public function getServerSettings() {
 		global $wpdb;
 		return array(
@@ -66,6 +92,9 @@ class promoViewWcu extends viewWcu {
 		);
 	}
 
+	/**
+	 * showWelcomePage.
+	 */
 	public function showWelcomePage() {
 		frameWcu::_()->getModule('templates')->loadJqueryUi();
 		frameWcu::_()->addStyle('sup.bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css');
@@ -78,16 +107,25 @@ class promoViewWcu extends viewWcu {
 		parent::display('welcomePage');
 	}
 
+	/**
+	 * _makeWelcomeLink.
+	 */
 	private function _makeWelcomeLink($link) {
 		return uriWcu::_(array('baseUrl' => $link, 'from' => 'welcome-page', 'pl' => WCU_CODE));
 	}
 
+	/**
+	 * getTourHtml.
+	 */
 	public function getTourHtml() {
 		$this->assign('contactFormLink', $this->getModule()->getContactLink());
 		$this->assign('finishSiteLink', $this->getModule()->generateMainLink('utm_source=plugin&utm_medium=final_step_b_step&utm_campaign=woocurrency'));
 		return parent::getContent('adminTour');
 	}
 
+	/**
+	 * getPluginDeactivation.
+	 */
 	public function getPluginDeactivation() {
 		return parent::getContent('pluginDeactivation');
 	}
