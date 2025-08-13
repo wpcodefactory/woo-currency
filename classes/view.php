@@ -1,14 +1,14 @@
 <?php
 abstract class viewWcu extends baseObjectWcu {
-	/*
+	/**
 	 * @deprecated
 	 */
 	protected $_tpl = WCU_DEFAULT;
-	/*
+	/**
 	 * @var string name of theme to load from templates, if empty - default values will be used
 	 */
 	protected $_theme = '';
-	/*
+	/**
 	 * @var string module code for this view
 	 */
 	protected $_code = '';
@@ -73,7 +73,7 @@ abstract class viewWcu extends baseObjectWcu {
 	}
 
 	/**
-	 * This will display form for our widgets
+	 * This will display form for our widgets.
 	 */
 	public function displayWidgetForm($data = array(), $widget = array(), $formTpl = 'form') {
 		$this->assign('data', $data);
