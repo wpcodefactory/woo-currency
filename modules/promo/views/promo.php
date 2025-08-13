@@ -22,7 +22,6 @@ class promoViewWcu extends viewWcu {
 	 */
 	public function getOverviewTabContent() {
 		frameWcu::_()->getModule('templates')->loadJqueryUi();
-
 		frameWcu::_()->getModule('templates')->loadSlimscroll();
 		frameWcu::_()->addScript('admin.overview', $this->getModule()->getModPath(). 'js/admin.overview.js');
 		frameWcu::_()->addStyle('admin.overview', $this->getModule()->getModPath(). 'css/admin.overview.css');
@@ -53,21 +52,6 @@ class promoViewWcu extends viewWcu {
 	 */
 	public function getNewsContent() {
 		return '';
-		/*$getData = wp_remote_get('http://woobewoo.com/news/main.html');
-		$content = '';
-		if($getData
-			&& is_array($getData)
-			&& isset($getData['response'])
-			&& isset($getData['response']['code'])
-			&& $getData['response']['code'] == 200
-			&& isset($getData['body'])
-			&& !empty($getData['body'])
-		) {
-			$content = $getData['body'];
-		} else {
-			$content = sprintf(__('There were some problems while trying to retrieve our news, but you can always check all list <a target="_blank" href="%s">here</a>.', WCU_LANG_CODE), 'http://woobewoo.com/news');
-		}
-		return $content;*/
 	}
 
 	/**
