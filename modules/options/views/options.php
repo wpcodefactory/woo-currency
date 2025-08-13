@@ -123,8 +123,8 @@ class optionsViewWcu extends viewWcu {
 		$this->assign('breadcrumbs', frameWcu::_()->getModule('admin_nav')->getView()->getBreadcrumbs());
 		$this->assign('mainLink', frameWcu::_()->getModule('promo')->getMainLink());
 
-        parent::display('optionsAdminPage');
-    }
+		parent::display('optionsAdminPage');
+	}
 
 	/**
 	 * sortOptsSet.
@@ -151,20 +151,20 @@ class optionsViewWcu extends viewWcu {
 	public function serverSettings() {
 		global $wpdb;
 		$this->assign('systemInfo', array(
-            'Operating System' => array('value' => PHP_OS),
-            'PHP Version' => array('value' => PHP_VERSION),
-            'Server Software' => array('value' => $_SERVER['SERVER_SOFTWARE']),
+			'Operating System' => array('value' => PHP_OS),
+			'PHP Version' => array('value' => PHP_VERSION),
+			'Server Software' => array('value' => $_SERVER['SERVER_SOFTWARE']),
 			'MySQL' => array('value' =>  $wpdb->db_version()),
-            'PHP Allow URL Fopen' => array('value' => ini_get('allow_url_fopen') ? 'Yes' : 'No'),
-            'PHP Memory Limit' => array('value' => ini_get('memory_limit')),
-            'PHP Max Post Size' => array('value' => ini_get('post_max_size')),
-            'PHP Max Upload Filesize' => array('value' => ini_get('upload_max_filesize')),
-            'PHP Max Script Execute Time' => array('value' => ini_get('max_execution_time')),
-            'PHP EXIF Support' => array('value' => extension_loaded('exif') ? 'Yes' : 'No'),
-            'PHP EXIF Version' => array('value' => phpversion('exif')),
-            'PHP XML Support' => array('value' => extension_loaded('libxml') ? 'Yes' : 'No', 'error' => !extension_loaded('libxml')),
-            'PHP CURL Support' => array('value' => extension_loaded('curl') ? 'Yes' : 'No', 'error' => !extension_loaded('curl')),
-        ));
+			'PHP Allow URL Fopen' => array('value' => ini_get('allow_url_fopen') ? 'Yes' : 'No'),
+			'PHP Memory Limit' => array('value' => ini_get('memory_limit')),
+			'PHP Max Post Size' => array('value' => ini_get('post_max_size')),
+			'PHP Max Upload Filesize' => array('value' => ini_get('upload_max_filesize')),
+			'PHP Max Script Execute Time' => array('value' => ini_get('max_execution_time')),
+			'PHP EXIF Support' => array('value' => extension_loaded('exif') ? 'Yes' : 'No'),
+			'PHP EXIF Version' => array('value' => phpversion('exif')),
+			'PHP XML Support' => array('value' => extension_loaded('libxml') ? 'Yes' : 'No', 'error' => !extension_loaded('libxml')),
+			'PHP CURL Support' => array('value' => extension_loaded('curl') ? 'Yes' : 'No', 'error' => !extension_loaded('curl')),
+		));
 		return parent::display('_serverSettings');
 	}
 
