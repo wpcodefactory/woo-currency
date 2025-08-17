@@ -258,10 +258,20 @@ class currencyViewWcu extends viewWcu {
 					foreach ($optTab as $key => &$opt) {
 
 						if ( $opt['html'] === 'selectlistsortable' ) {
-							$opt['params']['options'] =  isset($options[$indexTab][$indexTabSubOpt][$key]) && is_array($options[$indexTab][$indexTabSubOpt][$key]) ? array_replace(array_flip($options[$indexTab][$indexTabSubOpt][$key]), $opt['params']['options']) : $opt['params']['options'] ;
+							$opt['params']['options'] = (
+								(
+									isset($options[$indexTab][$indexTabSubOpt][$key]) &&
+									is_array($options[$indexTab][$indexTabSubOpt][$key])
+								) ?
+								array_replace(
+									array_flip($options[$indexTab][$indexTabSubOpt][$key]),
+									$opt['params']['options']
+								) :
+								$opt['params']['options']
+							);
 						}
 
-						$opt['params'] = isset($opt['params']) ? $opt['params'] : array();
+						$opt['params']          = isset($opt['params']) ? $opt['params'] : array();
 						$opt['params']['value'] = isset($options[$indexTab][$indexTabSubOpt][$key]) ? $options[$indexTab][$indexTabSubOpt][$key] : $defOptions[$indexTab][$indexTabSubOpt][$key];
 					}
 				}
