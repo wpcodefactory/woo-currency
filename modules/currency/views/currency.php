@@ -2,7 +2,7 @@
 /**
  * WBW Currency Switcher for WooCommerce - currencyViewWcu Class
  *
- * @version 2.2.0
+ * @version 2.2.1
  *
  * @author  woobewoo
  */
@@ -10,6 +10,22 @@
 defined( 'ABSPATH' ) || exit;
 
 class currencyViewWcu extends viewWcu {
+
+	/**
+	 * moduleTab.
+	 *
+	 * @version 2.2.1
+	 * @since   2.2.1
+	 */
+	public $moduleTab;
+
+	/**
+	 * showPreviewAjax.
+	 *
+	 * @version 2.2.1
+	 * @since   2.2.1
+	 */
+	public $showPreviewAjax;
 
 	/**
 	 * flagsModule.
