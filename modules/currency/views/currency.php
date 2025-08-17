@@ -198,7 +198,11 @@ class currencyViewWcu extends viewWcu {
 		$module      = $this->getModule();
 		$model       = $this->getModel();
 		$moduleIsPro = !empty($array[1]) ? $array[1] : false;
-		if (!empty($moduleIsPro) && $moduleIsPro && frameWcu::_()->getModule('options_pro')) {
+		if (
+			!empty($moduleIsPro) &&
+			$moduleIsPro &&
+			frameWcu::_()->getModule('options_pro')
+		) {
 			$options = frameWcu::_()->getModule('options_pro')->getModel()->getOptionsPro();
 		} else {
 			$options = $model->getOptions();
@@ -218,7 +222,10 @@ class currencyViewWcu extends viewWcu {
 		$model           = $this->getModel();
 		$moduleIsPro     = !empty($array[2]) ? $array[2] : false;
 		$showPreviewAjax = !empty($array[3]) ? $array[3] : false;
-		if ($moduleIsPro && frameWcu::_()->getModule('options_pro')) {
+		if (
+			$moduleIsPro &&
+			frameWcu::_()->getModule('options_pro')
+		) {
 			$options = frameWcu::_()->getModule('options_pro')->getModel()->getOptionsPro();
 		} else {
 			$options = $model->getOptions();
@@ -239,7 +246,10 @@ class currencyViewWcu extends viewWcu {
 		$optionsParams = $this->getModule()->getOptionsParams();
 
 		$indexTabWithChildrenOptionsArr = array (
-			'currency_switcher', 'currency_tooltip', 'currency_rates', 'currency_converter',
+			'currency_switcher',
+			'currency_tooltip',
+			'currency_rates',
+			'currency_converter',
 		);
 
 		foreach($optionsParams as $indexTab => &$optBlock) {
