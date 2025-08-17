@@ -144,9 +144,9 @@ class currencyViewWcu extends viewWcu {
 	 */
 	public function getCurrencyTabContent() {
 
-		$module = $this->getModule();
-		$model = $this->getModel();
-		$options = $model->getOptions();
+		$module     = $this->getModule();
+		$model      = $this->getModel();
+		$options    = $model->getOptions();
 		$defOptions = $module->getDefaultOptions();
 		$currencies = $model->getCurrencies();
 
@@ -195,8 +195,8 @@ class currencyViewWcu extends viewWcu {
 	 * getChildrenOneTab.
 	 */
 	public function getChildrenOneTab($array) {
-		$module = $this->getModule();
-		$model = $this->getModel();
+		$module      = $this->getModule();
+		$model       = $this->getModel();
 		$moduleIsPro = !empty($array[1]) ? $array[1] : false;
 		if (!empty($moduleIsPro) && $moduleIsPro && frameWcu::_()->getModule('options_pro')) {
 			$options = frameWcu::_()->getModule('options_pro')->getModel()->getOptionsPro();
@@ -214,9 +214,9 @@ class currencyViewWcu extends viewWcu {
 	 * getChildrenMultipleTab.
 	 */
 	public function getChildrenMultipleTab($array) {
-		$module = $this->getModule();
-		$model = $this->getModel();
-		$moduleIsPro = !empty($array[2]) ? $array[2] : false;
+		$module          = $this->getModule();
+		$model           = $this->getModel();
+		$moduleIsPro     = !empty($array[2]) ? $array[2] : false;
 		$showPreviewAjax = !empty($array[3]) ? $array[3] : false;
 		if ($moduleIsPro && frameWcu::_()->getModule('options_pro')) {
 			$options = frameWcu::_()->getModule('options_pro')->getModel()->getOptionsPro();
@@ -257,9 +257,9 @@ class currencyViewWcu extends viewWcu {
 				}
 			} else {
 				foreach($optBlock as $key => &$opt) {
-					$opt['params'] = isset($opt['params']) ? $opt['params'] : array();
+					$opt['params']               = isset($opt['params']) ? $opt['params'] : array();
 					$defOptions[$indexTab][$key] = isset($defOptions[$indexTab][$key]) ? $defOptions[$indexTab][$key] : '';
-					$opt['params']['value'] = isset($options[$indexTab][$key]) ? $options[$indexTab][$key] : $defOptions[$indexTab][$key];
+					$opt['params']['value']      = isset($options[$indexTab][$key]) ? $options[$indexTab][$key] : $defOptions[$indexTab][$key];
 				}
 			}
 
