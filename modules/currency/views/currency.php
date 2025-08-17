@@ -241,6 +241,8 @@ class currencyViewWcu extends viewWcu {
 
 	/**
 	 * _prepareOptionsParams.
+	 *
+	 * @version 2.2.1
 	 */
 	public function _prepareOptionsParams($options, $defOptions) {
 		$optionsParams = $this->getModule()->getOptionsParams();
@@ -271,15 +273,15 @@ class currencyViewWcu extends viewWcu {
 							);
 						}
 
-						$opt['params']          = isset($opt['params']) ? $opt['params'] : array();
-						$opt['params']['value'] = isset($options[$indexTab][$indexTabSubOpt][$key]) ? $options[$indexTab][$indexTabSubOpt][$key] : $defOptions[$indexTab][$indexTabSubOpt][$key];
+						$opt['params']          = $opt['params'] ?? array();
+						$opt['params']['value'] = $options[$indexTab][$indexTabSubOpt][$key] ?? $defOptions[$indexTab][$indexTabSubOpt][$key];
 					}
 				}
 			} else {
 				foreach($optBlock as $key => &$opt) {
-					$opt['params']               = isset($opt['params']) ? $opt['params'] : array();
-					$defOptions[$indexTab][$key] = isset($defOptions[$indexTab][$key]) ? $defOptions[$indexTab][$key] : '';
-					$opt['params']['value']      = isset($options[$indexTab][$key]) ? $options[$indexTab][$key] : $defOptions[$indexTab][$key];
+					$opt['params']               = $opt['params'] ?? array();
+					$defOptions[$indexTab][$key] = $defOptions[$indexTab][$key] ?? '';
+					$opt['params']['value']      = $options[$indexTab][$key] ?? $defOptions[$indexTab][$key];
 				}
 			}
 
