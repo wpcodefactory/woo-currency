@@ -1,4 +1,11 @@
 <?php
+/**
+ * WBW Currency Switcher for WooCommerce - Currencies
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
 
 $currencies = array(
 	'AFN' => array( 'AF' ),

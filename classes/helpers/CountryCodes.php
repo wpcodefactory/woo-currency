@@ -5,12 +5,16 @@
  * @author Albert Thalidzhokov
  * @link https://github.com/thalidzhokov/country-codes
  */
-class CountryCodes
-{
+
+defined( 'ABSPATH' ) || exit;
+
+class CountryCodes {
+
 	/**
 	 * @var string
 	 */
 	public static $language = 'en';
+
 	/**
 	 * @var array
 	 *
@@ -4546,6 +4550,7 @@ class CountryCodes
 					),
 			),
 	);
+
 	/**
 	 * @var array
 	 *
@@ -4565,6 +4570,7 @@ class CountryCodes
 	 * ...
 	 */
 	private static $_countriesByLanguages = array();
+
 	/**
 	 * @var array
 	 */
@@ -4579,6 +4585,7 @@ class CountryCodes
 		'countryFull',
 		'emoji',
 	);
+
 	/**
 	 * @var array
 	 */
@@ -4619,6 +4626,7 @@ class CountryCodes
 			'en' => array('continent' => 'South America'),
 		),
 	);
+
 	/**
 	 * @var array
 	 */
@@ -4650,6 +4658,7 @@ class CountryCodes
 		'Y' => '&#x1F1FE;',
 		'Z' => '&#x1F1FF;',
 	];
+
 	/**
 	 * @var array
 	 *
@@ -4663,6 +4672,7 @@ class CountryCodes
 	 * ...
 	 */
 	private static $_continentsByLanguages = array();
+
 	/**
 	 * @var array
 	 */
@@ -4675,12 +4685,12 @@ class CountryCodes
 		'OC',
 		'SA',
 	);
+
 	/**
 	 * @param string $language
 	 * @return array
 	 */
-	static function _continentsByLanguage($language = '')
-	{
+	static function _continentsByLanguage($language = '') {
 		$continentsByLanguage = array();
 		if (empty($language) || !is_string($language)) {
 			$language = self::$language;
@@ -4701,12 +4711,12 @@ class CountryCodes
 		self::$_continentsByLanguages = $continentsByLanguage;
 		return self::$_continentsByLanguages[$language];
 	}
+
 	/**
 	 * @param string $language
 	 * @return array
 	 */
-	static function _countriesByLanguage($language = '')
-	{
+	static function _countriesByLanguage($language = '') {
 		$language = !empty($language) && is_string($language)
 			? $language
 			: self::$language;
@@ -4736,12 +4746,12 @@ class CountryCodes
 		self::$_countriesByLanguages = $countriesByLanguage;
 		return self::$_countriesByLanguages[$language];
 	}
+
 	/**
 	 * @param string $alpha2
 	 * @return string
 	 */
-	public static function getEmojiByAlpha2($alpha2 = '')
-	{
+	public static function getEmojiByAlpha2($alpha2 = '') {
 		$rtn = '';
 		$excludedAlpha2 = [
 			'AB',
@@ -4752,12 +4762,12 @@ class CountryCodes
 		}
 		return $rtn;
 	}
+
 	/**
 	 * @param string $alpha3
 	 * @return string
 	 */
-	public static function getEmojiByAlpha3($alpha3 = '')
-	{
+	public static function getEmojiByAlpha3($alpha3 = '') {
 		$rtn = '';
 		if (!empty($alpha3) && is_string($alpha3) && strlen($alpha3) === 3) {
 			switch ($alpha3) {
@@ -4785,14 +4795,14 @@ class CountryCodes
 		}
 		return $rtn;
 	}
+
 	/**
 	 * @param string $keyField field for the array of countries, set it to null if you want array without named indices
 	 * @param string $requestedField name of the field to be fetched in value part of array
 	 * @param string $language
 	 * @return array contained key => value pairs of the requested key and field
 	 */
-	public static function get($keyField = 'alpha2', $requestedField = 'country', $language = '')
-	{
+	public static function get($keyField = 'alpha2', $requestedField = 'country', $language = '') {
 		$language = !empty($language) && is_string($language)
 			? $language
 			: self::$language;
@@ -4815,13 +4825,13 @@ class CountryCodes
 		}
 		return $result;
 	}
+
 	/**
 	 * @param string $keyField field for the array of countries, set it to null if you want array without named indices
 	 * @param array $requestedFields array of name of the fields to be fetched in value part of array
 	 * @return array contained key => value pairs of the requested key and field
 	 */
-	public static function get2($keyField = 'alpha2', $requestedFields = ['alpha3', 'country'])
-	{
+	public static function get2($keyField = 'alpha2', $requestedFields = ['alpha3', 'country']) {
 		$language = !empty($language) && is_string($language)
 			? $language
 			: self::$language;
@@ -4854,6 +4864,7 @@ class CountryCodes
 		}
 		return $result;
 	}
+
 	/**
 	 * @param string $keyField field for the array of countries, set it to null if you want array without named indices
 	 * @param string $requestedField name of the field to be fetched in value part of array
@@ -4862,8 +4873,7 @@ class CountryCodes
 	 * Works exactly as get() above
 	 * But takes an extra param to enable filtering by continent
 	 */
-	public static function getByContinent($keyField = 'alpha2', $requestedField = 'country', $continentCode = '')
-	{
+	public static function getByContinent($keyField = 'alpha2', $requestedField = 'country', $continentCode = '') {
 		$language = !empty($language) && is_string($language)
 			? $language
 			: self::$language;
