@@ -1,4 +1,14 @@
 <?php
+/**
+ * WBW Currency Switcher for WooCommerce - installerWcu Class
+ *
+ * @version 2.2.3
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class installerWcu {
 	static public $update_to_version_method = '';
 	static private $_firstTimeActivated = false;
@@ -110,8 +120,24 @@ class installerWcu {
 			frameWcu::_()->getModule('promo')->getModel()->checkAndSend( true );
 		}*/
 	}
+
+	/**
+	 * _updateOrdersCurrency.
+	 *
+	 * @version 2.2.3
+	 */
 	static private function _updateOrdersCurrency() {
 		$wcuCurrency = get_option('woocommerce_currency', 'USD');
+
+		$doResetOrderCurrency = true;
+		if (
+			!function_exists('get_woocommerce_currencies') ||
+			!($currencies = get_woocommerce_currencies()) ||
+			!isset($currencies[$wcuCurrency])
+		) {
+			$doResetOrderCurrency = false;
+		}
+
 		if (function_exists('wc_get_orders')) {
 			$oldCurrencies = array();
 			$orders = wc_get_orders(array(
@@ -125,7 +151,9 @@ class installerWcu {
 					$order = wc_get_order($orderId);
 					if ($order) {
 						$oldCurrencies[$orderId] = $order->get_currency();
-						$order->set_currency($wcuCurrency);
+						if ($doResetOrderCurrency) {
+							$order->set_currency($wcuCurrency);
+						}
 					}
 					//$oldCurrencies[$orderId] = get_post_meta($orderId, '_order_currency', true);
 					//update_post_meta($orderId, '_order_currency', $wcuCurrency);
@@ -137,6 +165,7 @@ class installerWcu {
 			}
 		}
 	}
+
 	static public function update() {
 		global $wpdb;
 		$wpPrefix = $wpdb->prefix; /* add to 0.0.3 Versiom */
