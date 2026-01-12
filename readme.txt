@@ -2,8 +2,8 @@
 Contributors: woobewoo
 Tags: currency switcher, WooCommerce currency switcher, multi currency, currency converter, currency, converter, WooCommerce
 Donate link: https://woobewoo.com/product/woo-currency/
-Tested up to: 6.8
-Stable tag: 2.2.2
+Tested up to: 6.9
+Stable tag: 2.2.3
 
 WBW Currency Switcher for WooCommerce allows customers to switch products prices to any currencies. Get rates converted in the real-time with dynamic currency switcher
 
@@ -140,6 +140,12 @@ The plugin uses the Cryptocompare and Free Converter platforms which are providi
 13. Admin panel. Custom Currencies
 
 == Changelog ==
+
+= 2.2.3 - 12/01/2026 =
+* Fix - Plugin deactivation issue fixed.
+* Dev - Coding standards improved.
+* WC tested up to: 10.4.
+* Tested up to: 6.9.
 
 = 2.2.2 - 20/08/2025 =
 * Dev - Coding standards improved.
