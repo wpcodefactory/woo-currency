@@ -11,10 +11,19 @@ defined( 'ABSPATH' ) || exit;
 
 class installerWcu {
 
+	/**
+	 * update_to_version_method.
+	 */
 	static public $update_to_version_method = '';
 
+	/**
+	 * _firstTimeActivated.
+	 */
 	static private $_firstTimeActivated = false;
 
+	/**
+	 * init.
+	 */
 	static public function init( $isUpdate = false ) {
 		global $wpdb;
 		$wpPrefix = $wpdb->prefix; /* add to 0.0.3 Version */
@@ -91,14 +100,23 @@ class installerWcu {
 		}
 	}
 
+	/**
+	 * setUsed.
+	 */
 	static public function setUsed() {
 		update_option(WCU_DB_PREF. 'plug_was_used', 1);
 	}
 
+	/**
+	 * isUsed.
+	 */
 	static public function isUsed() {
 		return (int) get_option(WCU_DB_PREF. 'plug_was_used');
 	}
 
+	/**
+	 * delete.
+	 */
 	static public function delete() {
 		self::_checkSendStat('delete');
 		global $wpdb;
@@ -111,11 +129,17 @@ class installerWcu {
 		delete_option(WCU_DB_PREF. 'orders_currencies');
 	}
 
+	/**
+	 * deactivate.
+	 */
 	static public function deactivate() {
 		self::_checkSendStat('deactivate');
 		self::_updateOrdersCurrency();
 	}
 
+	/**
+	 * _checkSendStat.
+	 */
 	static private function _checkSendStat($statCode) {
 
 	}
@@ -163,6 +187,9 @@ class installerWcu {
 		}
 	}
 
+	/**
+	 * update.
+	 */
 	static public function update() {
 		global $wpdb;
 		$wpPrefix = $wpdb->prefix; /* add to 0.0.3 Version */
