@@ -29,10 +29,11 @@ class installerWcu {
 		$wpPrefix = $wpdb->prefix; /* add to 0.0.3 Version */
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 		$current_version = get_option($wpPrefix. WCU_DB_PREF. 'db_version', 0);
-		if(!$current_version)
+		if(!$current_version) {
 			self::$_firstTimeActivated = true;
+		}
 		/**
-		 * modules
+		 * modules.
 		 */
 		if (!dbWcu::exist("@__modules")) {
 			dbDelta(dbWcu::prepareQuery("CREATE TABLE IF NOT EXISTS `@__modules` (
@@ -59,7 +60,7 @@ class installerWcu {
 				(NULL, 'currency_widget',1,1,'Currency Widget');");
 		}
 		/**
-		 *  modules_type
+		 * modules_type.
 		 */
 		if(!dbWcu::exist("@__modules_type")) {
 			dbDelta(dbWcu::prepareQuery("CREATE TABLE IF NOT EXISTS `@__modules_type` (
@@ -72,8 +73,8 @@ class installerWcu {
 				(6,'addons');");
 		}
 		/**
-		* Plugin usage statistics
-		*/
+		 * Plugin usage statistics.
+		 */
 		if(!dbWcu::exist("@__usage_stat")) {
 			dbDelta(dbWcu::prepareQuery("CREATE TABLE `@__usage_stat` (
 			  `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -165,8 +166,8 @@ class installerWcu {
 			$oldCurrencies = array();
 			$orders = wc_get_orders(array(
 				'posts_per_page' => -1,
-				'type' => 'shop_order',
-				'return' => 'ids'
+				'type'           => 'shop_order',
+				'return'         => 'ids',
 			));
 
 			if (!empty($orders)) {
