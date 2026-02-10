@@ -1,9 +1,8 @@
 === WBW Currency Switcher for WooCommerce ===
 Contributors: woobewoo
-Tags: currency switcher, WooCommerce currency switcher, multi currency, currency converter, currency, converter, WooCommerce
-Donate link: https://woobewoo.com/product/woo-currency/
+Tags: currency switcher, multi currency, currency converter, currency, woocommerce
 Tested up to: 6.9
-Stable tag: 2.2.3
+Stable tag: 2.2.4
 
 WBW Currency Switcher for WooCommerce allows customers to switch products prices to any currencies. Get rates converted in the real-time with dynamic currency switcher
 
@@ -96,6 +95,7 @@ Follow this tutorial [Getting Started with WBW Currency Switcher for WooCommerce
 WBW Currency Switcher for WooCommerce plugin created special tab Currency in the WooCommerce Settings menu. You can follow the link in plugin window to move there, or go there manually via WooCommerce plugin. Follow this tutorial [Main Settings](https://woobewoo.com/documentation/currency-main-settings?utm_source=wordpress&utm_medium=main-settings&utm_campaign=currency "Main Settings") and you can easily set the Currency Switcher plugin.
 
 = Will transactions are processed in the base currency or in the chosen currency? =
+
 Currency conversions are estimated and should be used for informational purposes only. Purchases still using your WooCommerce store’s base currency itself. Read more about [Manual / automatic exchange rate for each currency](https://woobewoo.com/feature/manual-automatic-exchange-rate-for-each-currency?utm_source=wordpress&utm_medium=exchangerate&utm_campaign=currency "Manual / automatic exchange rate for each currency")
 
 = How can I add currency switcher to my shop? =
@@ -105,6 +105,7 @@ Currency Switcher is flexible and easy to set up. The plugin provides 2 ways to 
 2. Display rules tab allows to show the switcher on All pages, on selected pages or posts or exclude display on selected pages/posts.
 
 = Which kind of design is available for switcher? =
+
 The plugin provides a range of [settings for switcher design](https://woobewoo.com/feature/currency-switcher-design?utm_source=wordpress&utm_medium=design&utm_campaign=currency "Design") You can select position on the page (left or right), position of the switch in accordance with the header and footer of the page and the type of switcher:
 
 * **Simple type** display the Switcher like a bar (horizontal and vertical), to pick the currency by click.
@@ -112,6 +113,7 @@ The plugin provides a range of [settings for switcher design](https://woobewoo.c
 * **Floating type** saves space on your store page and floating by mouse-over.
 
 = How to add custom flags and currency? =
+
 If you need to add any custom currency or your own designed icon, you can easily do it.
 *In order to add your own image, move to the Custom Flag tab, press “add a custom flag” and press “Save” and upload an icon. You can view all the added custom icons and add or remove the previously uploaded ones.
 *With Custom Currencies feature, you are free to add your own currency in the same way. Move to the Custom Currency tab and enter a required code and symbol. Save the changes and currency will be available for selection in the Currencies tab.
@@ -122,9 +124,15 @@ Look at detailed instruction in [Main Settings tutorial](https://woobewoo.com/do
 Large or small, desktop or handheld, WBW Currency Switcher for WooCommerce is fully compatible and responsive! The plugin works and displays perfectly on tablet or phone, making it easy and convenient for customers to enjoy their shopping time and make purchases on all devices.
 
 = How to update the currency by the latest exchange rate? =
+
 The plugin uses the Cryptocompare and Free Converter platforms which are providing the latest exchange rates, and substitute displayed prices in real-time. You can update the currency Manually or Automatically (Pro). Automatic update option comes with a selection of period for currency updates: every minute, hourly, twice a day, daily, weekly or manually.
 
+= Where do I report security bugs found in this plugin? =
+
+Please report security bugs found in the source code of the plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/c8dfeb67-06cd-46fc-9ff7-49f82d1badf1).
+
 == Screenshots ==
+
 1. Currency Switcher demo
 2. Rates, Switcher and Converter examples on the Shop page
 3. WBW Currency Switcher for WooCommerce Plugin admin panel. Currencies settings
@@ -140,6 +148,9 @@ The plugin uses the Cryptocompare and Free Converter platforms which are providi
 13. Admin panel. Custom Currencies
 
 == Changelog ==
+
+= 2.2.4 - 10/02/2026 =
+* WC tested up to: 10.5.
 
 = 2.2.3 - 12/01/2026 =
 * Fix - Plugin deactivation issue fixed.
