@@ -1,9 +1,7 @@
 <?php
-class currencyControllerWcu extends controllerWcu
-{
+class currencyControllerWcu extends controllerWcu {
 
-	public function saveCurrencyTab()
-	{
+	public function saveCurrencyTab() {
 		if (!current_user_can(frameWcu::_()->getModule('adminmenu')->getMainCap())) {
 			wp_send_json_error('You are not allowed to perform this action.');		
 		}
@@ -36,8 +34,7 @@ class currencyControllerWcu extends controllerWcu
 		return $res->ajaxExec();
 	}
 
-	public function saveCurrenciesList()
-	{
+	public function saveCurrenciesList() {
 		$res = new responseWcu();
 
 		parse_str(reqWcu::getVar('currencies', 'all', ''), $currencies);
@@ -47,8 +44,7 @@ class currencyControllerWcu extends controllerWcu
 		return $res->ajaxExec();
 	}
 
-	public function getCurrencyRate()
-	{
+	public function getCurrencyRate() {
 
 		$res = new responseWcu();
 		$fromCurrency = reqWcu::getVar('default_currency');
@@ -64,8 +60,7 @@ class currencyControllerWcu extends controllerWcu
 		return $res->ajaxExec();
 	}
 
-	public function getPermissions()
-	{
+	public function getPermissions() {
 		return array(
 			WCU_USERLEVELS => array(
 				WCU_ADMIN => array()
