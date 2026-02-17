@@ -332,5 +332,5 @@ defined( 'ABSPATH' ) || exit;
     <?php echo htmlWcu::hidden('mod', array('value' => 'currency'))?>
     <?php echo htmlWcu::hidden('action', array('value' => 'saveCurrencyTab'))?>
     <?php echo htmlWcu::hidden('pl', array('value' => WCU_CODE))?>
-    <?php wp_nonce_field('wbw_currency_nonce', 'nonce'); ?>
+    <?php wp_nonce_field('wbw_currency_nonce', '_wbw_currency_nonce'); ?>
 </div>

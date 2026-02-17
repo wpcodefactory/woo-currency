@@ -20,7 +20,7 @@ class currencyControllerWcu extends controllerWcu {
 		if (!current_user_can(frameWcu::_()->getModule('adminmenu')->getMainCap())) {
 			wp_send_json_error(__('You are not allowed to perform this action.', 'woo-currency'));
 		}
-		check_ajax_referer('wbw_currency_nonce', 'nonce');
+		check_ajax_referer('wbw_currency_nonce', '_wbw_currency_nonce');
 
 		$res = new responseWcu();
 		$module = $this->getModule();
