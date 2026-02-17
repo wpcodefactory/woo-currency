@@ -151,8 +151,8 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
-= 2.2.6 - 14/02/2026 =
-* Dev – Fix unauthenticated access.
+= 2.2.6 - 17/02/2026 =
+* Dev – Fix unauthenticated access vulnerability.
 
 = 2.2.5 - 13/02/2026 =
 * Dev - Rename plugin from "WBW Currency Switcher for WooCommerce" to "Currency Switcher for WooCommerce by WBW".
