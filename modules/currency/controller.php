@@ -1,6 +1,21 @@
 <?php
+/**
+ * WBW Currency Switcher for WooCommerce - currencyControllerWcu Class
+ *
+ * @version 2.2.6
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class currencyControllerWcu extends controllerWcu {
 
+	/**
+	 * saveCurrencyTab.
+	 *
+	 * @version 2.2.6
+	 */
 	public function saveCurrencyTab() {
 		if (!current_user_can(frameWcu::_()->getModule('adminmenu')->getMainCap())) {
 			wp_send_json_error('You are not allowed to perform this action.');		

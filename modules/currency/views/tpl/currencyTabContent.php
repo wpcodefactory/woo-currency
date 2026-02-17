@@ -1,3 +1,15 @@
+<?php
+/**
+ * WBW Currency Switcher for WooCommerce - currencyTabContent
+ *
+ * @version 2.2.6
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+?>
+
 <?php $wcuShowPro = !empty($this->optionsProModule) ? '' : 'wcuShowPro'; ?>
 <div class="wcuCurrenciesShell">
     <h3 style="margin-bottom: 1px;"><?php printf(__('WooCurrency %s', WCU_LANG_CODE), WCU_VERSION) ?></h3>
