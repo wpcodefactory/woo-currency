@@ -117,12 +117,12 @@ defined( 'ABSPATH' ) || exit;
 						'type' => 'text',
                         'value' => !empty($params['tho_separator']) ? $params['tho_separator'] : '',
 						'attrs' => $disabled . '',
-                        ))?> 
+                        ))?>
 					<?php echo htmlWcu::input("{$this->dbPrefix}[dec_separator][]", array(
 						'type' => 'text',
                         'value' => !empty($params['dec_separator']) ? $params['dec_separator'] : '',
 						'attrs' => $disabled . '',
-                        ))?> 
+                        ))?>
                 </div>
                 <div class="col-md-1">
                     <?php echo htmlWcu::selectbox("{$this->dbPrefix}[decimals][]", array(

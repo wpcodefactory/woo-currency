@@ -49,6 +49,9 @@ class currencyControllerWcu extends controllerWcu {
 		return $res->ajaxExec();
 	}
 
+	/**
+	 * saveCurrenciesList.
+	 */
 	public function saveCurrenciesList() {
 		$res = new responseWcu();
 
@@ -59,6 +62,9 @@ class currencyControllerWcu extends controllerWcu {
 		return $res->ajaxExec();
 	}
 
+	/**
+	 * getCurrencyRate.
+	 */
 	public function getCurrencyRate() {
 
 		$res = new responseWcu();
@@ -75,6 +81,9 @@ class currencyControllerWcu extends controllerWcu {
 		return $res->ajaxExec();
 	}
 
+	/**
+	 * getPermissions.
+	 */
 	public function getPermissions() {
 		return array(
 			WCU_USERLEVELS => array(
@@ -82,6 +91,5 @@ class currencyControllerWcu extends controllerWcu {
 			),
 		);
 	}
-
 
 }
