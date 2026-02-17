@@ -18,7 +18,7 @@ class currencyControllerWcu extends controllerWcu {
 	 */
 	public function saveCurrencyTab() {
 		if (!current_user_can(frameWcu::_()->getModule('adminmenu')->getMainCap())) {
-			wp_send_json_error('You are not allowed to perform this action.');
+			wp_send_json_error(__('You are not allowed to perform this action.', 'woo-currency'));
 		}
 		check_ajax_referer('wbw_currency_nonce', 'nonce');
 
