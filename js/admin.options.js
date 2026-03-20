@@ -1,6 +1,6 @@
 /**
  * Admin options
- * @version 2.2.6
+ * @version 2.2.7
  */
 
 var wcuAdminFormChanged = [];
@@ -14,7 +14,7 @@ var g_wcuChosenOptions = {
 /**
  * beforeunload event handler.
  *
- * @version 2.2.6
+ * @version 2.2.7
  */
 window.addEventListener('beforeunload', function (e) {
     window.onbeforeunload = null;
@@ -27,7 +27,7 @@ window.addEventListener('beforeunload', function (e) {
 /**
  * Jquery ready function
  *
- * @version 2.2.6
+ * @version 2.2.7
  */
 jQuery(document).ready(function(){
 	wcuInitMainPromoPopup();
