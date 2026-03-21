@@ -558,108 +558,108 @@ function InitStickyItem() {
 		}
 	});
 }
-			function wcuSelectMultipleSortableFunction(originalSelectId) {
+function wcuSelectMultipleSortableFunction(originalSelectId) {
 
-			var pseudoSelectClass = originalSelectId+'Pseudo';
-			var pseudoSelectDiv = pseudoSelectClass+'Div';
+	var pseudoSelectClass = originalSelectId+'Pseudo';
+	var pseudoSelectDiv = pseudoSelectClass+'Div';
 
-			pseudoSelectClass = pseudoSelectClass.toString();
-			pseudoSelectDiv = pseudoSelectDiv.toString();
+	pseudoSelectClass = pseudoSelectClass.toString();
+	pseudoSelectDiv = pseudoSelectDiv.toString();
 
-			var select = jQuery("#"+originalSelectId+"");
-			var name = jQuery("#"+originalSelectId+"").attr("name");
+	var select = jQuery("#"+originalSelectId+"");
+	var name = jQuery("#"+originalSelectId+"").attr("name");
 
-			var pseudoSelect = jQuery("<div class='"+pseudoSelectClass+" wcuSelectMultipleSortableWrapper' data-name='"+name+"'></div>");
+	var pseudoSelect = jQuery("<div class='"+pseudoSelectClass+" wcuSelectMultipleSortableWrapper' data-name='"+name+"'></div>");
 
-			jQuery("#"+originalSelectId+"").hide();
-			pseudoSelect.insertBefore(select);
+	jQuery("#"+originalSelectId+"").hide();
+	pseudoSelect.insertBefore(select);
 
-			select.find("option").each(function(e){
-				var html = jQuery(this).text();
-				var val = jQuery(this).val();
-				if (jQuery.isNumeric(html)) {
-					jQuery(this).remove();
-					return true;
+	select.find("option").each(function(e){
+		var html = jQuery(this).text();
+		var val = jQuery(this).val();
+		if (jQuery.isNumeric(html)) {
+			jQuery(this).remove();
+			return true;
+		}
+		var selected = jQuery(this).prop("selected");
+		if (selected) {selected = 'checked';}
+		var option = jQuery("<div align='center' class='"+pseudoSelectDiv+" wcuSelectMultipleSortableDiv' data-value='"+val+"' data-text='"+html+"'><i class='fa fa-arrows-h' style='font-size: 20px; margin-top:5px;'></i><br><input class='"+pseudoSelectDiv+"Checkbox' "+ selected +" type='checkbox'>"+html+"</div>")
+
+		pseudoSelect.append(option);
+	});
+
+	jQuery( "."+pseudoSelectClass+"" ).sortable({
+	  update: function( event, ui ) {
+		wcuSelectSortableCreateOptions(pseudoSelectClass, pseudoSelectDiv, select, name, pseudoSelect);
+	  }
+	});
+
+	jQuery( "."+pseudoSelectClass+"" ).disableSelection();
+
+	jQuery("."+pseudoSelectDiv+"").click(function(e){
+		var checkbox = jQuery(this).find("."+pseudoSelectDiv+"Checkbox");
+		checkbox.prop("checked", !checkbox.prop("checked"));
+		 if (jQuery(this).find(".icheckbox_minimal").hasClass("checked")) {
+			 jQuery(this).find(".icheckbox_minimal").removeClass("checked");
+		 } else {
+			 jQuery(this).find(".icheckbox_minimal").addClass("checked");
+		 };
+
+		wcuSelectSortableCreateOptions(pseudoSelectClass, pseudoSelectDiv, select, name, pseudoSelect);
+	});
+
+	jQuery("."+pseudoSelectDiv+"Checkbox").click(function(e){
+		e.stopPropagation();
+		wcuSelectSortableCreateOptions(pseudoSelectClass, pseudoSelectDiv, select, name, pseudoSelect);
+	});
+
+}
+
+function wcuSelectSortableCreateOptions(pseudoSelectClass, pseudoSelectDiv, select, name, pseudoSelect) {
+	select.find("option").remove();
+	jQuery('body .'+pseudoSelectClass+'').find("."+pseudoSelectDiv+"").each(function(e){
+		var html = jQuery(this).text();
+		var val = jQuery(this).attr("data-value");
+		var checked = jQuery(this).find('input').is(":checked");
+		option = select.append("<option value='"+val+"' >"+html+"</option>");
+		if (checked) {
+			select.find('option').last().prop("selected", true);
+		}
+	});
+}
+
+// Hide random blocks by selected options
+jQuery("[name*='wcu_options[currency_switcher][design_tab][type]']").on("change", function(){
+		toggleType = jQuery(this).val();
+		toggleSwitcher = jQuery("[name*='wcu_options[currency_switcher][design_tab][toggle_switcher]']");
+
+		toggleSwitcherFullSize = jQuery("[name*='wcu_options[currency_switcher][design_tab][toggle_switcher]'][value='full_size']");
+		toggleSwitcherOnClick = jQuery("[name*='wcu_options[currency_switcher][design_tab][toggle_switcher]'][value='on_click']");
+		toggleSwitcherOnHover = jQuery("[name*='wcu_options[currency_switcher][design_tab][toggle_switcher]'][value='on_hover']");
+
+		switch (toggleType) {
+			case 'simple':
+				toggleSwitcherFullSize.parent().parent().show();
+				break;
+			case 'floating':
+				if ( toggleSwitcherFullSize.parent().hasClass("checked") ) {
+					toggleSwitcher.parent().removeClass("checked");
+					toggleSwitcherOnHover.prop("checked",true);
+					toggleSwitcherOnHover.parent().addClass("checked");
 				}
-				var selected = jQuery(this).prop("selected");
-				if (selected) {selected = 'checked';}
-				var option = jQuery("<div align='center' class='"+pseudoSelectDiv+" wcuSelectMultipleSortableDiv' data-value='"+val+"' data-text='"+html+"'><i class='fa fa-arrows-h' style='font-size: 20px; margin-top:5px;'></i><br><input class='"+pseudoSelectDiv+"Checkbox' "+ selected +" type='checkbox'>"+html+"</div>")
-
-				pseudoSelect.append(option);
-			});
-
-			jQuery( "."+pseudoSelectClass+"" ).sortable({
-			  update: function( event, ui ) {
-				wcuSelectSortableCreateOptions(pseudoSelectClass, pseudoSelectDiv, select, name, pseudoSelect);
-			  }
-			});
-
-			jQuery( "."+pseudoSelectClass+"" ).disableSelection();
-
-			jQuery("."+pseudoSelectDiv+"").click(function(e){
-				var checkbox = jQuery(this).find("."+pseudoSelectDiv+"Checkbox");
-				checkbox.prop("checked", !checkbox.prop("checked"));
-				 if (jQuery(this).find(".icheckbox_minimal").hasClass("checked")) {
-					 jQuery(this).find(".icheckbox_minimal").removeClass("checked");
-				 } else {
-					 jQuery(this).find(".icheckbox_minimal").addClass("checked");
-				 };
-
-				wcuSelectSortableCreateOptions(pseudoSelectClass, pseudoSelectDiv, select, name, pseudoSelect);
-			});
-
-			jQuery("."+pseudoSelectDiv+"Checkbox").click(function(e){
-				e.stopPropagation();
-				wcuSelectSortableCreateOptions(pseudoSelectClass, pseudoSelectDiv, select, name, pseudoSelect);
-			});
-
+				toggleSwitcherFullSize.parent().parent().hide();
+				break;
+			case 'rotating':
+				if ( toggleSwitcherFullSize.parent().hasClass("checked") ) {
+					toggleSwitcher.parent().removeClass("checked");
+					toggleSwitcherOnHover.prop("checked",true);
+					toggleSwitcherOnHover.parent().addClass("checked");
+				}
+				toggleSwitcherFullSize.parent().parent().hide();
+				break;
 		}
 
-		function wcuSelectSortableCreateOptions(pseudoSelectClass, pseudoSelectDiv, select, name, pseudoSelect) {
-			select.find("option").remove();
-			jQuery('body .'+pseudoSelectClass+'').find("."+pseudoSelectDiv+"").each(function(e){
-				var html = jQuery(this).text();
-				var val = jQuery(this).attr("data-value");
-				var checked = jQuery(this).find('input').is(":checked");
-				option = select.append("<option value='"+val+"' >"+html+"</option>");
-				if (checked) {
-					select.find('option').last().prop("selected", true);
-				}
-			});
-		}
-
-		// Hide random blocks by selected options
-		jQuery("[name*='wcu_options[currency_switcher][design_tab][type]']").on("change", function(){
-				toggleType = jQuery(this).val();
-				toggleSwitcher = jQuery("[name*='wcu_options[currency_switcher][design_tab][toggle_switcher]']");
-
-				toggleSwitcherFullSize = jQuery("[name*='wcu_options[currency_switcher][design_tab][toggle_switcher]'][value='full_size']");
-				toggleSwitcherOnClick = jQuery("[name*='wcu_options[currency_switcher][design_tab][toggle_switcher]'][value='on_click']");
-				toggleSwitcherOnHover = jQuery("[name*='wcu_options[currency_switcher][design_tab][toggle_switcher]'][value='on_hover']");
-
-				switch (toggleType) {
-				  case 'simple':
-					 toggleSwitcherFullSize.parent().parent().show();
-					break;
-				  case 'floating':
-						if ( toggleSwitcherFullSize.parent().hasClass("checked") ) {
-						  toggleSwitcher.parent().removeClass("checked");
-						  toggleSwitcherOnHover.prop("checked",true);
-						  toggleSwitcherOnHover.parent().addClass("checked");
-						}
-						toggleSwitcherFullSize.parent().parent().hide();
-					break;
-				  case 'rotating':
-					  if ( toggleSwitcherFullSize.parent().hasClass("checked") ) {
-						toggleSwitcher.parent().removeClass("checked");
-						toggleSwitcherOnHover.prop("checked",true);
-						toggleSwitcherOnHover.parent().addClass("checked");
-					  }
-					  toggleSwitcherFullSize.parent().parent().hide();
-					break;
-				}
-
-		});
+});
 
 // Toggle CurrencySwitcher open button options by Toggle Switcher checked
 jQuery(document).ready(function(){
