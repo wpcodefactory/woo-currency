@@ -1,6 +1,9 @@
 /**
- * Admin options
+ * WBW Currency Switcher for WooCommerce - Admin Options JS
+ *
  * @version 2.2.7
+ *
+ * @author  woobewoo
  */
 
 var wcuAdminFormChanged = [];
@@ -17,11 +20,11 @@ var g_wcuChosenOptions = {
  * @version 2.2.7
  */
 window.addEventListener('beforeunload', function (e) {
-    window.onbeforeunload = null;
-    if (!wcuAdminFormChanged.length) return;
-    e.preventDefault();
+	window.onbeforeunload = null;
+	if (!wcuAdminFormChanged.length) return;
+	e.preventDefault();
 
-    return true;
+	return true;
 });
 
 /**
@@ -158,7 +161,7 @@ jQuery(document).ready(function(){
 		}, 500);
 	}
 	// Check for showing review notice after a week usage
-    wcuInitPlugNotices();
+	wcuInitPlugNotices();
 	jQuery(".woobewoo-plugin .tooltipstered").removeAttr("title");
 });
 function wcuInitTooltips( selector ) {
@@ -677,15 +680,15 @@ function InitStickyItem() {
 				switch (toggleType) {
 				  case 'simple':
 					 toggleSwitcherFullSize.parent().parent().show();
-				    break;
+					break;
 				  case 'floating':
 						if ( toggleSwitcherFullSize.parent().hasClass("checked") ) {
 						  toggleSwitcher.parent().removeClass("checked");
 						  toggleSwitcherOnHover.prop("checked",true);
 						  toggleSwitcherOnHover.parent().addClass("checked");
 						}
-				  		toggleSwitcherFullSize.parent().parent().hide();
-				    break;
+						toggleSwitcherFullSize.parent().parent().hide();
+					break;
 				  case 'rotating':
 					  if ( toggleSwitcherFullSize.parent().hasClass("checked") ) {
 						toggleSwitcher.parent().removeClass("checked");
@@ -693,7 +696,7 @@ function InitStickyItem() {
 						toggleSwitcherOnHover.parent().addClass("checked");
 					  }
 					  toggleSwitcherFullSize.parent().parent().hide();
-				    break;
+					break;
 				}
 
 		});
