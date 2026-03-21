@@ -26,7 +26,6 @@ window.addEventListener('beforeunload', function (e) {
 
 	return true;
 });
-
 /**
  * Jquery ready function
  *
@@ -59,7 +58,7 @@ jQuery(document).ready(function(){
 
 	// Timeout - is to count only user changes, because some changes can be done auto when form is loaded
 	setTimeout(function() {
-		// If some changes was made in those forms and they were not saved - show message for confirnation before page reload
+		// If some changes was made in those forms and they were not saved - show message for confirmation before page reload
 		var formsPreventLeave = ['mainform'];
 		if(formsPreventLeave && formsPreventLeave.length) {
 			jQuery('#'+ formsPreventLeave.join(', #')).find('input,select').change(function(){
@@ -90,7 +89,6 @@ jQuery(document).ready(function(){
 		}).trigger('change');
 	}
 	wcuInitCustomCheckRadio();
-	//wcuInitCustomSelect();
 
 	jQuery('.wcuFieldsetToggled').each(function(){
 		var self = this;
@@ -111,31 +109,6 @@ jQuery(document).ready(function(){
 			return false;
 		});
 	});
-	// Tooltipster initialization
-	/*var tooltipsterSettings = {
-		contentAsHTML: true
-	,	interactive: true
-	,	speed: 0
-	,	delay: 0
-	//,	animation: 'swing'
-	,	maxWidth: 450
-	};
-	if(jQuery('.woobewoo-tooltip').length) {
-		tooltipsterSettings.position = 'top-left';
-		jQuery('.woobewoo-tooltip').tooltipster( tooltipsterSettings );
-	}
-	if(jQuery('.woobewoo-tooltip-bottom').length) {
-		tooltipsterSettings.position = 'bottom-left';
-		jQuery('.woobewoo-tooltip-bottom').tooltipster( tooltipsterSettings );
-	}
-	if(jQuery('.woobewoo-tooltip-left').length) {
-		tooltipsterSettings.position = 'left';
-		jQuery('.woobewoo-tooltip-left').tooltipster( tooltipsterSettings );
-	}
-	if(jQuery('.woobewoo-tooltip-right').length) {
-		tooltipsterSettings.position = 'right';
-		jQuery('.woobewoo-tooltip-right').tooltipster( tooltipsterSettings );
-	}*/
 	wcuInitTooltips();
 	if(jQuery('.wcuCopyTextCode').length) {
 		setTimeout(function(){	// Give it some time - wait until all other elements will be initialized
@@ -170,7 +143,6 @@ function wcuInitTooltips( selector ) {
 	,	interactive: true
 	,	speed: 0
 	,	delay: 0
-	//,	animation: 'swing'
 	,	maxWidth: 450
 	}
 	,	findPos = {
@@ -481,8 +453,8 @@ function resizePreview() {
 /*Some items should be always on users screen*/
 function InitStickyItem() {
 	jQuery(window).scroll(function(){
-		var stickiItemsSelectors = [/*'.ui-jqgrid-hdiv', */'.supsystic-sticky']
-		,	elementsUsePaddingNext = [/*'.ui-jqgrid-hdiv', */'.supsystic-bar']	// For example - if we stick row - then all other should not offest to top after we will place element as fixed
+		var stickiItemsSelectors = ['.supsystic-sticky']
+		,	elementsUsePaddingNext = ['.supsystic-bar']	// For example - if we stick row - then all other should not offset to top after we will place element as fixed
 		,	wpTollbarHeight = 32
 		,	wndScrollTop = jQuery(window).scrollTop() + wpTollbarHeight
 		,	footer = jQuery('.wcuAdminFooterShell')
@@ -490,9 +462,6 @@ function InitStickyItem() {
 		,	docHeight = jQuery(document).height()
 		,	wasSticking = false
 		,	wasUnSticking = false;
-		/*if(jQuery('#wpbody-content .update-nag').length) {	// Not used for now
-			wpTollbarHeight += parseInt(jQuery('#wpbody-content .update-nag').outerHeight());
-		}*/
 
 		for(var i = 0; i < stickiItemsSelectors.length; i++) {
 			jQuery(stickiItemsSelectors[ i ]).each(function(){
@@ -589,13 +558,6 @@ function InitStickyItem() {
 				}
 			});
 		}
-		// if(wasSticking) {
-		// 	if(jQuery('#wcuPreviewStickyBar').size())
-		// 		jQuery('#wcuPreviewStickyBar').show();
-		// } else if(wasUnSticking) {
-		// 	if(jQuery('#wcuPreviewStickyBar').size())
-		// 		jQuery('#wcuPreviewStickyBar').hide();
-		// }
 	});
 }
 			function wcuSelectMultipleSortableFunction(originalSelectId) {
