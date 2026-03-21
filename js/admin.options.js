@@ -111,7 +111,7 @@ jQuery(document).ready(function(){
 	});
 	wcuInitTooltips();
 	if(jQuery('.wcuCopyTextCode').length) {
-		setTimeout(function(){	// Give it some time - wait until all other elements will be initialized
+		setTimeout(function(){ // Give it some time - wait until all other elements will be initialized
 			var cloneWidthElement =  jQuery('<span class="sup-shortcode" />').appendTo('.woobewoo-plugin');
 			jQuery('.wcuCopyTextCode').attr('readonly', 'readonly').click(function(){
 				this.setSelectionRange(0, this.value.length);
@@ -182,7 +182,7 @@ function checkAdminFormSaved() {
 		if(!confirm(toeLangWcu('Some changes were not-saved. Are you sure you want to leave?'))) {
 			return false;
 		}
-		wcuAdminFormChanged = [];	// Clear unsaved forms array - if user wanted to do this
+		wcuAdminFormChanged = []; // Clear unsaved forms array - if user wanted to do this
 	}
 	return true;
 }
@@ -343,7 +343,7 @@ function wcuInitPlugNotices() {
 			jQuery(this).find('.notice-dismiss').click(function(){
 				var $notice = jQuery(this).parents('.woobewoo-admin-notice');
 				if(!$notice.data('stats-sent')) {
-					// User closed this message - that is his choise, let's respect this and save it's saved status
+					// User closed this message - that is his choice, let's respect this and save it's saved status
 					jQuery.sendFormWcu({
 						data: {mod: 'promo', action: 'addNoticeAction', code: $notice.data('code'), choice: 'hide'}
 					});
@@ -454,7 +454,7 @@ function resizePreview() {
 function InitStickyItem() {
 	jQuery(window).scroll(function(){
 		var stickiItemsSelectors = ['.supsystic-sticky']
-		,	elementsUsePaddingNext = ['.supsystic-bar']	// For example - if we stick row - then all other should not offset to top after we will place element as fixed
+		,	elementsUsePaddingNext = ['.supsystic-bar'] // For example - if we stick row - then all other should not offset to top after we will place element as fixed
 		,	wpTollbarHeight = 32
 		,	wndScrollTop = jQuery(window).scrollTop() + wpTollbarHeight
 		,	footer = jQuery('.wcuAdminFooterShell')
@@ -500,7 +500,6 @@ function InitStickyItem() {
 							element.addClass('sticky-full-width');
 						}
 						if(useNextElementPadding) {
-							//element.addClass('supsystic-sticky-active-bordered');
 							nextElement = element.next();
 							if(nextElement && nextElement.length) {
 								nextElement.data('prevPaddingTop', nextElement.css('padding-top'));
@@ -513,7 +512,7 @@ function InitStickyItem() {
 						}
 						wasSticking = true;
 						element.trigger('startSticky');
-					} else if(!isNaN(prevScrollMinPos) && currentScrollTop <= prevScrollMinPos) {	// Stop sticking
+					} else if(!isNaN(prevScrollMinPos) && currentScrollTop <= prevScrollMinPos) { // Stop sticking
 						// because of this action some map tabs (shapes and heatmap) are jump up during scroll.
 						element.removeClass('supsystic-sticky-active').data('scrollMinPos', 0).css({
 							'top': 0
@@ -522,7 +521,6 @@ function InitStickyItem() {
 							element.removeClass('sticky-full-width');
 						}
 						if(useNextElementPadding) {
-							//element.removeClass('supsystic-sticky-active-bordered');
 							nextElement = element.next();
 							if(nextElement && nextElement.length) {
 								var nextPrevPaddingTop = parseInt(nextElement.data('prevPaddingTop'));
@@ -535,7 +533,7 @@ function InitStickyItem() {
 						}
 						element.trigger('stopSticky');
 						wasUnSticking = true;
-					} else {	// Check new stick position
+					} else { // Check new stick position
 						if(element.hasClass('supsystic-sticky-active')) {
 							if(footerHeight) {
 								var elementHeight = element.height()
