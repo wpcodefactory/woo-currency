@@ -152,7 +152,7 @@ Please report security bugs found in the source code of the plugin through the [
 == Changelog ==
 
 = 2.2.7 - 21/03/2026 =
-* Fix - Browser changes alert bug.
+* Fix - Browser "Changes you made may not be saved" alert bug.
 * WC tested up to: 10.6.
 
 = 2.2.6 - 17/02/2026 =
