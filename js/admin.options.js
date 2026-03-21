@@ -1,3 +1,8 @@
+/**
+ * Admin options
+ * @version 2.2.7
+ */
+
 var wcuAdminFormChanged = [];
 var g_wcuChosenOptions = {
 	width: '100%',
@@ -6,11 +11,24 @@ var g_wcuChosenOptions = {
 	enable_split_word_search: true,
 	placeholder_text_multiple: 'select options',
 };
-window.onbeforeunload = function(){
-	// If there are at lease one unsaved form - show message for confirnation for page leave
-	if(wcuAdminFormChanged.length)
-		return 'Some changes were not-saved. Are you sure you want to leave?';
-};
+/**
+ * beforeunload event handler.
+ *
+ * @version 2.2.7
+ */
+window.addEventListener('beforeunload', function (e) {
+    window.onbeforeunload = null;
+    if (!wcuAdminFormChanged.length) return;
+    e.preventDefault();
+
+    return true;
+});
+
+/**
+ * Jquery ready function
+ *
+ * @version 2.2.7
+ */
 jQuery(document).ready(function(){
 	wcuInitMainPromoPopup();
 
@@ -39,7 +57,7 @@ jQuery(document).ready(function(){
 	// Timeout - is to count only user changes, because some changes can be done auto when form is loaded
 	setTimeout(function() {
 		// If some changes was made in those forms and they were not saved - show message for confirnation before page reload
-		var formsPreventLeave = [];
+		var formsPreventLeave = ['mainform'];
 		if(formsPreventLeave && formsPreventLeave.length) {
 			jQuery('#'+ formsPreventLeave.join(', #')).find('input,select').change(function(){
 				var formId = jQuery(this).parents('form:first').attr('id');

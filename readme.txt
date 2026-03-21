@@ -2,7 +2,7 @@
 Contributors: woobewoo
 Tags: currency switcher, multi currency, currency converter, currency, woocommerce
 Tested up to: 6.9
-Stable tag: 2.2.6
+Stable tag: 2.2.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -150,6 +150,10 @@ Please report security bugs found in the source code of the plugin through the [
 13. Admin panel. Custom Currencies
 
 == Changelog ==
+
+= 2.2.7 - 21/03/2026 =
+* Fix - Browser changes alert bug.
+* WC tested up to: 10.6.
 
 = 2.2.6 - 17/02/2026 =
 * Dev – Fix unauthenticated access vulnerability.
