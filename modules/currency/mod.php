@@ -78,6 +78,9 @@ class currencyWcu extends moduleWcu {
 			add_filter('woocommerce_product_get_price', array($this, 'getCurrencyPrice'), 9999, 2);
 			add_filter('woocommerce_product_get_regular_price', array($this, 'getCurrencyPrice'), 9999, 2);
 			add_filter('woocommerce_product_get_sale_price', array($this, 'getCurrencyPrice'), 9999, 2);
+			add_filter('woocommerce_package_rates', array($this, 'updatePackageRates'), 9999);
+			add_action('woocommerce_cart_calculate_fees', array($this, 'updateFees'), 9999);
+			add_filter('woocommerce_coupon_get_amount', array($this, 'updateCouponAmount'), 9999, 2);
 		} else {
 			add_action('woocommerce_blocks_loaded', array($this, 'addWoocommerceBlocksHooks'));
 			add_filter('raw_woocommerce_price', array($this, 'getCurrencyPrice'), 9999, 2);
@@ -92,10 +95,6 @@ class currencyWcu extends moduleWcu {
 
 //		add_filter('woocommerce_order_get_total', array($this, 'getTotalCurrencyPrice'), 9999, 2);
 		add_action('woocommerce_email_header', array($this, 'removeConvertTotalPrice'), 10);
-
-		add_filter('woocommerce_package_rates', array($this, 'updatePackageRates'), 9999);
-		add_action('woocommerce_cart_calculate_fees', array($this, 'updateFees'), 9999);
-		add_filter('woocommerce_coupon_get_amount', array($this, 'updateCouponAmount'), 9999, 2);
 
 		add_action('woocommerce_before_calculate_totals', array($this, 'beforeCartTotals'), 9999, 2);
 		add_action('woocommerce_after_calculate_totals', array($this, 'afterCartTotals'), 9999);
@@ -311,13 +310,21 @@ class currencyWcu extends moduleWcu {
 		return $price;
 	}
 
+	/**
+	 * addWoocommerceBlocksHooks
+	 *
+	 * @return void
+	 * @version 2.2.8
+	 */
 	function addWoocommerceBlocksHooks() {
 		add_filter('woocommerce_get_price_excluding_tax', array($this, 'getCurrencyPriceCart'), 9999);
 		add_filter('woocommerce_get_price_including_tax', array($this, 'getCurrencyPriceCart'), 9999);
 		add_filter('woocommerce_cart_get_subtotal', array($this, 'getCurrencyPriceCart'), 9999);
 		add_filter('woocommerce_cart_get_total', array($this, 'getCurrencyPriceCart'), 9999);
+		add_filter('woocommerce_cart_get_discount_total', array($this, 'getCurrencyPriceCart'), 9999);
 		add_filter('woocommerce_cart_get_shipping_total', array($this, 'getShippingTotal'), 9999);
 		add_filter('woocommerce_package_rates', array($this, 'calcShippingCosts'), 2);
+		add_filter('woocommerce_cart_tax_totals', array($this, 'calcTaxTotals'), 9999);
 		add_action('woocommerce_calculate_totals', array($this, 'calcLineSubtotal'), 9999);
 		dispatcherWcu::addFilter('jsInitVariables', array($this, 'addShippingCosts'));
 	}
@@ -340,6 +347,29 @@ class currencyWcu extends moduleWcu {
 		$this->shippingCosts = $costs;
 		return $methods;
 	}
+
+	/**
+	 * calcTaxTotals
+	 *
+	 * @param $tax_totals
+	 *
+	 * @return mixed
+	 * @version 2.2.8
+	 */
+	public function calcTaxTotals( $tax_totals ) {
+		if ( $this->currentCurrency === $this->defaultCurrency ) {
+			return $tax_totals;
+		}
+
+		foreach ($tax_totals as &$tax_total) {
+			$tax_total->amount = $this->getModel()->getCurrencyPrice(
+				$tax_total->amount
+			);
+		}
+
+		return $tax_totals;
+	}
+
 	public function getShippingTotal($price) {
 		if (!has_block('woocommerce/cart') && !has_block('woocommerce/checkout') && !$this->isBlocksAPI()) {
 			return $price;
@@ -352,16 +382,39 @@ class currencyWcu extends moduleWcu {
 		}
 		return $response;
 	}
-	public function isBlocksAPI(  ) {
+
+	/**
+	 * isBlocksAPI
+	 *
+	 * @return bool
+	 * @version 2.2.8
+	 */
+	public function isBlocksAPI() {
 		$uri = empty($_SERVER['REQUEST_URI']) ? '' : sanitize_text_field($_SERVER['REQUEST_URI']);
-		return strpos( $uri, 'wp-json/wc/store/') && (strpos( $uri, '/batch?') || strpos( $uri, '/checkout?__experimental_calc_totals=true'));
+		return strpos( $uri, 'wp-json/wc/store/') !== false || strpos( $uri, '/checkout?__experimental_calc_totals=true') !== false;
 	}
+
+	/**
+	 * calcLineSubtotal
+	 *
+	 * @param $cart
+	 *
+	 * @return void
+	 * @version 2.2.8
+	 */
 	public function calcLineSubtotal( $cart ) {
 		if (has_block('woocommerce/cart') || has_block('woocommerce/checkout') || $this->isBlocksAPI()) {
 
 			foreach ( $cart->get_cart() as $key => $cartItem ) {
-				if (!empty($cartItem['line_subtotal']) && !empty($cart->cart_contents[$key])) {
-					$cart->cart_contents[$key]['line_subtotal'] = $this->getModel()->getCurrencyPrice($cartItem['line_subtotal'], null);
+				if ( ! empty( $cartItem['line_subtotal'] ) && ! empty( $cart->cart_contents[ $key ] ) ) {
+					$cart->cart_contents[ $key ]['line_subtotal'] = $this->getModel()->getCurrencyPrice( $cartItem['line_subtotal'], null );
+				}
+				if ( ! empty( $cart_item['line_tax'] ) ) {
+					$cart_item['line_tax'] = $this->getModel()->getCurrencyPrice( $cart_item['line_tax'] );
+				}
+
+				if ( ! empty( $cart_item['line_subtotal_tax'] ) ) {
+					$cart_item['line_subtotal_tax'] = $this->getModel()->getCurrencyPrice( $cart_item['line_subtotal_tax'] );
 				}
 			}
 		}
