@@ -110,6 +110,9 @@ class currencyWcu extends moduleWcu {
 			add_action('woocommerce_checkout_order_processed', array($this, 'controlPayPalSupportedCurrencies'), 9999);
             // convert for payment_paynet
 			add_action('woocommerce_checkout_order_processed', array($this, 'convertCustomCurrencies'), 9999);
+
+			add_action('woocommerce_store_api_checkout_order_processed', array($this, 'controlPayPalSupportedCurrencies'), 9999);
+			add_action('woocommerce_store_api_checkout_order_processed', array($this, 'convertCustomCurrencies'), 9999);
 		}
 		add_filter('wpg_request_param', array($this, 'recalcWpgAmounts'), 9999);
 
@@ -548,14 +551,27 @@ class currencyWcu extends moduleWcu {
 		return $params;
 	}
 
+	/**
+	 * convertCustomCurrencies
+	 *
+	 * @param $id
+	 *
+	 * @return void
+	 * @version 2.2.8
+	 */
 	public function convertCustomCurrencies( $id ) {
-		$order  = wc_get_order( $id );
+		if ( $id instanceof WC_Order ) {
+			$order = wc_get_order( $id );
+			$id = $id->get_id();
+		} else {
+			$order  = wc_get_order( $id );
+		}
 		$method = $order->get_payment_method();
 		if ( $method == 'payment_paynet' ) {
 			$currentCurrency = $this->getCurrentCurrency();
 			$paymentCurrency = 'TRY';
 			$this->setCurrentCurrency( $paymentCurrency, true );
-			$paymentTotal = $this->getCurrencyPrice( WC()->cart->get_total( 'edit' ) );
+			$paymentTotal = WC()->cart->get_total( 'edit' );
 
 			utilsWcu::updateOrderMeta($id, array('wcu_order_currency' => $paymentCurrency, 'wcu_order_total' => $paymentTotal));
 			//update_post_meta( $id, 'wcu_order_currency', $paymentCurrency );
@@ -565,10 +581,22 @@ class currencyWcu extends moduleWcu {
 		}
 	}
 
+	/**
+	 * controlPayPalSupportedCurrencies
+	 *
+	 * @param $id
+	 *
+	 * @return void
+	 * @throws WC_Data_Exception
+	 * @version 2.2.8
+	 */
 	public function controlPayPalSupportedCurrencies($id)
 	{
+		if ( $id instanceof WC_Order ) {
+			$id = $id->get_id();
+		}
 		$currentCurrency = $this->getCurrentCurrency();
-		utilsWcu::updateOrderMeta($id, array('wcu_order_currency' => $currentCurrency, 'wcu_order_total' => $this->getCurrencyPrice( WC()->cart->get_total('edit'))));
+		utilsWcu::updateOrderMeta($id, array('wcu_order_currency' => $currentCurrency, 'wcu_order_total' => WC()->cart->get_total('edit')));
 		//update_post_meta( $id, 'wcu_order_currency', $currentCurrency );
 		//update_post_meta( $id, 'wcu_order_total', $this->getCurrencyPrice( WC()->cart->get_total( 'edit' ) ) );
 		$options = $this->getModel()->getOptions();
