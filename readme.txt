@@ -154,6 +154,7 @@ Please report security bugs found in the source code of the plugin through the [
 = 2.2.8 - 26/03/2026 =
 * Fix - Wrong order total saving bug.
 * Fix - Currency change after payment method change when "Change currency at checkout" disabled.
+* Fix - Shipping, coupon, tax, and other fees conversion bug.
 
 = 2.2.7 - 21/03/2026 =
 * Fix - Browser "Changes you made may not be saved" alert bug.

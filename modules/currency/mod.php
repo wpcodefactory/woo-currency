@@ -93,6 +93,10 @@ class currencyWcu extends moduleWcu {
 //		add_filter('woocommerce_order_get_total', array($this, 'getTotalCurrencyPrice'), 9999, 2);
 		add_action('woocommerce_email_header', array($this, 'removeConvertTotalPrice'), 10);
 
+		add_filter('woocommerce_package_rates', array($this, 'updatePackageRates'), 9999);
+		add_action('woocommerce_cart_calculate_fees', array($this, 'updateFees'), 9999);
+		add_filter('woocommerce_coupon_get_amount', array($this, 'updateCouponAmount'), 9999, 2);
+
 		add_action('woocommerce_before_calculate_totals', array($this, 'beforeCartTotals'), 9999, 2);
 		add_action('woocommerce_after_calculate_totals', array($this, 'afterCartTotals'), 9999);
 
@@ -383,6 +387,64 @@ class currencyWcu extends moduleWcu {
 		remove_filter('woocommerce_order_get_total', array($this, 'getTotalCurrencyPrice'), 9999, 2);
 	}
 
+	/**
+	 * updatePackageRates
+	 *
+	 * @param $rates
+	 *
+	 * @return array
+	 * @version 2.2.8
+	 */
+	public function updatePackageRates($rates) {
+		foreach ($rates as $rate_obj) {
+			$rate_obj->cost = $this->getModel()->getCurrencyPrice($rate_obj->cost);
+
+			if (!empty($rate_obj->taxes)) {
+				foreach ($rate_obj->taxes as &$tax) {
+					$tax = $this->getModel()->getCurrencyPrice($tax);
+				}
+			}
+		}
+
+		return $rates;
+	}
+
+	/**
+	 * updateFees
+	 *
+	 * @param $cart
+	 *
+	 * @return void
+	 * @version 2.2.8
+	 */
+	public function updateFees($cart) {
+		if ($this->currentCurrency === $this->defaultCurrency) return;
+		foreach ($cart->get_fees() as $fee) {
+			$fee->amount = $this->getModel()->getCurrencyPrice($fee->amount);
+			$fee->total  = $this->getModel()->getCurrencyPrice($fee->total);
+		}
+	}
+
+	/**
+	 * updateCouponAmount
+	 *
+	 * @param $amount
+	 * @param $coupon
+	 *
+	 * @return float|int
+	 * @version 2.2.8
+	 */
+	public function updateCouponAmount($amount, $coupon) {
+		if ($this->currentCurrency === $this->defaultCurrency) {
+			return $amount;
+		}
+
+		if (!in_array($coupon->get_discount_type(), array( 'fixed_cart', 'fixed_product' ) )) {
+			return $amount;
+		}
+
+		return $this->getModel()->getCurrencyPrice($amount);
+	}
 
    function getCurrencyOrderTotal($order_total)
    {
