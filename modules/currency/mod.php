@@ -1,8 +1,13 @@
 <?php
 /**
- * currencyWcu
+ * WBW Currency Switcher for WooCommerce - currencyWcu Class
+ *
  * @version 2.2.8
+ *
+ * @author woobewoo
  */
+
+defined( 'ABSPATH' ) || exit;
 
 class currencyWcu extends moduleWcu {
 
@@ -93,7 +98,6 @@ class currencyWcu extends moduleWcu {
 		add_filter('woocommerce_price_filter_widget_min_amount', array($this, 'getCurrencyPriceMinWidget'), 9999);
 		add_filter('woocommerce_price_filter_widget_max_amount', array($this, 'getCurrencyPriceMaxWidget'), 9999);
 
-//		add_filter('woocommerce_order_get_total', array($this, 'getTotalCurrencyPrice'), 9999, 2);
 		add_action('woocommerce_email_header', array($this, 'removeConvertTotalPrice'), 10);
 
 		add_action('woocommerce_before_calculate_totals', array($this, 'beforeCartTotals'), 9999, 2);
@@ -134,7 +138,6 @@ class currencyWcu extends moduleWcu {
 
 		add_filter('wc_get_template', array($this, 'updateCurrencyForEmailTemplateOrder'), 9999, 5);				// from woocommerce 2.7 it is necessary for new order email
 		add_action('wpo_wcpdf_process_template_order', array($this, 'updateCurrencyForPdfTemplateOrder'), 1, 2);	// compatibility for https://wordpress.org/plugins/woocommerce-pdf-invoices-packing-slips/
-//		add_action('woocommerce_order_get_currency', array($this, 'getOrderCurrency'), 1, 2);						// callback for woocommerce get_order_currency() function
 		add_filter('woocommerce_checkout_update_order_review', array($this, 'updateCheckoutOrderReview'), 9999);	// callback for ajax recalc of order review on checkout
 
 		add_filter('woocommerce_get_formatted_order_total', array($this, 'getCurrencyOrderTotal'));	// callback for ajax recalc of order review on checkout
@@ -314,10 +317,11 @@ class currencyWcu extends moduleWcu {
 	}
 
 	/**
-	 * addWoocommerceBlocksHooks
+	 * addWoocommerceBlocksHooks.
+	 *
+	 * @version 2.2.8
 	 *
 	 * @return void
-	 * @version 2.2.8
 	 */
 	function addWoocommerceBlocksHooks() {
 		add_filter('woocommerce_get_price_excluding_tax', array($this, 'getCurrencyPriceCart'), 9999);
@@ -352,12 +356,14 @@ class currencyWcu extends moduleWcu {
 	}
 
 	/**
-	 * calcTaxTotals
+	 * calcTaxTotals.
 	 *
-	 * @param $tax_totals
+	 * @version 2.2.8
+	 * @since   2.2.8
+	 *
+	 * @param array $tax_totals Tax totals.
 	 *
 	 * @return mixed
-	 * @version 2.2.8
 	 */
 	public function calcTaxTotals( $tax_totals ) {
 		if ( $this->currentCurrency === $this->defaultCurrency ) {
@@ -387,10 +393,11 @@ class currencyWcu extends moduleWcu {
 	}
 
 	/**
-	 * isBlocksAPI
+	 * isBlocksAPI.
+	 *
+	 * @version 2.2.8
 	 *
 	 * @return bool
-	 * @version 2.2.8
 	 */
 	public function isBlocksAPI() {
 		$uri = empty($_SERVER['REQUEST_URI']) ? '' : sanitize_text_field($_SERVER['REQUEST_URI']);
@@ -398,12 +405,13 @@ class currencyWcu extends moduleWcu {
 	}
 
 	/**
-	 * calcLineSubtotal
+	 * calcLineSubtotal.
 	 *
-	 * @param $cart
+	 * @version 2.2.8
+	 *
+	 * @param WC_Cart $cart Cart.
 	 *
 	 * @return void
-	 * @version 2.2.8
 	 */
 	public function calcLineSubtotal( $cart ) {
 		if (has_block('woocommerce/cart') || has_block('woocommerce/checkout') || $this->isBlocksAPI()) {
@@ -444,12 +452,14 @@ class currencyWcu extends moduleWcu {
 	}
 
 	/**
-	 * updatePackageRates
+	 * updatePackageRates.
 	 *
-	 * @param $rates
+	 * @version 2.2.8
+	 * @since   2.2.8
+	 *
+	 * @param $rates Rates.
 	 *
 	 * @return array
-	 * @version 2.2.8
 	 */
 	public function updatePackageRates($rates) {
 		foreach ($rates as $rate_obj) {
@@ -466,15 +476,19 @@ class currencyWcu extends moduleWcu {
 	}
 
 	/**
-	 * updateFees
+	 * updateFees.
 	 *
-	 * @param $cart
+	 * @version 2.2.8
+	 * @since   2.2.8
+	 *
+	 * @param WC_Cart $cart Cart.
 	 *
 	 * @return void
-	 * @version 2.2.8
 	 */
 	public function updateFees($cart) {
-		if ($this->currentCurrency === $this->defaultCurrency) return;
+		if ($this->currentCurrency === $this->defaultCurrency) {
+			return;
+		}
 		foreach ($cart->get_fees() as $fee) {
 			$fee->amount = $this->getModel()->getCurrencyPrice($fee->amount);
 			$fee->total  = $this->getModel()->getCurrencyPrice($fee->total);
@@ -482,13 +496,15 @@ class currencyWcu extends moduleWcu {
 	}
 
 	/**
-	 * updateCouponAmount
+	 * updateCouponAmount.
 	 *
-	 * @param $amount
-	 * @param $coupon
+	 * @version 2.2.8
+	 * @since   2.2.8
+	 *
+	 * @param float     $amount
+	 * @param WC_Coupon $coupon
 	 *
 	 * @return float|int
-	 * @version 2.2.8
 	 */
 	public function updateCouponAmount($amount, $coupon) {
 		if ($this->currentCurrency === $this->defaultCurrency) {
@@ -552,19 +568,20 @@ class currencyWcu extends moduleWcu {
 	}
 
 	/**
-	 * convertCustomCurrencies
+	 * convertCustomCurrencies.
 	 *
-	 * @param $id
+	 * @version 2.2.8
+	 *
+	 * @param int|WC_Order $id Order or order ID.
 	 *
 	 * @return void
-	 * @version 2.2.8
 	 */
 	public function convertCustomCurrencies( $id ) {
 		if ( $id instanceof WC_Order ) {
 			$order = wc_get_order( $id );
-			$id = $id->get_id();
+			$id    = $id->get_id();
 		} else {
-			$order  = wc_get_order( $id );
+			$order = wc_get_order( $id );
 		}
 		$method = $order->get_payment_method();
 		if ( $method == 'payment_paynet' ) {
@@ -582,13 +599,14 @@ class currencyWcu extends moduleWcu {
 	}
 
 	/**
-	 * controlPayPalSupportedCurrencies
+	 * controlPayPalSupportedCurrencies.
 	 *
-	 * @param $id
+	 * @version 2.2.8
+	 *
+	 * @param int|WC_Order $id Order or order ID.
 	 *
 	 * @return void
 	 * @throws WC_Data_Exception
-	 * @version 2.2.8
 	 */
 	public function controlPayPalSupportedCurrencies($id)
 	{
