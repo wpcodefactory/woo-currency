@@ -493,10 +493,13 @@ class fieldWcu {
 	public function displayConfig($module) {
 	   echo $this->drawConfig($module);
 	}
+
 	/**
 	 * This method will prepare internal value to it's type
 	 * @see $this->type
 	 * @return mixed - prepared value on the basis of $this->type
+	 *
+	 * @version 2.2.9
 	 */
 	public function valToType() {
 		switch($this->type) {
@@ -505,12 +508,10 @@ class fieldWcu {
 			case 'smallint':
 				$this->value = (int) $this->value;
 				break;
+			case 'decimal':
+			case 'double':
 			case 'float':
 				$this->value = (float) $this->value;
-				break;
-			case 'double':
-			case 'decimal':
-				$this->value = (double) $this->value;
 				break;
 		}
 		return $this->type;

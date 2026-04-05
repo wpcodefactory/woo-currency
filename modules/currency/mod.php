@@ -46,7 +46,7 @@ class currencyWcu extends moduleWcu {
 	/**
 	 * Init method.
 	 *
-	 * @version 2.2.8
+	 * @version 2.2.9
 	 */
 	public function init() {
 		parent::init();
@@ -82,6 +82,13 @@ class currencyWcu extends moduleWcu {
 			add_filter('woocommerce_product_get_price', array($this, 'getCurrencyPrice'), 9999, 2);
 			add_filter('woocommerce_product_get_regular_price', array($this, 'getCurrencyPrice'), 9999, 2);
 			add_filter('woocommerce_product_get_sale_price', array($this, 'getCurrencyPrice'), 9999, 2);
+
+			add_filter('woocommerce_variation_prices_price', array($this, 'getCurrencyPrice'), 9999, 2);
+			add_filter('woocommerce_variation_prices_regular_price', array($this, 'getCurrencyPrice'), 9999, 2);
+			add_filter('woocommerce_variation_prices_sale_price', array($this, 'getCurrencyPrice'), 9999, 2);
+			add_filter('woocommerce_product_variation_get_price', array($this, 'getCurrencyPrice'), 9999, 2);
+			add_filter('woocommerce_product_variation_get_regular_price', array($this, 'getCurrencyPrice'), 9999, 2);
+
 			add_filter('woocommerce_package_rates', array($this, 'updatePackageRates'), 9999);
 			add_action('woocommerce_cart_calculate_fees', array($this, 'updateFees'), 9999);
 			add_filter('woocommerce_coupon_get_amount', array($this, 'updateCouponAmount'), 9999, 2);

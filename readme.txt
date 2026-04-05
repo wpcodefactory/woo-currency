@@ -151,6 +151,11 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
+= 2.2.9 - 01/04/2026 =
+* Fix - Variable product price conversion bug.
+* Fix - "Creation of dynamic property is deprecated" notices fixed.
+* Fix - "Deprecated: Non-canonical cast (double) is deprecated" notices fixed.
+
 = 2.2.8 - 30/03/2026 =
 * Fix - Order totals (including line-items) saving bug.
 * Fix - Currency change after payment method change when "Change currency at checkout" is disabled.

@@ -40,10 +40,10 @@ abstract class tableWcu {
 	 * Escape data before action
 	 */
 	protected $_escape = false;
-	
+
 	protected $_limitFrom = '';
 	protected $_limitTo = '';
-	
+
     static public function getInstance($table = '') {
         static $instances = array();
 		if(!$table) {
@@ -51,9 +51,9 @@ abstract class tableWcu {
 		}
         if(!isset($instances[$table])) {
             $class = 'table'. strFirstUp($table). strFirstUp(WCU_CODE);
-            if(class_exists($class)) 
+            if(class_exists($class))
                 $instances[$table] = new $class();
-            else 
+            else
                 $instances[$table] = NULL;  /*throw error must be here*/
         }
         return $instances[$table];
@@ -86,13 +86,13 @@ abstract class tableWcu {
     }
     public function fillFromDB($id = 0, $where = '') {
         $res = $this;
-        if($id) 
+        if($id)
             $data = $this->getById($id);
          elseif($where)
             $data = $this->get('*', $where);
          else
             $data = $this->getAll();
-        
+
         if($data) {
             if($id) {
                 foreach($data as $k => $v) {
@@ -147,7 +147,7 @@ abstract class tableWcu {
     }
     public function setID($id) {
         $this->_id = $id;
-    } 
+    }
     public function getAll($fields = '*') {
         return $this->get($fields);
     }
@@ -179,19 +179,19 @@ abstract class tableWcu {
 		return $this;
     }
 	public function limitFrom($limit = '') {
-        if (is_numeric($limit)) 
+        if (is_numeric($limit))
             $this->_limitFrom = (int)$limit;
 		return $this;
     }
 	public function limitTo($limit = '') {
-        if (is_numeric($limit)) 
+        if (is_numeric($limit))
             $this->_limitTo = (int)$limit;
 		return $this;
     }
     /**
      * Add ORDER BY to SQL
-     * 
-     * @param mixed $fields 
+     *
+     * @param mixed $fields
      */
     public function orderBy($fields){
         if (is_array($fields)) {
@@ -204,8 +204,8 @@ abstract class tableWcu {
     }
     /**
      * Add GROUP BY to SQL
-     * 
-     * @param mixed $fields 
+     *
+     * @param mixed $fields
      */
     public function groupBy($fields){
         if (is_array($fields)) {
@@ -244,7 +244,7 @@ abstract class tableWcu {
 			} else {
 				$query .= ' LIMIT '. $this->_limit;
 			}
-            
+
             $this->_limit = '';
         } elseif($this->_limitFrom !== '' &&  $this->_limitTo !== '') {
 			$query .= ' LIMIT '. $this->_limitFrom. ','. $this->_limitTo;
@@ -270,20 +270,20 @@ abstract class tableWcu {
                 $query = 'UPDATE ';
                 break;
         }
-		
+
         $fields = $this->_getQueryString($data, ',', true);
 
         if(empty($fields)) {
             $this->_addError(__('Nothing to update', WCU_LANG_CODE));
             return false;
         }
-        
+
         $query .= $this->_table. ' SET '. $fields;
 
         if(!empty($this->_errors))
             return false;
         if($method == 'UPDATE' && !empty($where))
-            $query .= ' WHERE '. $this->_getQueryString($where, 'AND'); 
+            $query .= ' WHERE '. $this->_getQueryString($where, 'AND');
         if(dbWcu::query($query)) {
             if($method == 'INSERT')
                 return dbWcu::lastID();
@@ -326,6 +326,7 @@ abstract class tableWcu {
         }
         return dbWcu::query($q);
     }
+
     /**
      * Convert to database query
      * @param mixed $data if array given - convert it into string where key - is column name, value - database value to set;
@@ -333,6 +334,8 @@ abstract class tableWcu {
      * if string givven - just return it without changes
      * @param string $delim delimiter to use in query, recommended - ',', 'AND', 'OR'
      * @return string query string
+     *
+     * @version 2.2.9
      */
     public function _getQueryString($data, $delim = ',', $validate = false) {
         $res = '';
@@ -340,7 +343,7 @@ abstract class tableWcu {
             foreach($data as $k => $v) {
                 if(array_key_exists($k, $this->_fields) || $k == $this->_id) {
                     $val = $v;
-                    if(isset($this->_fields[$k]) && $this->_fields[$k]->adapt['dbTo']) 
+                    if(isset($this->_fields[$k]) && $this->_fields[$k]->adapt['dbTo'])
                         $val = fieldAdapterWcu::_($val, $this->_fields[$k]->adapt['dbTo'], fieldAdapterWcu::DB);
                     if($validate) {
                         if (isset($this->_fields[$k]) && is_object($this->_fields[$k])) {
@@ -357,11 +360,9 @@ abstract class tableWcu {
 							case 'tinyint':
 								$res .= $k. ' = '. (int)$val. ' '. $delim. ' ';
 								break;
+							case 'decimal':
 							case 'float':
 								$res .= $k. ' = '. (float)$val. ' '. $delim. ' ';
-								break;
-							case 'decimal':
-								$res .= $k. ' = '. (double)$val. ' '. $delim. ' ';
 								break;
 							case 'free':    //Just set it as it is
 								$res .= $k. ' = '. $val. ' '. $delim. ' ';
@@ -414,7 +415,7 @@ abstract class tableWcu {
         return dbWcu::get('SELECT '. $this->_id. ' FROM '. $this->_table. ' WHERE '. $field. ' = "'. $value. '"', 'one');
     }
     protected function _addError($error) {
-        if(is_array($error)) 
+        if(is_array($error))
             $this->_errors = array_merge($this->_errors, $error);
         else
             $this->_errors[] = $error;
@@ -470,7 +471,7 @@ abstract class tableWcu {
                     if($d[$key] == 'false')
                         $d[$key] = 0;
                     $d[$key] = (int) $d[$key];
-                    
+
                     break;
             }
         }
@@ -478,13 +479,13 @@ abstract class tableWcu {
         return $d;
     }
     public function install($d = array()) {
-        
+
     }
     public function uninstall($d = array()) {
-        
+
     }
 	public function activate() {
-		
+
 	}
     public function getLastInsertID() {
         return dbWcu::get('SELECT MAX('. $this->_id. ') FROM '. $this->_table, 'one');
