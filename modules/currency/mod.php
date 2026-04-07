@@ -81,7 +81,6 @@ class currencyWcu extends moduleWcu {
 		if ( $this->convertByCheckout ) {
 			add_filter('woocommerce_product_get_price', array($this, 'getCurrencyPrice'), 9999, 2);
 			add_filter('woocommerce_product_get_regular_price', array($this, 'getCurrencyPrice'), 9999, 2);
-			add_filter('woocommerce_product_get_sale_price', array($this, 'getCurrencyPrice'), 9999, 2);
 
 			add_filter('woocommerce_variation_prices_price', array($this, 'getCurrencyPrice'), 9999, 2);
 			add_filter('woocommerce_variation_prices_regular_price', array($this, 'getCurrencyPrice'), 9999, 2);
