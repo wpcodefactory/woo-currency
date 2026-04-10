@@ -2,7 +2,7 @@
 Contributors: woobewoo
 Tags: currency switcher, multi currency, currency converter, currency, woocommerce
 Tested up to: 6.9
-Stable tag: 2.2.8
+Stable tag: 2.2.9
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -154,6 +154,8 @@ Please report security bugs found in the source code of the plugin through the [
 = 2.2.9 - 06/04/2026 =
 * Fix - Variable product price conversion bug.
 * Fix - All product's `sale` badge bug.
+* Fix - Twice price conversion when "Change currency at checkout" is enabled.
+* Fix - Wrong currency display on mini cart in checkout page when "Change currency at checkout" is disabled and "Manual prices" is enabled.
 * Fix - "Creation of dynamic property is deprecated" notices fixed.
 * Fix - "Deprecated: Non-canonical cast (double) is deprecated" notices fixed.
 
