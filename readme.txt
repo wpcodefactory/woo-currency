@@ -151,7 +151,7 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
-= 2.2.9 - 06/04/2026 =
+= 2.2.9 - 11/04/2026 =
 * Fix - Variable product price conversion bug.
 * Fix - All product's `sale` badge bug.
 * Fix - Twice price conversion when "Change currency at checkout" is enabled.
