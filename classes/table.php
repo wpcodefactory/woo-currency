@@ -1,4 +1,14 @@
 <?php
+/**
+ * WBW Currency Switcher for WooCommerce - tableWcu Class
+ *
+ * @author  woobewoo
+ *
+ * @version 2.2.9
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 abstract class tableWcu {
     /**
      * ID column name

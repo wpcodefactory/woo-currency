@@ -1,4 +1,14 @@
 <?php
+/**
+ * WBW Currency Switcher for WooCommerce - fieldWcu Class
+ *
+ * @author  woobewoo
+ *
+ * @version 2.2.9
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class fieldWcu {
 	public $name = '';
 	public $html = '';
