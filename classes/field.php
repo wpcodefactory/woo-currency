@@ -10,31 +10,35 @@
 defined( 'ABSPATH' ) || exit;
 
 class fieldWcu {
-	public $name = '';
-	public $html = '';
-	public $type = '';
-	public $default = '';
-	public $value = '';
-	public $label = '';
-	public $maxlen = 0;
-	public $id = 0;
-	public $htmlParams = array();
-	public $validate = array();
+
+	public $name        = '';
+	public $html        = '';
+	public $type        = '';
+	public $default     = '';
+	public $value       = '';
+	public $label       = '';
+	public $maxlen      = 0;
+	public $id          = 0;
+	public $htmlParams  = array();
+	public $validate    = array();
 	public $description = '';
+
 	/**
-	 * Wheter or not add error html element right after input field
+	 * Whether or not add error html element right after input field
 	 * if bool - will be added standard element
 	 * if string - it will be add this string
 	 */
 	public $errorEl = false;
+
 	/**
 	 * Name of method in table object to prepare data before insert / update operations
 	 */
 	public $adapt = array('htmlWcu' => '', 'dbFrom' => '', 'dbTo' => '');
+
 	/**
 	 * Init database field representation
 	 * @param string $html html type of field (text, textarea, etc. @see html class)
-	 * @param string $type database type (int, varcahr, etc.)
+	 * @param string $type database type (int, varchar, etc.)
 	 * @param mixed $default default value for this field
 	 */
 	public function __construct($name, $html = 'text', $type = 'other', $default = '', $label = '', $maxlen = 0, $adaption = array(), $validate = '', $description = '') {
@@ -55,15 +59,18 @@ class fieldWcu {
 			$this->addValidation('validLen');
 		}
 	}
+
 	/**
 	 * @param mixed $errorEl - if bool and "true" - than we will use standard error element, if string - we will use this string as error element
 	 */
 	public function setErrorEl($errorEl) {
 		$this->errorEl = $errorEl;
 	}
+
 	public function getErrorEl() {
 		return $this->errorEl;
 	}
+
 	public function setValidation($validate) {
 		if(is_array($validate))
 			$this->validate = $validate;
@@ -74,9 +81,11 @@ class fieldWcu {
 				$this->validate = array(trim($validate));
 		}
 	}
+
 	public function addValidation($validate) {
 		$this->validate[] = $validate;
 	}
+
 	/**
 	 * Set $value property.
 	 * Sure - it is public and can be set directly, but it can be more
@@ -88,40 +97,50 @@ class fieldWcu {
 			$value = fieldAdapterWcu::_($value, $this->adapt['dbFrom'], fieldAdapterWcu::DB);
 		$this->value = $value;
 	}
+
 	public function setLabel($label) {
 		$this->label = $label;
 	}
+
 	public function setHtml($html) {
 		$this->html = $html;
 	}
+
 	public function getHtml() {
 		return $this->html;
 	}
+
 	public function setName($name) {
 		$this->name = $name;
 	}
+
 	public function getName() {
 		return $this->name;
 	}
+
 	public function getValue() {
 		return $this->value;
 	}
+
 	public function getLabel() {
 		return $this->label;
 	}
+
 	public function setID($id) {
 		$this->id = $id;
 	}
+
 	public function getID() {
 		return $this->id;
 	}
+
 	public function setAdapt($adapt) {
 		$this->adapt = $adapt;
 	}
+
 	public function drawHtml($tag, $id) {
 		if(method_exists('htmlWcu', $this->html)) {
 			$method = $this->html;
-			//echo $this->name. ': '. $this->value. '<br />';
 			if(!empty($this->value))
 				$this->htmlParams['value'] = $this->value;
 			if ($method == 'checkbox') {
@@ -157,6 +176,7 @@ class fieldWcu {
 		}
 		return false;
 	}
+
 	public function displayValue() {
 		$value = '';
 		switch($this->html) {
@@ -214,27 +234,34 @@ class fieldWcu {
 		else
 			return $value;
 	}
+
 	public function showValue() {
 		echo $this->displayValue();
 	}
+
 	public function display($tag = 1, $id = 0) {
 		echo $this->drawHtml($tag, $id);
 	}
+
 	public function addHtmlParam($name, $value) {
 		$this->htmlParams[$name] = $value;
 	}
+
 	/**
 	 * Alias for addHtmlParam();
 	 */
 	public function setHtmlParam($name, $value) {
 		$this->addHtmlParam($name, $value);
 	}
+
 	public function setHtmlParams($params) {
 		$this->htmlParams = $params;
 	}
+
 	public function getHtmlParam($name) {
 		return isset($this->htmlParams[$name]) ? $this->htmlParams[$name] : false;
 	}
+
 	/**
 	 * Function to display userfields in front-end
 	 *
@@ -345,12 +372,6 @@ class fieldWcu {
 	 */
 	function checkVarFromParam($param, $element) {
 		return utilsWcu::xmlAttrToStr($param, $element);
-		/*if (isset($param[$element])) {
-			// convert object element to string
-			return (string)$param[$element];
-		} else {
-			return '';
-		}*/
 	}
 
 	/**
@@ -360,39 +381,43 @@ class fieldWcu {
 	 * @return array $config_params
 	 */
 	public function prepareConfigOptions($xml) {
-	  // load xml structure of parameters
-	   $config = simplexml_load_file($xml);
-	   $config_params = array();
-	   foreach ($config->params->param as $param) {
-		 // read the variables
-		  $name = $this->checkVarFromParam($param,'name');
-		  $type = $this->checkVarFromParam($param,'type');
-		  $label = $this->checkVarFromParam($param,'label');
-		  $helper = $this->checkVarFromParam($param,'helperWcu');
-		  $module = $this->checkVarFromParam($param,'moduleWcu');
-		  $values = $this->checkVarFromParam($param,'values');
-		  $default = $this->checkVarFromParam($param,'default');
-		  $description = $this->checkVarFromParam($param,'description');
-		  if ($name == '') continue;
-		// fill in the variables to configuration array
-		  $config_params[$name] = array('type'=>$type,
-										'label'=>$label,
-										'helperWcu'=>$helper,
-										'moduleWcu'=>$module,
-										'values'=>$values,
-										'default'=>$default,
-										'description'=>$description,
-										);
-	   }
-	   return $config_params;
+		// load xml structure of parameters
+		$config = simplexml_load_file($xml);
+		$config_params = array();
+		foreach ($config->params->param as $param) {
+			// read the variables
+			$name        = $this->checkVarFromParam($param,'name');
+			$type        = $this->checkVarFromParam($param,'type');
+			$label       = $this->checkVarFromParam($param,'label');
+			$helper      = $this->checkVarFromParam($param,'helperWcu');
+			$module      = $this->checkVarFromParam($param,'moduleWcu');
+			$values      = $this->checkVarFromParam($param,'values');
+			$default     = $this->checkVarFromParam($param,'default');
+			$description = $this->checkVarFromParam($param,'description');
+			if ($name == '') continue;
+			// fill in the variables to configuration array
+			$config_params[$name] = array(
+				'type'       => $type,
+				'label'      => $label,
+				'helperWcu'  => $helper,
+				'moduleWcu'  => $module,
+				'values'     => $values,
+				'default'    => $default,
+				'description'=> $description,
+			);
+		}
+		return $config_params;
 	}
+
 	public function setDescription($desc) {
 		$this->description = $desc;
 	}
+
 	public function getDescription() {
 		return $this->description;
 	}
-	 /**
+
+	/**
 	 * Displays the config options for given module
 	 *
 	 * @param string $module
@@ -402,106 +427,105 @@ class fieldWcu {
 		if(!frameWcu::_()->getModule($module))
 			return false;
 		// check for xml file with params structure
-	   if(frameWcu::_()->getModule($module)->isExternal())
-		   $config_xml = frameWcu::_()->getModule($module)->getModDir(). 'mod.xml';
-	   else
-		   $config_xml = WCU_MODULES_DIR.$module.DS.'mod.xml';
+		if(frameWcu::_()->getModule($module)->isExternal())
+			$config_xml = frameWcu::_()->getModule($module)->getModDir(). 'mod.xml';
+		else
+			$config_xml = WCU_MODULES_DIR.$module.DS.'mod.xml';
 
-	   if (!file_exists($config_xml)) {
-		   // if there is no configuration file for this $module
-		   return __('There are no configuration options for this module', WCU_LANG_CODE);
-	   }
-	   $output = '';
-	   // reading params structure
-	   $configOptions = $this->prepareConfigOptions($config_xml);
-	   // reading params from database
-	   //bugodel2nia..............
-	   if(is_string($this->value))
+		if (!file_exists($config_xml)) {
+			// if there is no configuration file for this $module
+			return __('There are no configuration options for this module', WCU_LANG_CODE);
+		}
+		$output = '';
+		// reading params structure
+		$configOptions = $this->prepareConfigOptions($config_xml);
+		// reading params from database
+		//bugodel2nia..............
+		if(is_string($this->value))
 			$params = Utils::jsonDecode($this->value);
-	   elseif(is_object($this->value) || is_array($this->value))
+		elseif(is_object($this->value) || is_array($this->value))
 			$params = toeObjectToArray($this->value);
-	   //if (!empty($params)) {
-	   if (!empty($configOptions)){
-		   $i = 0;
-		   if (empty($params)) {
-			   $params = array('0'=>array());
-		   }
-		   if(is_array($additionalOptions) && !empty($additionalOptions)) {
-			   $configOptions = array_merge($configOptions, $additionalOptions);
-		   }
-		   foreach ($params as $param) {
-			   $output .= '<div class="module_options">';
-			   foreach ($configOptions as $key=>$value){
-				  $fieldValue = '';
-				  $output .= '<div class="module_option">';
-				  $method = $configOptions[$key]['type'];
-				  $name = 'params['.$i.']['.$key.']';
-				  $options = array();
-				  // if the values attribute is set
-				  if ($configOptions[$key]['values'] != ''){
-					  $extract_options = explode(',', $configOptions[$key]['values']);
-					  if (count($extract_options) > 1) {
-						  foreach ($extract_options as $item=>$string) {
-							  if(strpos($string, '=>')) {
-								  $keyVal = array_map('trim', explode('=>', $string));
-								  $options[ $keyVal[0] ] = $keyVal[1];
-							  } else {
+		if (!empty($configOptions)){
+			$i = 0;
+			if (empty($params)) {
+				$params = array('0'=>array());
+			}
+			if(is_array($additionalOptions) && !empty($additionalOptions)) {
+				$configOptions = array_merge($configOptions, $additionalOptions);
+			}
+			foreach ($params as $param) {
+				$output .= '<div class="module_options">';
+				foreach ($configOptions as $key=>$value){
+					$fieldValue = '';
+					$output .= '<div class="module_option">';
+					$method = $configOptions[$key]['type'];
+					$name = 'params['.$i.']['.$key.']';
+					$options = array();
+					// if the values attribute is set
+					if ($configOptions[$key]['values'] != ''){
+						$extract_options = explode(',', $configOptions[$key]['values']);
+						if (count($extract_options) > 1) {
+							foreach ($extract_options as $item=>$string) {
+								if(strpos($string, '=>')) {
+									$keyVal = array_map('trim', explode('=>', $string));
+									$options[ $keyVal[0] ] = $keyVal[1];
+								} else {
 									$options[$string] = $string;
-							  }
-						  }
-					  } else {
-						  $fieldValue = $configOptions[$key]['default'];
-					  }
-				  // if helper is needed to render the object
-				  } elseif ($configOptions[$key]['helper'] != '') {
-					  $helper_name = $configOptions[$key]['helper'];
-					  // is helper from current module or other?
-					  if ($configOptions[$key]['module'] != '') {
-						  $hmodule = $configOptions[$key]['module'];
-					  } else {
-						  $hmodule = $module;
-					  }
-					  // calling the helper class
-					  $helper = frameWcu::_()->getModule($hmodule)->getHelper();
-					  if ($helper) {
-						  // calling the helper method for current option
-						  if (method_exists($helper, $helper_name))
-							$options = $helper->$helper_name();
-					  }
-				  }
+								}
+							}
+						} else {
+							$fieldValue = $configOptions[$key]['default'];
+						}
+					// if helper is needed to render the object
+					} elseif ($configOptions[$key]['helper'] != '') {
+						$helper_name = $configOptions[$key]['helper'];
+						// is helper from current module or other?
+						if ($configOptions[$key]['module'] != '') {
+							$hmodule = $configOptions[$key]['module'];
+						} else {
+							$hmodule = $module;
+						}
+						// calling the helper class
+						$helper = frameWcu::_()->getModule($hmodule)->getHelper();
+						if ($helper) {
+							// calling the helper method for current option
+							if (method_exists($helper, $helper_name))
+								$options = $helper->$helper_name();
+						}
+					}
 					if (isset($param[$key])) {
 						$fieldValue = $param[$key];
 					} else {
 						if ($fieldValue == '')
 							$fieldValue = $configOptions[$key]['default'];
 					}
-				  // filling the parameters to build html element
-					 $htmlParams = array('value'=>$fieldValue,'optionsWcu'=>$options);
-					 if($method == 'checkbox') {
-						 $htmlParams['value'] = 1;
-						 $htmlParams['checked'] = (bool)$fieldValue;
-					 }
-					 if(!empty($configOptions[$key]['htmlParams']) && is_array($configOptions[$key]['htmlParams'])) {
-						 $htmlParams = array_merge($htmlParams, $configOptions[$key]['htmlParams']);
-					 }
-				  // output label and html element
-					 $output .= '<label>'.__($configOptions[$key]['label']);
-					 if ($configOptions[$key]['description'] != '') {
-						 $output .= '<a class="toeOptTip" tip="'.__($configOptions[$key]['description']).'"></a>';
-					 }
-					 $output .= '</label><br />';
-					 $output .= htmlWcu::$method($name,$htmlParams).'<br />';
-					 $output .= '</div>';
-			   }
-			   $i++;
-			 $output .= '</div>';
-		   }
-	   }
-	   return $output;
+					// filling the parameters to build html element
+					$htmlParams = array('value'=>$fieldValue,'optionsWcu'=>$options);
+					if($method == 'checkbox') {
+						$htmlParams['value'] = 1;
+						$htmlParams['checked'] = (bool)$fieldValue;
+					}
+					if(!empty($configOptions[$key]['htmlParams']) && is_array($configOptions[$key]['htmlParams'])) {
+						$htmlParams = array_merge($htmlParams, $configOptions[$key]['htmlParams']);
+					}
+					// output label and html element
+					$output .= '<label>'.__($configOptions[$key]['label']);
+					if ($configOptions[$key]['description'] != '') {
+						$output .= '<a class="toeOptTip" tip="'.__($configOptions[$key]['description']).'"></a>';
+					}
+					$output .= '</label><br />';
+					$output .= htmlWcu::$method($name,$htmlParams).'<br />';
+					$output .= '</div>';
+				}
+				$i++;
+				$output .= '</div>';
+			}
+		}
+		return $output;
 	}
 
 	public function displayConfig($module) {
-	   echo $this->drawConfig($module);
+		echo $this->drawConfig($module);
 	}
 
 	/**
