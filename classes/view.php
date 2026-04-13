@@ -3,10 +3,13 @@
  * WBW Currency Switcher for WooCommerce - viewWcu Class
  *
  * @author  woobewoo
+ *
+ * @version 2.2.9
  */
 
 defined( 'ABSPATH' ) || exit;
 
+#[AllowDynamicProperties]
 abstract class viewWcu extends baseObjectWcu {
 
 	/**
