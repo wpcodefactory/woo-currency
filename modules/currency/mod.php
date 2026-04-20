@@ -266,85 +266,12 @@ class currencyWcu extends moduleWcu {
 		return $args;
 	}
 
-	function beforeCartTotals($cart) {
-		dispatcherWcu::doAction('setCartItemsPrice', $cart);
-		$this->nowCalcCartTotals = true;
-	}
-
-	function afterCartTotals() {
-		$this->nowCalcCartTotals = false;
-	}
-
 	function beforeOrderTotals() {
 		$this->nowCalcOrderTotals = true;
 	}
 
 	function afterOrderTotals() {
 		$this->nowCalcOrderTotals = false;
-	}
-
-	public function getCurrencyPriceCartProduct( $price, $qty = 1, $product = null ) {
-		if (!is_null($product)) {
-			$origin = (float) $product->get_price();
-			$qty = empty($qty) ? 1 : (float) $qty;
-			$newPrice = $price / $qty;
-			if ($price == $origin) {
-				return $this->getModel()->getCurrencyPrice($price, $product) * $qty;
-			}
-		}
-		return $price;
-	}
-
-	public function addShippingCosts($js) {
-		if (!empty($this->shippingCosts)) {
-			$js['shippingCosts'] = $this->shippingCosts;
-		}
-		return $js;
-	}
-
-	public function calcShippingCosts($methods) {
-		if (!has_block('woocommerce/cart') && !has_block('woocommerce/checkout')) {
-			return $methods;
-		}
-		$costs = array();
-		foreach ( $methods as $key => $method ) {
-			if (!empty($method->cost)) {
-				$costs[$key] = wc_price($method->cost);
-			}
-		}
-		$this->shippingCosts = $costs;
-		return $methods;
-	}
-
-	/**
-	 * calcTaxTotals.
-	 *
-	 * @version 2.2.8
-	 * @since   2.2.8
-	 *
-	 * @param array $tax_totals Tax totals.
-	 *
-	 * @return mixed
-	 */
-	public function calcTaxTotals( $tax_totals ) {
-		if ( $this->currentCurrency === $this->defaultCurrency ) {
-			return $tax_totals;
-		}
-
-		foreach ($tax_totals as &$tax_total) {
-			$tax_total->amount = $this->getModel()->getCurrencyPrice(
-				$tax_total->amount
-			);
-		}
-
-		return $tax_totals;
-	}
-
-	public function getShippingTotal($price) {
-		if (!has_block('woocommerce/cart') && !has_block('woocommerce/checkout') && !$this->isBlocksAPI()) {
-			return $price;
-		}
-		return $this->getModel()->getCurrencyPrice($price, null);
 	}
 
 	public function restApiRequest($response, $request, $path, $handler) {
@@ -364,33 +291,6 @@ class currencyWcu extends moduleWcu {
 	public function isBlocksAPI() {
 		$uri = empty($_SERVER['REQUEST_URI']) ? '' : sanitize_text_field($_SERVER['REQUEST_URI']);
 		return strpos( $uri, 'wp-json/wc/store/') !== false || strpos( $uri, '/checkout?__experimental_calc_totals=true') !== false;
-	}
-
-	/**
-	 * calcLineSubtotal.
-	 *
-	 * @version 2.2.8
-	 *
-	 * @param WC_Cart $cart Cart.
-	 *
-	 * @return void
-	 */
-	public function calcLineSubtotal( $cart ) {
-		if (has_block('woocommerce/cart') || has_block('woocommerce/checkout') || $this->isBlocksAPI()) {
-
-			foreach ( $cart->get_cart() as $key => $cartItem ) {
-				if ( ! empty( $cartItem['line_subtotal'] ) && ! empty( $cart->cart_contents[ $key ] ) ) {
-					$cart->cart_contents[ $key ]['line_subtotal'] = $this->getModel()->getCurrencyPrice( $cartItem['line_subtotal'], null );
-				}
-				if ( ! empty( $cart_item['line_tax'] ) ) {
-					$cart_item['line_tax'] = $this->getModel()->getCurrencyPrice( $cart_item['line_tax'] );
-				}
-
-				if ( ! empty( $cart_item['line_subtotal_tax'] ) ) {
-					$cart_item['line_subtotal_tax'] = $this->getModel()->getCurrencyPrice( $cart_item['line_subtotal_tax'] );
-				}
-			}
-		}
 	}
 
 	public function getCurrencyPriceCart($price) {
