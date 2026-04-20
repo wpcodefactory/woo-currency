@@ -46,7 +46,7 @@ class currencyWcu extends moduleWcu {
 	/**
 	 * Init method.
 	 *
-	 * @version 2.2.10
+	 * @version 2.3.0
 	 */
 	public function init() {
 		parent::init();
@@ -650,8 +650,8 @@ class currencyWcu extends moduleWcu {
 	/**
      * refreshCartFragments.
      *
-     * @version 2.2.10
-	 * @since 2.2.10
+     * @version 2.3.0
+	 * @since 2.3.0
 	 */
 	public function refreshCartFragments() {
         if ( ! is_checkout() || $this->convertByCheckout ) {
@@ -684,8 +684,8 @@ class currencyWcu extends moduleWcu {
 	/**
 	 * restorePreviousCurrency.
 	 *
-	 * @version 2.2.10
-	 * @since 2.2.10
+	 * @version 2.3.0
+	 * @since 2.3.0
 	 */
     public function restorePreviousCurrency() {
 	    if ($this->convertByCheckout || wp_doing_ajax() || isset($_GET['wc-ajax']) || !is_page()) {
@@ -777,7 +777,7 @@ class currencyWcu extends moduleWcu {
 	/**
 	 * getCurrentCurrency.
 	 *
-	 * @version 2.2.10
+	 * @version 2.3.0
 	 */
 	public function getCurrentCurrency() {
 		if(!$this->convertByCheckout && ($this->wcuIsWcfmPage() || isset($_GET['startcheckout']) || (isset($_GET['wc-ajax']) && strpos($_GET['wc-ajax'], 'checkout') !== false))) {
