@@ -151,9 +151,10 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
-= 2.3.0 - 17/04/2026 =
-* Fix - Variable products + manual prices bug.
+= 2.3.0 - 20/04/2026 =
+* Fix - Manual Prices - Variable products with disabled "Change currency at checkout" option bug.
 * Fix - Wrong currency display on thank-you page after changing currency.
+* WC tested up to: 10.7.
 
 = 2.2.9 - 13/04/2026 =
 * Fix - Variable product price conversion bug.
