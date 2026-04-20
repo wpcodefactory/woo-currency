@@ -46,7 +46,7 @@ class currencyWcu extends moduleWcu {
 	/**
 	 * Init method.
 	 *
-	 * @version 2.2.9
+	 * @version 2.2.10
 	 */
 	public function init() {
 		parent::init();
@@ -63,7 +63,9 @@ class currencyWcu extends moduleWcu {
 		}
 
 		add_filter('wp_head', array($this, 'headerActions'), 9999);
-		add_filter('wc_price_args', array($this, 'setPriceArgs'), 9999, 1);
+		add_action('wp_footer', array($this, 'refreshCartFragments'));
+		add_filter('wc_price_args', array($this, 'setPriceArgs'), 9999 );
+		add_action('template_redirect', array($this, 'restorePreviousCurrency'));
 
 		add_filter('woocommerce_get_settings_general', array($this, 'updateGeneralTabContent'), 9999);
 		add_action('woocommerce_settings_tabs_array', array($this, 'updateSettingsTabs'), 9999);
@@ -71,32 +73,24 @@ class currencyWcu extends moduleWcu {
 
 		if ( ! is_admin() ) {
 			add_filter('woocommerce_currency', array($this, 'getCurrentCurrency'), 9999);
-			add_filter('woocommerce_currency_symbol', array($this, 'getCurrencySymbol'), 9999);
 		}
 		add_filter('wc_get_price_thousand_separator', array($this, 'getCurrencyThousandSeparator'), 9999);
 		add_filter('wc_get_price_decimal_separator', array($this, 'getCurrencyDecimalSeparator'), 9999);
 
 		add_filter('wc_get_price_decimals', array($this, 'getPriceDecimalsCount'));
 
-		if ( $this->convertByCheckout ) {
-			add_filter('woocommerce_product_get_price', array($this, 'getCurrencyPrice'), 9999, 2);
-			add_filter('woocommerce_product_get_regular_price', array($this, 'getCurrencyPrice'), 9999, 2);
+		add_filter('woocommerce_product_get_price', array($this, 'getCurrencyPrice'), 9999, 2);
+		add_filter('woocommerce_product_get_regular_price', array($this, 'getCurrencyPrice'), 9999, 2);
 
-			add_filter('woocommerce_variation_prices_price', array($this, 'getCurrencyPrice'), 9999, 2);
-			add_filter('woocommerce_variation_prices_regular_price', array($this, 'getCurrencyPrice'), 9999, 2);
-			add_filter('woocommerce_variation_prices_sale_price', array($this, 'getCurrencyPrice'), 9999, 2);
-			add_filter('woocommerce_product_variation_get_price', array($this, 'getCurrencyPrice'), 9999, 2);
-			add_filter('woocommerce_product_variation_get_regular_price', array($this, 'getCurrencyPrice'), 9999, 2);
+		add_filter('woocommerce_variation_prices_price', array($this, 'getCurrencyPrice'), 9999, 2);
+		add_filter('woocommerce_variation_prices_regular_price', array($this, 'getCurrencyPrice'), 9999, 2);
+		add_filter('woocommerce_variation_prices_sale_price', array($this, 'getCurrencyPrice'), 9999, 2);
+		add_filter('woocommerce_product_variation_get_price', array($this, 'getCurrencyPrice'), 9999, 2);
+		add_filter('woocommerce_product_variation_get_regular_price', array($this, 'getCurrencyPrice'), 9999, 2);
 
-			add_filter('woocommerce_package_rates', array($this, 'updatePackageRates'), 9999);
-			add_action('woocommerce_cart_calculate_fees', array($this, 'updateFees'), 9999);
-			add_filter('woocommerce_coupon_get_amount', array($this, 'updateCouponAmount'), 9999, 2);
-		} else {
-			add_action('woocommerce_blocks_loaded', array($this, 'addWoocommerceBlocksHooks'));
-			add_filter('raw_woocommerce_price', array($this, 'getCurrencyPrice'), 9999, 2);
-			add_action('woocommerce_before_calculate_totals', array($this, 'beforeCartTotals'), 9999, 2);
-			add_action('woocommerce_after_calculate_totals', array($this, 'afterCartTotals'), 9999);
-		}
+		add_filter('woocommerce_package_rates', array($this, 'updatePackageRates'), 9999);
+		add_action('woocommerce_cart_calculate_fees', array($this, 'updateFees'), 9999);
+		add_filter('woocommerce_coupon_get_amount', array($this, 'updateCouponAmount'), 9999, 2);
 
 		if (!empty($_GET['wc-ajax']) && ($_GET['wc-ajax'] == 'ppc-create-order')) {
 			add_filter('woocommerce_cart_get_total', array($this, 'getCurrencyPriceCart'), 9999);
@@ -179,11 +173,6 @@ class currencyWcu extends moduleWcu {
 		add_filter( 'woocommerce_format_localized_price', array( $this, 'getFormatLocalizedPrice' ), 10, 2 );
 
 		add_filter( 'wcu_get_currencies_data', array( $this, 'setOrderRate' ) );
-
-		if (!is_admin()) {
-			add_action( 'woocommerce_before_mini_cart_contents', array( $this, 'addCompatibilityMiniCart' ) );
-			add_action( 'woocommerce_mini_cart_contents', array( $this, 'removeCompatibilityMiniCart' ) );
-		}
 
 		// for Yith Product Add-ons & Extra Options
 		add_action('yith_wapo_before_main_container', array($this, 'enableYithAddonConverter'));
@@ -294,22 +283,6 @@ class currencyWcu extends moduleWcu {
 		$this->nowCalcOrderTotals = false;
 	}
 
-	public function addCompatibilityMiniCart() {
-		if (!empty($_GET['wc-ajax']) && $_GET['wc-ajax'] == 'get_refreshed_fragments') {
-			$settings = get_option('wcu_options_pro', array());
-			$settings = isset($settings['manual_prices']) ? $settings['manual_prices'] : array();
-			if (isset($settings['toggle_manual_prices']) && $settings['toggle_manual_prices'] == '1') {
-				add_filter('woocommerce_get_price_including_tax', array($this, 'getCurrencyPriceCartProduct'), 9999, 3);
-				add_filter('woocommerce_get_price_excluding_tax', array($this, 'getCurrencyPriceCartProduct'), 9999, 3);
-			}
-		}
-	}
-
-	public function removeCompatibilityMiniCart() {
-		remove_filter('woocommerce_get_price_including_tax', array($this, 'getCurrencyPriceCartProduct'), 9999, 3);
-		remove_filter('woocommerce_get_price_excluding_tax', array($this, 'getCurrencyPriceCartProduct'), 9999, 3);
-	}
-
 	public function getCurrencyPriceCartProduct( $price, $qty = 1, $product = null ) {
 		if (!is_null($product)) {
 			$origin = (float) $product->get_price();
@@ -320,26 +293,6 @@ class currencyWcu extends moduleWcu {
 			}
 		}
 		return $price;
-	}
-
-	/**
-	 * addWoocommerceBlocksHooks.
-	 *
-	 * @version 2.2.8
-	 *
-	 * @return void
-	 */
-	function addWoocommerceBlocksHooks() {
-		add_filter('woocommerce_get_price_excluding_tax', array($this, 'getCurrencyPriceCart'), 9999);
-		add_filter('woocommerce_get_price_including_tax', array($this, 'getCurrencyPriceCart'), 9999);
-		add_filter('woocommerce_cart_get_subtotal', array($this, 'getCurrencyPriceCart'), 9999);
-		add_filter('woocommerce_cart_get_total', array($this, 'getCurrencyPriceCart'), 9999);
-		add_filter('woocommerce_cart_get_discount_total', array($this, 'getCurrencyPriceCart'), 9999);
-		add_filter('woocommerce_cart_get_shipping_total', array($this, 'getShippingTotal'), 9999);
-		add_filter('woocommerce_package_rates', array($this, 'calcShippingCosts'), 2);
-		add_filter('woocommerce_cart_tax_totals', array($this, 'calcTaxTotals'), 9999);
-		add_action('woocommerce_calculate_totals', array($this, 'calcLineSubtotal'), 9999);
-		dispatcherWcu::addFilter('jsInitVariables', array($this, 'addShippingCosts'));
 	}
 
 	public function addShippingCosts($js) {
@@ -694,6 +647,75 @@ class currencyWcu extends moduleWcu {
 		}
 	}
 
+	/**
+     * refreshCartFragments.
+     *
+     * @version 2.2.10
+	 * @since 2.2.10
+	 */
+	public function refreshCartFragments() {
+        if ( ! is_checkout() || $this->convertByCheckout ) {
+            return;
+        }
+        setcookie('wcu_checkout_currency_changed', time(), time() + (86400 * 30), '/');
+        ?>
+        <script>
+            jQuery(function ($) {
+                // Clear all WooCommerce fragment keys dynamically
+                Object.keys(sessionStorage).forEach(function(key) {
+                    if (key.startsWith('wc_fragments_') || key.startsWith('wc_cart_hash_')) {
+                        sessionStorage.removeItem(key);
+                    }
+                });
+
+                $.ajaxPrefilter(function(options) {
+                    if (options.url && options.url.indexOf('wc-ajax=') !== -1) {
+                        options.url += (options.url.indexOf('?') !== -1 ? '&' : '?') + 'wcu_checkout=1';
+                    }
+                });
+
+                // Trigger fresh fragment refresh
+                $(document.body).trigger('wc_fragment_refresh');
+            });
+        </script>
+        <?php
+    }
+
+	/**
+	 * restorePreviousCurrency.
+	 *
+	 * @version 2.2.10
+	 * @since 2.2.10
+	 */
+    public function restorePreviousCurrency() {
+	    if ($this->convertByCheckout || wp_doing_ajax() || isset($_GET['wc-ajax']) || !is_page()) {
+		    return;
+	    }
+
+	    $checkout_page_id = wc_get_page_id('checkout');
+	    if ( ! is_page($checkout_page_id) && !empty($_COOKIE['wcu_checkout_currency_changed'])) {
+		    $this->recalcCart();
+		    setcookie('wcu_checkout_currency_changed', '', time() - 3600, COOKIEPATH, COOKIE_DOMAIN);
+		    unset($_COOKIE['wcu_checkout_currency_changed']);
+
+		    // Enqueue script to clear fragments on next page load
+		    add_action('wp_footer', function () {
+			    ?>
+                <script>
+                    jQuery(function ($) {
+                        Object.keys(sessionStorage).forEach(function(key) {
+                            if (key.startsWith('wc_fragments_') || key.startsWith('wc_cart_hash_')) {
+                                sessionStorage.removeItem(key);
+                            }
+                        });
+                        $(document.body).trigger('wc_fragment_refresh');
+                    });
+                </script>
+			    <?php
+		    });
+	    }
+    }
+
 	public function initCurrency() {
 		$currencies = $this->getCurrencies();
 
@@ -755,7 +777,7 @@ class currencyWcu extends moduleWcu {
 	/**
 	 * getCurrentCurrency.
 	 *
-	 * @version 2.2.9
+	 * @version 2.2.10
 	 */
 	public function getCurrentCurrency() {
 		if(!$this->convertByCheckout && ($this->wcuIsWcfmPage() || isset($_GET['startcheckout']) || (isset($_GET['wc-ajax']) && strpos($_GET['wc-ajax'], 'checkout') !== false))) {
@@ -766,7 +788,7 @@ class currencyWcu extends moduleWcu {
 			$this->setCurrentCurrency($this->defaultCurrency, true);
 		} else if(!$this->convertByCheckout && isset($_GET['wc-ajax']) && $_GET['wc-ajax'] == 'ppc-create-order') {
 			$this->setCurrentCurrency($this->defaultCurrency, true);
-		} else if(!$this->convertByCheckout && isset($_GET['wc-ajax']) && $_GET['wc-ajax'] == 'get_refreshed_fragments') {
+		} else if(!$this->convertByCheckout && isset($_GET['wc-ajax'], $_GET['wcu_checkout']) && $_GET['wc-ajax'] == 'get_refreshed_fragments') {
 			$this->setCurrentCurrency($this->defaultCurrency, true);
 		} else if(!$this->convertByCheckout && defined('REST_REQUEST') && REST_REQUEST && isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/wp-json/wc/store/v1/checkout') !== false ) {
 			$this->setCurrentCurrency($this->defaultCurrency, true);
@@ -812,22 +834,6 @@ class currencyWcu extends moduleWcu {
 
 	public function resetCurrentCurrency($notCookies = false) {
 		$this->setCurrentCurrency('',$notCookies);
-	}
-
-	public function getCurrencySymbol($symbol) {
-		global $pagenow, $post;
-		if ($pagenow == 'edit.php' && is_object($post) && utilsWcu::isOrderType($post->ID)) {
-			return $symbol;
-		}
-		$currencies = $this->getCurrencies();
-		$currencySymbols = $this->getCurrencySymbolsList();
-
-		if(!isset($currencies[$this->currentCurrency])) {
-			$this->resetCurrentCurrency();
-		}
-		return isset($currencies[$this->currentCurrency]) && isset($currencySymbols[$currencies[$this->currentCurrency]['symbol']])
-			? $currencySymbols[$currencies[$this->currentCurrency]['symbol']]
-			: $symbol;
 	}
 
 	public function getCurrencyThousandSeparator($default) {
