@@ -1,18 +1,24 @@
+/**
+ * WBW Currency Switcher for WooCommerce - Core JS
+ *
+ * @author woobewoo
+ */
+
 if(typeof(WCU_DATA) == 'undefined')
 	var WCU_DATA = {};
 if(isNumber(WCU_DATA.animationSpeed))
-    WCU_DATA.animationSpeed = parseInt(WCU_DATA.animationSpeed);
+	WCU_DATA.animationSpeed = parseInt(WCU_DATA.animationSpeed);
 else if(jQuery.inArray(WCU_DATA.animationSpeed, ['fast', 'slow']) == -1)
-    WCU_DATA.animationSpeed = 'fast';
+	WCU_DATA.animationSpeed = 'fast';
 WCU_DATA.showSubscreenOnCenter = parseInt(WCU_DATA.showSubscreenOnCenter);
 var sdLoaderImgWcu = '<img src="'+ WCU_DATA.loader+ '" />';
 var g_wcuAnimationSpeed = 300;
 
 jQuery.fn.showLoaderWcu = function() {
-    return jQuery(this).html( sdLoaderImgWcu );
+	return jQuery(this).html( sdLoaderImgWcu );
 };
 jQuery.fn.appendLoaderWcu = function() {
-    jQuery(this).append( sdLoaderImgWcu );
+	jQuery(this).append( sdLoaderImgWcu );
 };
 jQuery.sendFormWcu = function(params) {
 	// Any html element can be used here
@@ -29,51 +35,51 @@ jQuery.sendFormWcu = function(params) {
  * @param string params.clearMsg clear msg element after receive data, if is number - will use it to set time for clearing, else - if true - will clear msg element after 5 seconds
  */
 jQuery.fn.sendFormWcu = function(params) {
-    var form = null;
-    if(!params)
-        params = {fid: false, msgElID: false, onSuccess: false};
+	var form = null;
+	if(!params)
+		params = {fid: false, msgElID: false, onSuccess: false};
 
-    if(params.fid)
-        form = jQuery('#'+ fid);
-    else
-        form = jQuery(this);
+	if(params.fid)
+		form = jQuery('#'+ fid);
+	else
+		form = jQuery(this);
 
-    /* This method can be used not only from form data sending, it can be used just to send some data and fill in response msg or errors*/
-    var sentFromForm = (jQuery(form).tagName() == 'FORM');
-    var data = new Array();
-    if(params.data)
-        data = params.data;
-    else if(sentFromForm)
-        data = jQuery(form).serialize();
+	/* This method can be used not only from form data sending, it can be used just to send some data and fill in response msg or errors*/
+	var sentFromForm = (jQuery(form).tagName() == 'FORM');
+	var data = new Array();
+	if(params.data)
+		data = params.data;
+	else if(sentFromForm)
+		data = jQuery(form).serialize();
 
-    if(params.appendData) {
+	if(params.appendData) {
 		var dataIsString = typeof(data) == 'string';
 		var addStrData = [];
-        for(var i in params.appendData) {
+		for(var i in params.appendData) {
 			if(dataIsString) {
 				addStrData.push(i+ '='+ params.appendData[i]);
 			} else
-            data[i] = params.appendData[i];
-        }
+			data[i] = params.appendData[i];
+		}
 		if(dataIsString)
 			data += '&'+ addStrData.join('&');
-    }
-    var msgEl = null;
-    if(params.msgElID) {
-        if(params.msgElID == 'noMessages')
-            msgEl = false;
-        else if(typeof(params.msgElID) == 'object')
-           msgEl = params.msgElID;
-       else
-            msgEl = jQuery('#'+ params.msgElID);
-    }
+	}
+	var msgEl = null;
+	if(params.msgElID) {
+		if(params.msgElID == 'noMessages')
+			msgEl = false;
+		else if(typeof(params.msgElID) == 'object')
+		   msgEl = params.msgElID;
+	   else
+			msgEl = jQuery('#'+ params.msgElID);
+	}
 	if(typeof(params.inputsWraper) == 'string') {
 		form = jQuery('#'+ params.inputsWraper);
 		sentFromForm = true;
 	}
 	if(sentFromForm && form) {
-        jQuery(form).find('*.wcuInputError').removeClass('wcuInputError');
-    }
+		jQuery(form).find('*.wcuInputError').removeClass('wcuInputError');
+	}
 	if(msgEl && !params.btn) {
 		jQuery(msgEl)
 			.removeClass('wcuSuccessMsg')
@@ -92,15 +98,15 @@ jQuery.fn.sendFormWcu = function(params) {
 				.attr('class', 'fa fa-spinner fa-spin');
 		}
 	}
-    var url = '';
+	var url = '';
 	if(typeof(params.url) != 'undefined')
 		url = params.url;
-    else if(typeof(ajaxurl) == 'undefined' || typeof(ajaxurl) !== 'string')
-        url = WCU_DATA.ajaxurl;
-    else
-        url = ajaxurl;
+	else if(typeof(ajaxurl) == 'undefined' || typeof(ajaxurl) !== 'string')
+		url = WCU_DATA.ajaxurl;
+	else
+		url = ajaxurl;
 
-    jQuery('.wcuErrorForField').hide(WCU_DATA.animationSpeed);
+	jQuery('.wcuErrorForField').hide(WCU_DATA.animationSpeed);
 	var dataType = params.dataType ? params.dataType : 'json';
 	// Set plugin orientation
 	if(typeof(data) == 'string') {
@@ -111,21 +117,21 @@ jQuery.fn.sendFormWcu = function(params) {
 		data['reqType'] = 'ajax';
 	}
 
-    jQuery.ajax({
-        url: url,
-        data: data,
-        type: 'POST',
-        dataType: dataType,
-        success: function(res) {
-            toeProcessAjaxResponseWcu(res, msgEl, form, sentFromForm, params);
+	jQuery.ajax({
+		url: url,
+		data: data,
+		type: 'POST',
+		dataType: dataType,
+		success: function(res) {
+			toeProcessAjaxResponseWcu(res, msgEl, form, sentFromForm, params);
 			if(params.clearMsg) {
 				setTimeout(function(){
 					if(msgEl)
 						jQuery(msgEl).animateClear();
 				}, typeof(params.clearMsg) == 'boolean' ? 5000 : params.clearMsg);
 			}
-        }
-    });
+		}
+	});
 };
 /**
  * Hide content in element and then clear it
@@ -149,69 +155,63 @@ jQuery.fn.animateRemoveWcu = function(animationSpeed, onSuccess) {
 	});
 };
 function toeProcessAjaxResponseWcu(res, msgEl, form, sentFromForm, params) {
-    if(typeof(params) == 'undefined')
-        params = {};
-    if(typeof(msgEl) == 'string')
-        msgEl = jQuery('#'+ msgEl);
-    if(msgEl)
-        jQuery(msgEl).html('');
+	if(typeof(params) == 'undefined')
+		params = {};
+	if(typeof(msgEl) == 'string')
+		msgEl = jQuery('#'+ msgEl);
+	if(msgEl)
+		jQuery(msgEl).html('');
 	if(params.btn) {
 		jQuery(params.btn).removeAttr('disabled');
 		if(params.btnIconElement) {
 			params.btnIconElement.attr('class', params.btnIconElement.data('prev-class'));
 		}
 	}
-    /*if(sentFromForm) {
-        jQuery(form).find('*').removeClass('wcuInputError');
-    }*/
-    if(typeof(res) == 'object') {
-        if(res.error) {
-            if(msgEl) {
-                jQuery(msgEl)
+	if(typeof(res) == 'object') {
+		if(res.error) {
+			if(msgEl) {
+				jQuery(msgEl)
 					.removeClass('wcuSuccessMsg')
 					.addClass('wcuErrorMsg');
-            }
+			}
 			var errorsArr = [];
-            for(var name in res.errors) {
-                if(sentFromForm) {
+			for(var name in res.errors) {
+				if(sentFromForm) {
 					var inputError = jQuery(form).find('[name*="'+ name+ '"]');
-                    inputError.addClass('wcuInputError');
-					if(inputError.attr('placeholder')) {
-						//inputError.attr('placeholder', res.errors[ name ]);
-					}
+					inputError.addClass('wcuInputError');
 					if(!inputError.data('keyup-error-remove-binded')) {
 						inputError.keydown(function(){
 							jQuery(this).removeClass('wcuInputError');
 						}).data('keyup-error-remove-binded', 1);
 					}
-                }
-                if(jQuery('.wcuErrorForField.toe_'+ nameToClassId(name)+ '').exists())
-                    jQuery('.wcuErrorForField.toe_'+ nameToClassId(name)+ '').show().html(res.errors[name]);
-                else if(msgEl)
-                    jQuery(msgEl).append(res.errors[name]).append('<br />');
+				}
+				if(jQuery('.wcuErrorForField.toe_'+ nameToClassId(name)+ '').exists())
+					jQuery('.wcuErrorForField.toe_'+ nameToClassId(name)+ '').show().html(res.errors[name]);
+				else if(msgEl)
+					jQuery(msgEl).append(res.errors[name]).append('<br />');
 				else
 					errorsArr.push( res.errors[name] );
-            }
+			}
 			if(errorsArr.length && params.btn && jQuery.fn.dialog && !msgEl) {
 				jQuery('<div title="'+ toeLangWcu("Really small warning :)")+ '" />').html( errorsArr.join('<br />') ).appendTo('body').dialog({
 					modal: true
 				,	width: '500px'
 				});
 			}
-        } else if(res.messages.length) {
-            if(msgEl) {
-                jQuery(msgEl)
+		} else if(res.messages.length) {
+			if(msgEl) {
+				jQuery(msgEl)
 					.removeClass('wcuErrorMsg')
 					.addClass('wcuSuccessMsg');
-                for(var i = 0; i < res.messages.length; i++) {
-                    jQuery(msgEl).append(res.messages[i]).append('<br />');
-                }
-            }
-        }
-    }
-    if(params.onSuccess && typeof(params.onSuccess) == 'function') {
-        params.onSuccess(res);
-    }
+				for(var i = 0; i < res.messages.length; i++) {
+					jQuery(msgEl).append(res.messages[i]).append('<br />');
+				}
+			}
+		}
+	}
+	if(params.onSuccess && typeof(params.onSuccess) == 'function') {
+		params.onSuccess(res);
+	}
 }
 
 function getDialogElementWcu() {
@@ -247,25 +247,25 @@ function toeOptTimeoutHideDescriptionWcu() {
  * Show description for options
  */
 function toeOptShowDescriptionWcu(description, x, y, moveToLeft) {
-    if(typeof(description) != 'undefined' && description != '') {
-        if(!jQuery('#wcuOptDescription').length) {
-            jQuery('body').append('<div id="wcuOptDescription"></div>');
-        }
+	if(typeof(description) != 'undefined' && description != '') {
+		if(!jQuery('#wcuOptDescription').length) {
+			jQuery('body').append('<div id="wcuOptDescription"></div>');
+		}
 		if(moveToLeft)
 			jQuery('#wcuOptDescription').css('right', jQuery(window).width() - (x - 10));	// Show it on left side of target
 		else
 			jQuery('#wcuOptDescription').css('left', x + 10);
-        jQuery('#wcuOptDescription').css('top', y);
-        jQuery('#wcuOptDescription').show(200);
-        jQuery('#wcuOptDescription').html(description);
-    }
+		jQuery('#wcuOptDescription').css('top', y);
+		jQuery('#wcuOptDescription').show(200);
+		jQuery('#wcuOptDescription').html(description);
+	}
 }
 /**
  * Hide description for options
  */
 function toeOptHideDescriptionWcu() {
 	jQuery('#wcuOptDescription').removeAttr('toeFixTip');
-    jQuery('#wcuOptDescription').hide(200);
+	jQuery('#wcuOptDescription').hide(200);
 }
 function toeInArrayWcu(needle, haystack) {
 	if(haystack) {
@@ -339,9 +339,9 @@ function toeShowDialogCustomized(element, options) {
  * @see html::slider();
  **/
 function toeSliderMove(event, ui) {
-    var id = jQuery(event.target).attr('id');
-    jQuery('#toeSliderDisplay_'+ id).html( ui.value );
-    jQuery('#toeSliderInput_'+ id).val( ui.value ).change();
+	var id = jQuery(event.target).attr('id');
+	jQuery('#toeSliderDisplay_'+ id).html( ui.value );
+	jQuery('#toeSliderInput_'+ id).val( ui.value ).change();
 }
 function wcuCorrectJqueryUsed() {
 	return (typeof(jQuery.fn.sendFormWcu) === 'function');
@@ -376,12 +376,6 @@ function wcuUpdateUrlParam(param, value, url) {
 		if (m[1] == 'min_price' || m[1] == 'max_price') {
 			continue;
 		}
-		// if (m[1] == 'min_price') {
-		// 	m[2] = 0;
-		// }
-		// if (m[1] == 'max_price') {
-		// 	m[2] = 999999;
-		// }
 		queryParameters[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
 	}
 
@@ -395,9 +389,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			wcuReplaceShippingCost(100);
 		});
 		jQuery(document.body).on('click', '.wc-block-components-panel__button', function() {
-        	wcuReplaceShippingCost(0);
+			wcuReplaceShippingCost(0);
 			wcuReplaceShippingCost(100);
-    	});
+		});
 	}
 });
 function wcuReplaceShippingCost ( tt ) {

@@ -523,16 +523,16 @@ class currencyWcu extends moduleWcu {
 	}
 
 	public function wcuIsWcfmPage() {
-			global $post;
-			if (!empty($post)) {
-				$currentPageId = $post->ID;
-				$pages = get_option("wcfm_page_options");
-				$wcpage = isset($pages['wc_frontend_manager_page_id']) ? $pages['wc_frontend_manager_page_id'] : 999999;
-				if ($wcpage == $currentPageId) {
-					return true;
-				}
+		global $post;
+		if (!empty($post)) {
+			$currentPageId = $post->ID;
+			$pages = get_option("wcfm_page_options");
+			$wcpage = isset($pages['wc_frontend_manager_page_id']) ? $pages['wc_frontend_manager_page_id'] : 999999;
+			if ($wcpage == $currentPageId) {
+				return true;
 			}
-			return false;
+		}
+		return false;
 	}
 
 	public function headerActions() {
