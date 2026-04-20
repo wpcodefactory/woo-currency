@@ -648,73 +648,73 @@ class currencyWcu extends moduleWcu {
 	}
 
 	/**
-     * refreshCartFragments.
-     *
-     * @version 2.3.0
-	 * @since 2.3.0
+	 * refreshCartFragments.
+	 *
+	 * @version 2.3.0
+	 * @since   2.3.0
 	 */
 	public function refreshCartFragments() {
-        if ( ! is_checkout() || $this->convertByCheckout ) {
-            return;
-        }
-        setcookie('wcu_checkout_currency_changed', time(), time() + (86400 * 30), '/');
-        ?>
-        <script>
-            jQuery(function ($) {
-                // Clear all WooCommerce fragment keys dynamically
-                Object.keys(sessionStorage).forEach(function(key) {
-                    if (key.startsWith('wc_fragments_') || key.startsWith('wc_cart_hash_')) {
-                        sessionStorage.removeItem(key);
-                    }
-                });
+		if ( ! is_checkout() || $this->convertByCheckout ) {
+			return;
+		}
+		setcookie('wcu_checkout_currency_changed', time(), time() + (86400 * 30), '/');
+		?>
+		<script>
+			jQuery(function ($) {
+				// Clear all WooCommerce fragment keys dynamically
+				Object.keys(sessionStorage).forEach(function(key) {
+					if (key.startsWith('wc_fragments_') || key.startsWith('wc_cart_hash_')) {
+						sessionStorage.removeItem(key);
+					}
+				});
 
-                $.ajaxPrefilter(function(options) {
-                    if (options.url && options.url.indexOf('wc-ajax=') !== -1) {
-                        options.url += (options.url.indexOf('?') !== -1 ? '&' : '?') + 'wcu_checkout=1';
-                    }
-                });
+				$.ajaxPrefilter(function(options) {
+					if (options.url && options.url.indexOf('wc-ajax=') !== -1) {
+						options.url += (options.url.indexOf('?') !== -1 ? '&' : '?') + 'wcu_checkout=1';
+					}
+				});
 
-                // Trigger fresh fragment refresh
-                $(document.body).trigger('wc_fragment_refresh');
-            });
-        </script>
-        <?php
-    }
+				// Trigger fresh fragment refresh
+				$(document.body).trigger('wc_fragment_refresh');
+			});
+		</script>
+		<?php
+	}
 
 	/**
 	 * restorePreviousCurrency.
 	 *
 	 * @version 2.3.0
-	 * @since 2.3.0
+	 * @since   2.3.0
 	 */
-    public function restorePreviousCurrency() {
-	    if ($this->convertByCheckout || wp_doing_ajax() || isset($_GET['wc-ajax']) || !is_page()) {
-		    return;
-	    }
+	public function restorePreviousCurrency() {
+		if ($this->convertByCheckout || wp_doing_ajax() || isset($_GET['wc-ajax']) || !is_page()) {
+			return;
+		}
 
-	    $checkout_page_id = wc_get_page_id('checkout');
-	    if ( ! is_page($checkout_page_id) && !empty($_COOKIE['wcu_checkout_currency_changed'])) {
-		    $this->recalcCart();
-		    setcookie('wcu_checkout_currency_changed', '', time() - 3600, COOKIEPATH, COOKIE_DOMAIN);
-		    unset($_COOKIE['wcu_checkout_currency_changed']);
+		$checkout_page_id = wc_get_page_id('checkout');
+		if ( ! is_page($checkout_page_id) && !empty($_COOKIE['wcu_checkout_currency_changed'])) {
+			$this->recalcCart();
+			setcookie('wcu_checkout_currency_changed', '', time() - 3600, COOKIEPATH, COOKIE_DOMAIN);
+			unset($_COOKIE['wcu_checkout_currency_changed']);
 
-		    // Enqueue script to clear fragments on next page load
-		    add_action('wp_footer', function () {
-			    ?>
-                <script>
-                    jQuery(function ($) {
-                        Object.keys(sessionStorage).forEach(function(key) {
-                            if (key.startsWith('wc_fragments_') || key.startsWith('wc_cart_hash_')) {
-                                sessionStorage.removeItem(key);
-                            }
-                        });
-                        $(document.body).trigger('wc_fragment_refresh');
-                    });
-                </script>
-			    <?php
-		    });
-	    }
-    }
+			// Enqueue script to clear fragments on next page load
+			add_action('wp_footer', function () {
+				?>
+				<script>
+					jQuery(function ($) {
+						Object.keys(sessionStorage).forEach(function(key) {
+							if (key.startsWith('wc_fragments_') || key.startsWith('wc_cart_hash_')) {
+								sessionStorage.removeItem(key);
+							}
+						});
+						$(document.body).trigger('wc_fragment_refresh');
+					});
+				</script>
+				<?php
+			});
+		}
+	}
 
 	public function initCurrency() {
 		$currencies = $this->getCurrencies();
