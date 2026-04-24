@@ -584,11 +584,11 @@ class currencyWcu extends moduleWcu {
 	/**
 	 * restorePreviousCurrency.
 	 *
-	 * @version 2.3.0
+	 * @version 2.3.1
 	 * @since   2.3.0
 	 */
 	public function restorePreviousCurrency() {
-		if ($this->convertByCheckout || wp_doing_ajax() || isset($_GET['wc-ajax']) || !is_page()) {
+		if ( $this->convertByCheckout || wp_doing_ajax() || isset($_GET['wc-ajax']) || ( !is_page() && !is_archive() && !is_singular() ) ) {
 			return;
 		}
 
