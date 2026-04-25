@@ -3,13 +3,13 @@
 class currencyModelWcu extends modelWcu {
 
 	public static $savedCurrencies = null;
-	
+
 	public function saveCurrencies($data) {
 		$currencies = array();
 
 		if(!empty($data['name'])) {
 			foreach($data['name'] as $key => $name) {
-				$currencies[$name] = array('index' => $key,);
+				$currencies[sanitize_text_field(wp_unslash($name))] = array('index' => absint($key),);
 			}
 
 			foreach($data as $key => $item) {
@@ -21,10 +21,10 @@ class currencyModelWcu extends modelWcu {
 			foreach($currencies as $key => $c) {
 				$currencies[$key]['title'] = utilsWcu::escape($currencies[$key]['title']);
 				if($currencies[$key]['rate'] == 1) {
-					update_option('woocommerce_currency', $currencies[$key]['name']);
+					update_option('woocommerce_currency', sanitize_text_field(wp_unslash($currencies[$key]['name'])));
 				}
 				if (isset($currencies[$key]['symbol'])) {
-					$currencies[$key]['symbol'] = apply_filters('wcu_get_change_custom_symbol', $currencies[$key]['symbol'], $key);
+					$currencies[$key]['symbol'] = apply_filters('wcu_get_change_custom_symbol', sanitize_text_field(wp_unslash($currencies[$key]['symbol'])), $key);
 				}
 			}
 		}
@@ -42,7 +42,7 @@ class currencyModelWcu extends modelWcu {
 		foreach ($currencies as $key => $value) {
 			$currencies[$key]['rate'] = !empty($currencies[$key]['rate_custom']) ? $currencies[$key]['rate_custom'] : $currencies[$key]['rate'];
 		}
-		
+
 		self::$savedCurrencies = apply_filters('wcu_get_currencies_data', $currencies);
 
 		return self::$savedCurrencies;
@@ -154,7 +154,7 @@ class currencyModelWcu extends modelWcu {
 			? floatval((float) $price * (float) $currencies[$currentCurrency]['rate'])
 			: floatval((float) $price * (float) $currencies[$currentCurrency]['rate']);
 		}
-		
+
 		return $price;
 		//some hints for price rounding
 		//http://stackoverflow.com/questions/11692770/rounding-to-nearest-50-cents
@@ -459,7 +459,7 @@ class currencyModelWcu extends modelWcu {
 	}
 	public function _getPriceDecimalsCount($currency, $val = 2, $currencies = array()) {
 		if ($this->getModule()->nowCalcCartTotals || $this->getModule()->nowCalcOrderTotals) {
-			$currency = $this->getModule()->defaultCurrency;	
+			$currency = $this->getModule()->defaultCurrency;
 		}
 		return $this->_getRealPriceDecimalsCount($currency, $val, $currencies);
 	}
