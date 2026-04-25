@@ -15,7 +15,7 @@ class frameWcu {
     private $_styles = array();
 	private $_stylesInitialized = false;
 	private $_useFootAssets = false;
-    
+
     private $_scriptsVars = array();
     private $_mod = '';
     private $_action = '';
@@ -24,10 +24,10 @@ class frameWcu {
      */
     private $_res = null;
 	private $_orders = array();
-    
+
     public function __construct() {
         $this->_res = toeCreateObjWcu('response', array());
-        
+
     }
     static public function getInstance() {
         static $instance;
@@ -108,11 +108,11 @@ class frameWcu {
         $this->_initModules();
 
 		dispatcherWcu::doAction('afterModulesInit');
-		
+
 		modInstallerWcu::checkActivationMessages();
-		
+
         $this->_execModules();
-        
+
 		$addAssetsAction = $this->usePackAssets() && !is_admin() ? 'wp_footer' : 'init';
 
         add_action($addAssetsAction, array($this, 'addScripts'));
@@ -143,12 +143,15 @@ class frameWcu {
     }
     /**
      * Check permissions for action in controller by $code
+     *
+     * @version 2.3.1
+     *
      * @param string $code Code of controller that need to be checked
      * @param string $action Action that need to be checked
      * @return bool true if ok, else - false
      */
     public function havePermissions($code, $action) {
-        $res = true;
+        $res = false;
         $mod = $this->getModule($code);
         $action = strtolower($action);
         if($mod) {
@@ -162,10 +165,10 @@ class frameWcu {
                     }
                     if(array_key_exists($action, $permissions[WCU_METHODS])) {        // Permission for this method exists
                         $currentUserPosition = frameWcu::_()->getModule('user')->getCurrentUserPosition();
-                        if((is_array($permissions[ WCU_METHODS ][ $action ]) && !in_array($currentUserPosition, $permissions[ WCU_METHODS ][ $action ]))
-                            || (!is_array($permissions[ WCU_METHODS ][ $action ]) && $permissions[WCU_METHODS][$action] != $currentUserPosition)
+                        if((is_array($permissions[ WCU_METHODS ][ $action ]) && in_array($currentUserPosition, $permissions[ WCU_METHODS ][ $action ]))
+                            || (is_array($permissions[ WCU_METHODS ][ $action ]) && $permissions[WCU_METHODS][$action] === $currentUserPosition)
                         ) {
-                            $res = false;
+                            $res = true;
                         }
                     }
                 }
@@ -181,14 +184,14 @@ class frameWcu {
                         if(is_array($methods)) {
                             $lowerMethods = array_map('strtolower', $methods);          // Make case-insensitive
                             if(in_array($action, $lowerMethods)) {                      // Permission for this method exists
-                                if($currentUserPosition != $userlevel) 
-                                    $res = false;
+                                if($currentUserPosition === $userlevel)
+                                    $res = true;
                                 break;
                             }
                         } else {
                             $lowerMethod = strtolower($methods);            // Make case-insensitive
                             if($lowerMethod == $action) {                   // Permission for this method exists
-                                if($currentUserPosition != $userlevel) 
+                                if($currentUserPosition === $userlevel)
                                     $res = false;
                                 break;
                             }
@@ -203,7 +206,7 @@ class frameWcu {
 					if(in_array($action, $noncedMethods)) {
 						$nonce = isset($_REQUEST['_wpnonce']) ? $_REQUEST['_wpnonce'] : reqCfs::getVar('_wpnonce');
 						if(!wp_verify_nonce( $nonce, $action )) {
-							$res = false;
+							die();
 						}
 					}
 				}
@@ -334,7 +337,7 @@ class frameWcu {
         }
         return $res;
     }
-    
+
     public function getModule($code) {
         return (isset($this->_modules[$code]) ? $this->_modules[$code] : NULL);
     }
@@ -359,10 +362,10 @@ class frameWcu {
             wp_enqueue_script($handle, $src, $deps, $ver, $in_footer);
         } else {
             $this->_scripts[] = array(
-                'handle' => $handle, 
-                'src' => $src, 
-                'deps' => $deps, 
-                'ver' => $ver, 
+                'handle' => $handle,
+                'src' => $src,
+                'deps' => $deps,
+                'ver' => $ver,
                 'in_footer' => $in_footer,
                 'vars' => $vars
             );
@@ -375,7 +378,7 @@ class frameWcu {
         if(!empty($this->_scripts)) {
             foreach($this->_scripts as $s) {
                 wp_enqueue_script($s['handle'], $s['src'], $s['deps'], $s['ver'], $s['in_footer']);
-                
+
                 if($s['vars'] || isset($this->_scriptsVars[$s['handle']])) {
                     $vars = array();
                     if($s['vars'])
@@ -405,7 +408,7 @@ class frameWcu {
 			$this->_scriptsVars[ $script ][ $name ] = $val;
 		}
 	}
-    
+
     public function addStyle($handle, $src = false, $deps = array(), $ver = false, $media = 'all') {
 		$src = empty($src) ? $src : uriWcu::_($src);
 		if(!$ver)
@@ -418,7 +421,7 @@ class frameWcu {
 				'src' => $src,
 				'deps' => $deps,
 				'ver' => $ver,
-				'media' => $media 
+				'media' => $media
 			);
 		}
     }
@@ -432,13 +435,13 @@ class frameWcu {
     }
     //Very interesting thing going here.............
     public function loadPlugins() {
-        require_once(ABSPATH. 'wp-includes/pluggable.php'); 
+        require_once(ABSPATH. 'wp-includes/pluggable.php');
     }
     public function loadWPSettings() {
-        require_once(ABSPATH. 'wp-settings.php'); 
+        require_once(ABSPATH. 'wp-settings.php');
     }
 	public function loadLocale() {
-		require_once(ABSPATH. 'wp-includes/locale.php'); 
+		require_once(ABSPATH. 'wp-includes/locale.php');
 	}
     public function moduleActive($code) {
         return isset($this->_modules[$code]);
@@ -482,7 +485,7 @@ class frameWcu {
 	public function getActivationErrors() {
 		return get_option(WCU_CODE. '_plugin_activation_errors');
 	}
-	
+
 	public function getOrder( $id ) {
 		if (!isset($this->_orders[$id])) {
 			if (!function_exists('wc_get_order')) {

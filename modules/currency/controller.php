@@ -83,11 +83,15 @@ class currencyControllerWcu extends controllerWcu {
 
 	/**
 	 * getPermissions.
+	 *
+	 * @version 2.3.1
 	 */
 	public function getPermissions() {
 		return array(
 			WCU_USERLEVELS => array(
-				WCU_ADMIN => array()
+				WCU_ADMIN => array(
+					'saveCurrencyTab', 'getCurrencyRate'
+				)
 			),
 		);
 	}
