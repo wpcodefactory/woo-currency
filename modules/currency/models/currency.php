@@ -1,9 +1,23 @@
 <?php
+/**
+ * WBW Currency Switcher for WooCommerce - currencyModelWcu class
+ *
+ * @version 2.3.1
+ */
 
 class currencyModelWcu extends modelWcu {
 
 	public static $savedCurrencies = null;
 
+	/**
+	 * saveCurrencies.
+	 *
+	 * @param $data
+	 *
+	 * @return bool
+	 *
+	 * @version 2.3.1
+	 */
 	public function saveCurrencies($data) {
 		$currencies = array();
 

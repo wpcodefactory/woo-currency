@@ -1,4 +1,10 @@
 <?php
+/**
+ * WBW Currency Switcher for WooCommerce - frameWcu class
+ *
+ * @version 2.3.1
+ */
+
 class frameWcu {
     private $_modules = array();
     private $_tables = array();
