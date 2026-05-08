@@ -1,4 +1,10 @@
 <?php
+/**
+ * WBW Currency Switcher for WooCommerce - switcherSimpleDropdownViewWcu.
+ *
+ * @version 2.3.1
+ */
+
 foreach($this->designTab as $p) {
 	// create variable like param name with param value
 	${$p} = $this->optionsParams['currency_switcher']['design_tab'][$p]['params']['value'];
@@ -120,8 +126,8 @@ foreach($this->displayRulesTab as $p) {
             <i class="fa fa-times" aria-hidden="true"></i>
         </li>
 
-        <li class="wcuCurrent" data-currency="<?php echo $this->currentCurrency?>">
-            <?php echo $this->currencies[$this->currentCurrency];?>
+        <li class="wcuCurrent" data-currency="<?php echo esc_attr($this->currentCurrency); ?>">
+            <?php echo esc_html($this->currencies[$this->currentCurrency]); ?>
         </li>
 
         <?php }?>
@@ -130,8 +136,8 @@ foreach($this->displayRulesTab as $p) {
 			<?php $current = $key == $this->currentCurrency ? 'wcuCurrent' : '';?>
 
             <?php if (empty($current)) { ?>
-    			<li class="<?php echo $current?>" data-currency="<?php echo $key?>">
-    				<?php echo $currency;?>
+    			<li class="<?php echo $current?>" data-currency="<?php echo esc_attr($key); ?>">
+    				<?php echo esc_html($currency);?>
                 </li>
             <?php }?>
 
