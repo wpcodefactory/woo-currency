@@ -222,7 +222,6 @@ class currencyWcu extends moduleWcu {
 
 	public function getFormatLocalizedPrice( $formated, $price ) {
 		global $theorder, $post;
-		//if ( 0 != $price && is_admin() && is_object( $theorder ) && is_object( $post ) && $post->post_type == 'shop_order' ) {
 		if ( 0 != $price && is_admin() && is_object( $theorder ) && is_object( $post ) && utilsWcu::isOrderType($post->ID) ) {
 			$currentCurrency = $this->getCurrentCurrency();
 			$orderCurrency   = $theorder->get_currency();
@@ -250,7 +249,6 @@ class currencyWcu extends moduleWcu {
 		}
 		if ( ! is_null( $orderId ) && ! is_null( $orderCurrency ) ) {
 			$rate = utilsWcu::getOrderMeta($orderId, 'wcu_order_rate');
-			//$rate = get_post_meta( $orderId, 'wcu_order_rate', true );
 			if ( '' !== $rate && isset( $currencies[ $orderCurrency ] ) ) {
 				$currencies[ $orderCurrency ]['rate_custom'] = $rate;
 			}
@@ -451,8 +449,6 @@ class currencyWcu extends moduleWcu {
 			$paymentTotal = WC()->cart->get_total( 'edit' );
 
 			utilsWcu::updateOrderMeta($id, array('wcu_order_currency' => $paymentCurrency, 'wcu_order_total' => $paymentTotal));
-			//update_post_meta( $id, 'wcu_order_currency', $paymentCurrency );
-			//update_post_meta( $id, 'wcu_order_total', $paymentTotal);
 
 			$this->setCurrentCurrency( $currentCurrency, true );
 		}
@@ -480,7 +476,6 @@ class currencyWcu extends moduleWcu {
 			$currencies = $this->getCurrencies();
 			if ( isset( $currencies[ $currentCurrency ]['rate'] ) ) {
 				utilsWcu::updateOrderMeta($id, array('wcu_order_rate' => $currencies[$currentCurrency]['rate']));
-				//update_post_meta( $id, 'wcu_order_rate', $currencies[ $currentCurrency ]['rate'] );
 			}
 		}
 
@@ -784,7 +779,6 @@ class currencyWcu extends moduleWcu {
 			self::$orderId = $order->get_id();
 			self::$orderCurrency = $order->get_currency();
 			$meta = utilsWcu::getOrderMeta(self::$orderId, '_order_total');
-			//$meta          = get_post_meta( self::$orderId, '_order_total', true );
 			if ( ! empty( $meta ) ) {
 				$price = $meta;
 			}
@@ -959,7 +953,6 @@ class currencyWcu extends moduleWcu {
 		if (isset($_GET['post'])) {
 			$post_id = $_GET['post'];
 			$post = get_post($post_id);
-			//if (is_object($post) AND $post->post_type == 'shop_order') {
 			if (is_object($post) AND utilsWcu::isOrderType($post->ID)) {
 				$currency = $this->getWcuOrderCurrency($post->ID);
 				if (!empty($currency)) {
@@ -1734,7 +1727,6 @@ class currencyWcu extends moduleWcu {
 					$wp_query->set_404();
 					status_header( 404 );
 					nocache_headers();
-					//wp_die( 'Page not found', '', 404 );
 				}
 			}
 		}

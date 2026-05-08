@@ -98,7 +98,6 @@ class frameWcu {
                 }
             }
         }
-        //$operationTime = microtime(true) - $startTime;
     }
     protected function _initModules() {
         if(!empty($this->_modules)) {
@@ -108,7 +107,6 @@ class frameWcu {
         }
     }
     public function init() {
-        //$startTime = microtime(true);
         reqWcu::init();
         $this->_extractTables();
         $this->_extractModules();
@@ -131,7 +129,6 @@ class frameWcu {
 		register_deactivation_hook(WCU_DIR. DS. WCU_MAIN_FILE, array( 'utilsWcu', 'deactivatePlugin' ) );
 
 		add_action('init', array($this, 'connectLang'));
-        //$operationTime = microtime(true) - $startTime;
     }
 	public function connectLang() {
 		load_plugin_textdomain(WCU_LANG_CODE, false, WCU_PLUG_NAME. '/languages/');
@@ -308,11 +305,6 @@ class frameWcu {
         /**
          * @deprecated
          */
-        /*if(!empty($this->_modules)) {
-            foreach($this->_modules as $mod) {
-                $mod->exec();
-            }
-        }*/
     }
     public function getTables () {
         return $this->_tables;

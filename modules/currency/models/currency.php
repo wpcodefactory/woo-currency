@@ -162,9 +162,6 @@ class currencyModelWcu extends modelWcu {
 			} else {
 				$price = number_format($price, $precision, $decimalSep, '');
 			}
-		/*$price = isset($currencies[$currentCurrency]) && $currencies[$currentCurrency] != null
-			? number_format(floatval((float) $price * (float) $currencies[$currentCurrency]['rate']), $precision, $decimalSep, '')
-			: number_format(floatval((float) $price * (float) $currencies[$defaultCurrency]['rate']), $precision, $decimalSep, '');*/
 		} else {
 			$price = isset($currencies[$currentCurrency]) && $currencies[$currentCurrency] != null
 			? floatval((float) $price * (float) $currencies[$currentCurrency]['rate'])
@@ -231,12 +228,6 @@ class currencyModelWcu extends modelWcu {
 				$rate = !empty($currencyData['data']) && !empty($currencyData['data'][$toCurrency]) && !empty($currencyData['data'][$toCurrency]['value']) ? $currencyData['data'][$toCurrency]['value'] : $errorMsg;
 				break;
 			case 'ratesapi':
-/*				$url = "https://api.ratesapi.io/api/latest?base={$fromCurrency}&symbols={$toCurrency}";
-				$url_get = function_exists('curl_init') ? $this->_fileGetContentsCurl($url) : file_get_contents($url);
-				$url_json =  json_decode($url_get,true);
-				$rate = $url_json['rates'][$toCurrency];
-				$rate = !empty($rate) ? $rate : $errorMsg;
-				break;*/
 			case 'ecb':
 				if ( $fromCurrency === $toCurrency ) {
 					$rate = 1;
