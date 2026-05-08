@@ -1,6 +1,6 @@
 <?php
 /**
- * WBW Currency Switcher for WooCommerce - switcherSimpleDropdownViewWcu.
+ * WBW Currency Switcher for WooCommerce - switcherSimpleDropdownViewWcu
  *
  * @version 2.3.1
  */

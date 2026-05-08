@@ -151,8 +151,8 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
-= 2.3.1 - 24/04/2026 =
-* Fix - currency restore bug when "Change currency at checkout" disabled.
+= 2.3.1 - 08/05/2026 =
+* Fix - Currency restore bug when "Change currency at checkout" disabled.
 * Fix - Cross Site Scripting (XSS) vulnerability.
 
 = 2.3.0 - 20/04/2026 =

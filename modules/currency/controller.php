@@ -90,7 +90,8 @@ class currencyControllerWcu extends controllerWcu {
 		return array(
 			WCU_USERLEVELS => array(
 				WCU_ADMIN => array(
-					'saveCurrencyTab', 'getCurrencyRate'
+					'saveCurrencyTab',
+					'getCurrencyRate',
 				)
 			),
 		);

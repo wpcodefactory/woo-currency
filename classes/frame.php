@@ -1,6 +1,6 @@
 <?php
 /**
- * WBW Currency Switcher for WooCommerce - frameWcu class
+ * WBW Currency Switcher for WooCommerce - frameWcu Class
  *
  * @version 2.3.1
  */
