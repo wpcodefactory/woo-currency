@@ -134,11 +134,11 @@ class currencyWcu extends moduleWcu {
 
 		add_filter('woocommerce_admin_order_preview_line_items', array($this, 'setCorrectOrderCurrency'), 9999, 2);
 
-		add_filter('wc_get_template', array($this, 'updateCurrencyForEmailTemplateOrder'), 9999, 5);				// from woocommerce 2.7 it is necessary for new order email
-		add_action('wpo_wcpdf_process_template_order', array($this, 'updateCurrencyForPdfTemplateOrder'), 1, 2);	// compatibility for https://wordpress.org/plugins/woocommerce-pdf-invoices-packing-slips/
-		add_filter('woocommerce_checkout_update_order_review', array($this, 'updateCheckoutOrderReview'), 9999);	// callback for ajax recalc of order review on checkout
+		add_filter('wc_get_template', array($this, 'updateCurrencyForEmailTemplateOrder'), 9999, 5);             // from woocommerce 2.7 it is necessary for new order email
+		add_action('wpo_wcpdf_process_template_order', array($this, 'updateCurrencyForPdfTemplateOrder'), 1, 2); // compatibility for https://wordpress.org/plugins/woocommerce-pdf-invoices-packing-slips/
+		add_filter('woocommerce_checkout_update_order_review', array($this, 'updateCheckoutOrderReview'), 9999); // callback for ajax recalc of order review on checkout
 
-		add_filter('woocommerce_get_formatted_order_total', array($this, 'getCurrencyOrderTotal'));	// callback for ajax recalc of order review on checkout
+		add_filter('woocommerce_get_formatted_order_total', array($this, 'getCurrencyOrderTotal')); // callback for ajax recalc of order review on checkout
 
 		add_filter('woocommerce_before_resend_order_emails', array($this, 'woocommerceBeforeResendOrderEmails'), 1);
 		add_filter('woocommerce_email_actions', array($this, 'checkWoocommerceEmailActions'), 10);
@@ -396,11 +396,11 @@ class currencyWcu extends moduleWcu {
 			}
 		}
 		$details['total_item_amount'] = round($total, $decimals);
-		$tax = $model->getCurrencyPrice($details['order_tax']);
-		$details['order_tax'] = round($tax, $decimals);
-		$ship = $model->getCurrencyPrice($details['shipping']);
-		$details['shipping'] = round($ship, $decimals);
-		$details['order_total'] = round($total + $tax + $ship, $decimals);
+		$tax                          = $model->getCurrencyPrice($details['order_tax']);
+		$details['order_tax']         = round($tax, $decimals);
+		$ship                         = $model->getCurrencyPrice($details['shipping']);
+		$details['shipping']          = round($ship, $decimals);
+		$details['order_total']       = round($total + $tax + $ship, $decimals);
 
 		return $details;
 	}
@@ -933,7 +933,7 @@ class currencyWcu extends moduleWcu {
 	}
 
 	public function addToCartHash($hash) {
-		//for normal shipping update if to change currency
+		// for normal shipping update if to change currency
 		return '';
 	}
 
@@ -997,9 +997,9 @@ class currencyWcu extends moduleWcu {
 		// Just make little notices here
 		frameWcu::_()->getModule('promo')->getModel()->bigStatAdd('Welcome Show');
 		if(!installerWcu::isUsed()) {
-			installerWcu::setUsed();	// Show this welcome page - only one time
+			installerWcu::setUsed(); // Show this welcome page - only one time
 			frameWcu::_()->getModule('promo')->getModel()->bigStatAdd('Welcome Show');
-			frameWcu::_()->getModule('options')->getModel()->save('plug_welcome_show', time());	// Remember this
+			frameWcu::_()->getModule('options')->getModel()->save('plug_welcome_show', time()); // Remember this
 		}
 		$this->getView()->getCurrencyTabContent();
 	}
@@ -1470,18 +1470,18 @@ class currencyWcu extends moduleWcu {
 
 	public function getCryptoCurrencyList() {
 		return array (
-			'BTC' => '&#3647;',
-			'ETC' => 'ETC',
-			'LTC' => '&#321;',
-			'ETH' => 'ETH',
-			'ZEC' => 'ZEC',
+			'BTC'  => '&#3647;',
+			'ETC'  => 'ETC',
+			'LTC'  => '&#321;',
+			'ETH'  => 'ETH',
+			'ZEC'  => 'ZEC',
 			'DASH' => 'DASH',
-			'XRP' => 'XRP',
-			'XMR' => 'XMR',
-			'BCH' => 'BCH',
-			'NEO' => 'NEO',
-			'ADA' => 'ADA',
-			'EOS' => 'EOS',
+			'XRP'  => 'XRP',
+			'XMR'  => 'XMR',
+			'BCH'  => 'BCH',
+			'NEO'  => 'NEO',
+			'ADA'  => 'ADA',
+			'EOS'  => 'EOS',
 		);
 	}
 

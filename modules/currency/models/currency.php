@@ -64,8 +64,6 @@ class currencyModelWcu extends modelWcu {
 		return self::$savedCurrencies;
 	}
 
-
-
 	public function getDefaultCurrency() {
 		$wcCurrency = get_option('woocommerce_currency', 'USD');
 		$wcCurrencyPos = get_option('woocommerce_currency_pos', 'left');
@@ -84,11 +82,13 @@ class currencyModelWcu extends modelWcu {
 		);
 		return $currencies;
 	}
+
 	public function getCurrencySymbol($currency) {
 		$currencySymbols = $this->getModule()->getCurrencySymbols();
 
 		return isset($currencySymbols[$currency]) ? $currencySymbols[$currency] : $currencySymbols['USD'];
 	}
+
 	public function getCurrencyPriceFormat($format) {
 		$currencies = $this->getCurrencies();
 		$currentCurrency = $this->getModule()->currentCurrency;
@@ -113,19 +113,20 @@ class currencyModelWcu extends modelWcu {
 		}
 		return $format;
 	}
+
 	public function getCurrencyPrice($price, $product = null) {
-		$module = $this->getModule();
-		$currencies = $this->getCurrencies();
-		$defaultCurrency = $module->getDefaultCurrency();
-		$currentCurrency = $module->getCurrentCurrency();
+		$module           = $this->getModule();
+		$currencies       = $this->getCurrencies();
+		$defaultCurrency  = $module->getDefaultCurrency();
+		$currentCurrency  = $module->getCurrentCurrency();
 		$cryptoCurrencies = $module->getCryptoCurrencyList();
-		$decimalSep = $module->decimalSep;
+		$decimalSep       = $module->decimalSep;
 		$priceNumDecimals = $module->priceNumDecimals;
-		$precision = $currentCurrency != $defaultCurrency
+		$precision        = $currentCurrency != $defaultCurrency
 			? $this->_getPriceDecimalsCount($currentCurrency, $priceNumDecimals, $currencies)
 			: $this->_getPriceDecimalsCount($defaultCurrency, $priceNumDecimals, $currencies);
-		$exchangeFeeSign = isset($currencies[$currentCurrency]['exchange_fee_sign']) ? $currencies[$currentCurrency]['exchange_fee_sign'] : 0;
-		$exchangeFee = isset($currencies[$currentCurrency]['exchange_fee']) ? $currencies[$currentCurrency]['exchange_fee'] : 0;
+		$exchangeFeeSign  = isset($currencies[$currentCurrency]['exchange_fee_sign']) ? $currencies[$currentCurrency]['exchange_fee_sign'] : 0;
+		$exchangeFee      = isset($currencies[$currentCurrency]['exchange_fee']) ? $currencies[$currentCurrency]['exchange_fee'] : 0;
 
 		if($currentCurrency != $defaultCurrency) {
 			$newPrice = dispatcherWcu::applyFilters('getManualPrice', $price, $currentCurrency, $product);
@@ -137,7 +138,7 @@ class currencyModelWcu extends modelWcu {
 					return $newPrice;
 				}
 			}
-			//Rewrite manual rate
+			// Rewrite manual rate
 			if ( !empty($currencies[$currentCurrency]['rate_custom']) ) {
 				$currencies[$currentCurrency]['rate'] = $currencies[$currentCurrency]['rate_custom'];
 			} elseif ( $exchangeFee ) {
@@ -145,7 +146,7 @@ class currencyModelWcu extends modelWcu {
 				$currencies[$currentCurrency]['rate'] += $exchangeFee;
 			}
 		}
-			//Edited this line to set default converting of currency
+			// Edited this line to set default converting of currency
 		if ( !array_key_exists( $currentCurrency, $cryptoCurrencies ) ) {
 			if ($currentCurrency != $defaultCurrency) {
 				$price = isset($currencies[$currentCurrency]) && $currencies[$currentCurrency] != null
@@ -175,6 +176,7 @@ class currencyModelWcu extends modelWcu {
 		//return round ( $price , 0 ,PHP_ROUND_HALF_EVEN );
 		//return number_format ($price, $priceNumDecimals, $decimalSep, $this->thousands_sep);
 	}
+
 	public function getCurrencyVariationPrices($pricesArr) {
 		// lets sort arrays by values to avoid wrong price displaying on the front
 		if(!empty($pricesArr) && is_array($pricesArr)) {
@@ -183,7 +185,7 @@ class currencyModelWcu extends modelWcu {
 				$pricesArr[$key] = $arrvals;
 			}
 		}
-		//another way displaying of price range is not correct
+		// another way displaying of price range is not correct
 		if(empty($pricesArr['sale_price'])) {
 			if(isset($pricesArr['regular_price'])) {
 				$pricesArr['price'] = $pricesArr['regular_price'];
@@ -192,16 +194,21 @@ class currencyModelWcu extends modelWcu {
 		return $pricesArr;
 	}
 
+	/**
+	 * getCurrencyRate.
+	 *
+	 * @todo Is `ratesapi` the same as `ecb`?
+	 */
 	public function getCurrencyRate($fromCurrency, $toCurrency) {
 
-		$options = $this->getOptions();
-		$mode = !empty($options['options']['converter_type']) ? $options['options']['converter_type'] : 'cryptocompare';
-		$freeConverterApiKey = !empty($options['options']['free_converter_apikey']) ? $options['options']['free_converter_apikey'] : 'a4472cb452c8fb230db0';
-		$fixerConverterApiKey = !empty($options['options']['fixer_converter_apikey']) ? $options['options']['fixer_converter_apikey'] : 'a2697855aaf0f03e3bf46d2215106ef0';
+		$options                      = $this->getOptions();
+		$mode                         = !empty($options['options']['converter_type']) ? $options['options']['converter_type'] : 'cryptocompare';
+		$freeConverterApiKey          = !empty($options['options']['free_converter_apikey']) ? $options['options']['free_converter_apikey'] : 'a4472cb452c8fb230db0';
+		$fixerConverterApiKey         = !empty($options['options']['fixer_converter_apikey']) ? $options['options']['fixer_converter_apikey'] : 'a2697855aaf0f03e3bf46d2215106ef0';
 		$currencylayerConverterApiKey = !empty($options['options']['currencylayer_converter_apikey']) ? $options['options']['currencylayer_converter_apikey'] : '905875ebd37315ce29619a9663b071aa';
-		$oerConverterApiKey = !empty($options['options']['oer_converter_apikey']) ? $options['options']['oer_converter_apikey'] : 'e9f616eaa0fb49448d9fe3bd3b9bcd47';
-		$fromCurrency = urlencode($fromCurrency);
-		$toCurrency = urlencode($toCurrency);
+		$oerConverterApiKey           = !empty($options['options']['oer_converter_apikey']) ? $options['options']['oer_converter_apikey'] : 'e9f616eaa0fb49448d9fe3bd3b9bcd47';
+		$fromCurrency                 = urlencode($fromCurrency);
+		$toCurrency                   = urlencode($toCurrency);
 		if (!$fromCurrency) {
 			$errorMsg = sprintf(__("set main currency", WCU_LANG_CODE), $fromCurrency);
 		} else {
@@ -272,7 +279,6 @@ class currencyModelWcu extends modelWcu {
 					//https://finance.yahoo.com/quote/USDBTC=X
 					$queryStr = sprintf("%s%s=X", $fromCurrency, $toCurrency);
 					$url = "https://finance.yahoo.com/quote/" . $queryStr;
-					//$html = function_exists('curl_init') ? $this->_fileGetContentsCurl($url) : file_get_contents($url);
 					$response = wp_remote_request($url, array('headers' => array('Content-Type' => 'application/json')));
 					$html = is_wp_error($response) ? '' : wp_remote_retrieve_body($response);
 					preg_match_all('/quote-header-info.*?fin-streamer.*?>(.*?)<\/fin-streamer>/s', $html, $matches);
@@ -456,7 +462,6 @@ class currencyModelWcu extends modelWcu {
 		return update_option($this->getModule()->optionsDbOpt, escHtmlRecursively($options));
 	}
 
-
 	public function getOptions() {
 		$options = get_option($this->getModule()->optionsDbOpt, array());
 		if(empty($options) || !is_array($options)) {
@@ -464,12 +469,14 @@ class currencyModelWcu extends modelWcu {
 		}
 		return $options;
 	}
+
 	public function _getPriceDecimalsCount($currency, $val = 2, $currencies = array()) {
 		if ($this->getModule()->nowCalcCartTotals || $this->getModule()->nowCalcOrderTotals) {
 			$currency = $this->getModule()->defaultCurrency;
 		}
 		return $this->_getRealPriceDecimalsCount($currency, $val, $currencies);
 	}
+
 	public function _getRealPriceDecimalsCount($currency, $val = 2, $currencies = array()) {
 		$currencies = $this->getCurrencies();
 		if( isset($currencies[$currency]['decimals']) && ($currencies[$currency]['decimals'] != 0) ) {
@@ -484,6 +491,7 @@ class currencyModelWcu extends modelWcu {
 			return intval($val);
 		}
 	}
+
 	private function _fileGetContentsCurl($url) {
 		$ch = curl_init();
 
@@ -504,5 +512,4 @@ class currencyModelWcu extends modelWcu {
 		$field = $this->getModule()->settingFlags;
 		update_option($field, $setting);
 	}
-
 }

@@ -19,12 +19,12 @@ foreach($this->displayRulesTab as $p) {
 
 <style>
 
-<?php if ($show_on_screen && $show_on_screen_compare && $show_on_screen_value) {?>
+<?php if ($show_on_screen && $show_on_screen_compare && $show_on_screen_value) { ?>
 	<?php if ($show_on_screen_compare === 'less') {
 		$show_on_screen_compare = 'max-width';
 	} else {
 		$show_on_screen_compare = 'min-width';
-	}?>
+	} ?>
 	.wcuCurrencySwitcher {
 		display:none !important;
 	}
@@ -32,7 +32,7 @@ foreach($this->displayRulesTab as $p) {
 		.wcuCurrencySwitcher {
 			display:inline-block !important;
 		}
-<?php }?>
+<?php } ?>
 
 	<?php if (!wp_is_mobile()) { ?>
 		.wcuCurrencySwitcher.left, .wcuCurrencySwitcher.right {
@@ -113,9 +113,9 @@ foreach($this->displayRulesTab as $p) {
 		border-bottom:1px solid <?php echo $bor_color ?> !important;
 	}
 
-<?php if ($show_on_screen) {?>
+<?php if ($show_on_screen) { ?>
 }
-<?php }?>
+<?php } ?>
 
 </style>
 <div class="wcuCurrencySwitcherSimpleDropdown wcuCurrencySwitcher <?php echo $side_simple?> <?php echo $layout?> wcuCsdShow_<?php echo $show?> wcuCsdToggleSwitcher_<?php echo $toggle_switcher?> wcuCsdIconType_<?php echo $icon_type?> wcuCsdIconSize_<?php echo $icon_size?> wcuCsdShowBorder_<?php echo $show_border?>" data-type="<?php echo $type?>" style="display: none;">
@@ -134,16 +134,16 @@ foreach($this->displayRulesTab as $p) {
 
 		<?php }?>
 
-		<?php foreach ($this->currencies as $key => $currency) {?>
+		<?php foreach ($this->currencies as $key => $currency) { ?>
 			<?php $current = $key == $this->currentCurrency ? 'wcuCurrent' : '';?>
 
 			<?php if (empty($current)) { ?>
 				<li class="<?php echo $current?>" data-currency="<?php echo esc_attr($key); ?>">
 					<?php echo esc_html($currency);?>
 				</li>
-			<?php }?>
+			<?php } ?>
 
-		<?php }?>
+		<?php } ?>
 
 		<?php if ( ($layout === "horizontal") && ($side_simple === "right") ) { ?>
 

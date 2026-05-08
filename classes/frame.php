@@ -8,13 +8,16 @@
 defined( 'ABSPATH' ) || exit;
 
 class frameWcu {
+
 	private $_modules = array();
 	private $_tables = array();
 	private $_allModules = array();
+
 	/**
 	 * bool Uses to know if we are on one of the plugin pages
 	 */
 	private $_inPlugin = false;
+
 	/**
 	 * Array to hold all scripts and add them in one time in addScripts method
 	 */
@@ -27,6 +30,7 @@ class frameWcu {
 	private $_scriptsVars = array();
 	private $_mod = '';
 	private $_action = '';
+
 	/**
 	 * Object with result of executing non-ajax module request
 	 */
@@ -35,8 +39,8 @@ class frameWcu {
 
 	public function __construct() {
 		$this->_res = toeCreateObjWcu('response', array());
-
 	}
+
 	static public function getInstance() {
 		static $instance;
 		if(!$instance) {
@@ -44,9 +48,11 @@ class frameWcu {
 		}
 		return $instance;
 	}
+
 	static public function _() {
 		return self::getInstance();
 	}
+
 	public function parseRoute() {
 		// Check plugin
 		$pl = reqWcu::getVar('pl');
@@ -59,18 +65,23 @@ class frameWcu {
 				$this->_action = $action;
 		}
 	}
+
 	public function setMod($mod) {
 		$this->_mod = $mod;
 	}
+
 	public function getMod() {
 		return $this->_mod;
 	}
+
 	public function setAction($action) {
 		$this->_action = $action;
 	}
+
 	public function getAction() {
 		return $this->_action;
 	}
+
 	protected function _extractModules() {
 		$activeModules = $this->getTable('modules')
 				->innerJoin( $this->getTable('modules_type'), 'type_id' )
@@ -99,6 +110,7 @@ class frameWcu {
 			}
 		}
 	}
+
 	protected function _initModules() {
 		if(!empty($this->_modules)) {
 			foreach($this->_modules as $mod) {
@@ -106,6 +118,7 @@ class frameWcu {
 			}
 		}
 	}
+
 	public function init() {
 		reqWcu::init();
 		$this->_extractTables();
@@ -130,9 +143,11 @@ class frameWcu {
 
 		add_action('init', array($this, 'connectLang'));
 	}
+
 	public function connectLang() {
 		load_plugin_textdomain(WCU_LANG_CODE, false, WCU_PLUG_NAME. '/languages/');
 	}
+
 	/**
 	 * Check permissions for action in controller by $code and made corresponding action
 	 * @param string $code Code of controller that need to be checked
@@ -146,6 +161,7 @@ class frameWcu {
 			exit(_e('You have no permissions to view this page', WCU_LANG_CODE));
 		}
 	}
+
 	/**
 	 * Check permissions for action in controller by $code
 	 *
@@ -204,7 +220,7 @@ class frameWcu {
 					}
 				}
 			}
-			if($res) {	// Additional check for nonces
+			if($res) { // Additional check for nonces
 				$noncedMethods = $mod->getController()->getNoncedMethods();
 				if(!empty($noncedMethods)) {
 					$noncedMethods = array_map('strtolower', $noncedMethods);
@@ -219,12 +235,15 @@ class frameWcu {
 		}
 		return $res;
 	}
+
 	public function getRes() {
 		return $this->_res;
 	}
+
 	public function execAfterWpInit() {
 		$this->_doExec();
 	}
+
 	/**
 	 * Check if method for module require some special permission. We can detect users permissions only after wp init action was done.
 	 */
@@ -254,6 +273,7 @@ class frameWcu {
 		}
 		return $res;
 	}
+
 	protected function _execModules() {
 		if($this->_mod) {
 			// If module exist and is active
@@ -267,6 +287,7 @@ class frameWcu {
 			}
 		}
 	}
+
 	protected function _doExec() {
 		$mod = $this->getModule($this->_mod);
 		if($mod && $this->checkPermissions($this->_mod, $this->_action)) {
@@ -281,6 +302,7 @@ class frameWcu {
 			}
 		}
 	}
+
 	protected function _extractTables($tablesDir = WCU_TABLES_DIR) {
 		$mDirHandle = opendir($tablesDir);
 		while(($file = readdir($mDirHandle)) !== false) {
@@ -289,10 +311,12 @@ class frameWcu {
 			}
 		}
 	}
+
 	protected function _extractTable($tableName, $tablesDir = WCU_TABLES_DIR) {
 		importClassWcu('noClassNameHere', $tablesDir. $tableName. '.php');
 		$this->_tables[$tableName] = tableWcu::_($tableName);
 	}
+
 	/**
 	 * public alias for _extractTables method
 	 * @see _extractTables
@@ -301,14 +325,17 @@ class frameWcu {
 		if(!empty($tablesDir))
 			$this->_extractTables($tablesDir);
 	}
+
 	public function exec() {
 		/**
 		 * @deprecated
 		 */
 	}
+
 	public function getTables () {
 		return $this->_tables;
 	}
+
 	/**
 	 * Return table by name
 	 * @param string $tableName table name in database
@@ -321,6 +348,7 @@ class frameWcu {
 		}
 		return $this->_tables[$tableName];
 	}
+
 	public function getModules($filter = array()) {
 		$res = array();
 		if(empty($filter))
@@ -341,15 +369,18 @@ class frameWcu {
 	public function getModule($code) {
 		return (isset($this->_modules[$code]) ? $this->_modules[$code] : NULL);
 	}
+
 	public function inPlugin() {
 		return $this->_inPlugin;
 	}
+
 	public function usePackAssets() {
 		if(!$this->_useFootAssets && $this->getModule('options') && $this->getModule('options')->get('foot_assets')) {
 			$this->_useFootAssets = true;
 		}
 		return $this->_useFootAssets;
 	}
+
 	/**
 	 * Push data to script array to use it all in addScripts method
 	 * @see wp_enqueue_script definition
@@ -371,6 +402,7 @@ class frameWcu {
 			);
 		}
 	}
+
 	/**
 	 * Add all scripts from _scripts array to worwcuess
 	 */
@@ -433,28 +465,35 @@ class frameWcu {
 		}
 		$this->_stylesInitialized = true;
 	}
-	//Very interesting thing going here.............
+
+	// Very interesting thing going here...
 	public function loadPlugins() {
 		require_once(ABSPATH. 'wp-includes/pluggable.php');
 	}
+
 	public function loadWPSettings() {
 		require_once(ABSPATH. 'wp-settings.php');
 	}
+
 	public function loadLocale() {
 		require_once(ABSPATH. 'wp-includes/locale.php');
 	}
+
 	public function moduleActive($code) {
 		return isset($this->_modules[$code]);
 	}
+
 	public function moduleExists($code) {
 		if($this->moduleActive($code))
 			return true;
 		return isset($this->_allModules[$code]);
 	}
+
 	public function isTplEditor() {
 		$tplEditor = reqWcu::getVar('tplEditor');
 		return (bool) $tplEditor;
 	}
+
 	/**
 	 * This is custom method for each plugin and should be modified if you create copy from this instance.
 	 */
@@ -470,18 +509,22 @@ class frameWcu {
 		}
 		return false;
 	}
+
 	public function isAdminPlugPage() {
 		if($this->isAdminPlugOptsPage()) {
 			return true;
 		}
 		return false;
 	}
+
 	public function licenseDeactivated() {
 		return (!$this->getModule('license') && $this->moduleExists('license'));
 	}
+
 	public function savePluginActivationErrors() {
 		update_option(WCU_CODE. '_plugin_activation_errors',  ob_get_contents());
 	}
+
 	public function getActivationErrors() {
 		return get_option(WCU_CODE. '_plugin_activation_errors');
 	}
