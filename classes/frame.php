@@ -174,7 +174,7 @@ class frameWcu {
                     if(array_key_exists($action, $permissions[WCU_METHODS])) {        // Permission for this method exists
                         $currentUserPosition = frameWcu::_()->getModule('user')->getCurrentUserPosition();
                         if((is_array($permissions[ WCU_METHODS ][ $action ]) && in_array($currentUserPosition, $permissions[ WCU_METHODS ][ $action ]))
-                            || (is_array($permissions[ WCU_METHODS ][ $action ]) && $permissions[WCU_METHODS][$action] === $currentUserPosition)
+                            || (!is_array($permissions[ WCU_METHODS ][ $action ]) && $permissions[WCU_METHODS][$action] === $currentUserPosition)
                         ) {
                             $res = true;
                         }
@@ -200,7 +200,7 @@ class frameWcu {
                             $lowerMethod = strtolower($methods);            // Make case-insensitive
                             if($lowerMethod == $action) {                   // Permission for this method exists
                                 if($currentUserPosition === $userlevel)
-                                    $res = false;
+                                    $res = true;
                                 break;
                             }
                         }
