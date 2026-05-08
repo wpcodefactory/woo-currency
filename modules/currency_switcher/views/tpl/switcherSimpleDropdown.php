@@ -88,30 +88,30 @@ foreach($this->displayRulesTab as $p) {
 		-moz-border-radius:  <?php echo $border_radius . $border_radius_dimension ?>;
 		-webkit-border-radius:  <?php echo $border_radius . $border_radius_dimension ?>;
 	}
-    .wcuCurrencySwitcher.wcuCsdToggleSwitcher_on_hover ul:hover li {
-        color: <?php echo $txt_color?>;
-    }
-    .wcuCsdToggleSwitcherClick ul li{
-        color: <?php echo $txt_color?> !important;
-    }
-    .wcuCurrencySwitcher ul:hover li.wcuCurrent {
-        color: <?php echo $txt_color_cur?>;
-    }
-    .wcuCsdToggleSwitcherClick ul li.wcuCurrent{
-        color: <?php echo $txt_color_cur?> !important;
-    }
-    .wcuCurrencySwitcher ul:hover li:hover {
-        color: <?php echo $txt_color_h?>;
-    }
-    .wcuCsdToggleSwitcherClick ul li:hover{
-        color: <?php echo $txt_color_h?> !important;
-    }
-    .wcuCurrencySwitcher.wcuCsdIconType_circle.wcuCsdShowBorder_1 ul li {
-        border-bottom:1px solid <?php echo $bor_color ?> !important;
-    }
-    .wcuCurrencySwitcher.horizontal.wcuCsdShowBorder_1 li {
-        border-bottom:1px solid <?php echo $bor_color ?> !important;
-    }
+	.wcuCurrencySwitcher.wcuCsdToggleSwitcher_on_hover ul:hover li {
+		color: <?php echo $txt_color?>;
+	}
+	.wcuCsdToggleSwitcherClick ul li{
+		color: <?php echo $txt_color?> !important;
+	}
+	.wcuCurrencySwitcher ul:hover li.wcuCurrent {
+		color: <?php echo $txt_color_cur?>;
+	}
+	.wcuCsdToggleSwitcherClick ul li.wcuCurrent{
+		color: <?php echo $txt_color_cur?> !important;
+	}
+	.wcuCurrencySwitcher ul:hover li:hover {
+		color: <?php echo $txt_color_h?>;
+	}
+	.wcuCsdToggleSwitcherClick ul li:hover{
+		color: <?php echo $txt_color_h?> !important;
+	}
+	.wcuCurrencySwitcher.wcuCsdIconType_circle.wcuCsdShowBorder_1 ul li {
+		border-bottom:1px solid <?php echo $bor_color ?> !important;
+	}
+	.wcuCurrencySwitcher.horizontal.wcuCsdShowBorder_1 li {
+		border-bottom:1px solid <?php echo $bor_color ?> !important;
+	}
 
 <?php if ($show_on_screen) {?>
 }
@@ -122,40 +122,40 @@ foreach($this->displayRulesTab as $p) {
 	<?php dispatcherWcu::doAction('beforeCurrencySwitcherList', $this->optionsParams); ?>
 	<ul>
 
-        <?php if ( ( ($layout === "horizontal") && ($side_simple === "left") ) || ($layout === "vertical") ) { ?>
+		<?php if ( ( ($layout === "horizontal") && ($side_simple === "left") ) || ($layout === "vertical") ) { ?>
 
-        <li class="wcuCurrencySwitcherSimpleDropdownClose">
-            <i class="fa fa-times" aria-hidden="true"></i>
-        </li>
+		<li class="wcuCurrencySwitcherSimpleDropdownClose">
+			<i class="fa fa-times" aria-hidden="true"></i>
+		</li>
 
-        <li class="wcuCurrent" data-currency="<?php echo esc_attr($this->currentCurrency); ?>">
-            <?php echo esc_html($this->currencies[$this->currentCurrency]); ?>
-        </li>
+		<li class="wcuCurrent" data-currency="<?php echo esc_attr($this->currentCurrency); ?>">
+			<?php echo esc_html($this->currencies[$this->currentCurrency]); ?>
+		</li>
 
-        <?php }?>
+		<?php }?>
 
 		<?php foreach ($this->currencies as $key => $currency) {?>
 			<?php $current = $key == $this->currentCurrency ? 'wcuCurrent' : '';?>
 
-            <?php if (empty($current)) { ?>
-    			<li class="<?php echo $current?>" data-currency="<?php echo esc_attr($key); ?>">
-    				<?php echo esc_html($currency);?>
-                </li>
-            <?php }?>
+			<?php if (empty($current)) { ?>
+				<li class="<?php echo $current?>" data-currency="<?php echo esc_attr($key); ?>">
+					<?php echo esc_html($currency);?>
+				</li>
+			<?php }?>
 
 		<?php }?>
 
-        <?php if ( ($layout === "horizontal") && ($side_simple === "right") ) { ?>
+		<?php if ( ($layout === "horizontal") && ($side_simple === "right") ) { ?>
 
-            <li class="wcuCurrent" data-currency="<?php echo $this->currentCurrency?>">
-                <?php echo $this->currencies[$this->currentCurrency];?>
-            </li>
+			<li class="wcuCurrent" data-currency="<?php echo $this->currentCurrency?>">
+				<?php echo $this->currencies[$this->currentCurrency];?>
+			</li>
 
-            <li class="wcuCurrencySwitcherSimpleDropdownClose">
-                <i class="fa fa-times" aria-hidden="true"></i>
-            </li>
+			<li class="wcuCurrencySwitcherSimpleDropdownClose">
+				<i class="fa fa-times" aria-hidden="true"></i>
+			</li>
 
-        <?php }?>
+		<?php }?>
 
 	</ul>
 </div>
