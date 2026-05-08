@@ -14,6 +14,8 @@
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  **/
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Base config constants and functions.
  */

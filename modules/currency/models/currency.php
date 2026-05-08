@@ -5,6 +5,8 @@
  * @version 2.3.1
  */
 
+defined( 'ABSPATH' ) || exit;
+
 class currencyModelWcu extends modelWcu {
 
 	public static $savedCurrencies = null;

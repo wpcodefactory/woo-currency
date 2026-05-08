@@ -5,6 +5,8 @@
  * @version 2.3.1
  */
 
+defined( 'ABSPATH' ) || exit;
+
 class frameWcu {
     private $_modules = array();
     private $_tables = array();
