@@ -2,7 +2,7 @@
 Contributors: woobewoo
 Tags: currency switcher, multi currency, currency converter, currency, woocommerce
 Tested up to: 6.9
-Stable tag: 2.3.1
+Stable tag: 2.3.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
