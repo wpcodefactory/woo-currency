@@ -1,22 +1,27 @@
 /**
- * WBW Currency Switcher for WooCommerce - Style-rtl CSS
+ * WBW Currency Switcher for WooCommerce - Style-RTL CSS
  *
  * @version 2.4.0
  *
- * @author  woobewoo
+ * @author woobewoo
  */
+
 .woobewoo-plugin .woobewoo-content .woobewoo-navigation {
 	left: 0;
 }
+
 .woobewoo-plugin .woobewoo-content .woobewoo-navigation.woobewoo-sticky-active {
 	left: 20px;
 }
+
 #woobewoo-breadcrumbs {
 	left: 0;
 }
+
 .woobewoo-tour-btns .woobewoo-tour-next-btn {
 	float: right;
 }
+
 .woobewoo-plugin .wcuCopyTextCode {
 	direction: ltr;
 }
