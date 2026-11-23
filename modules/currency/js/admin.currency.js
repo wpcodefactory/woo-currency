@@ -3,7 +3,7 @@
  *
  * @version 2.4.0
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 jQuery(document).ready(function() {
     var currenciesShell = jQuery('.wcuCurrenciesShell'),

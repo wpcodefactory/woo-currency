@@ -2,7 +2,7 @@
 /**
  * WBW Currency Switcher for WooCommerce - userWcu Class
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;

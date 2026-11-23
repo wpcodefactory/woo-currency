@@ -4,7 +4,7 @@
  *
  * @version 2.4.0
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 
 

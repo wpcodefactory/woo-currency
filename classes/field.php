@@ -2,7 +2,7 @@
 /**
  * WBW Currency Switcher for WooCommerce - fieldWcu Class
  *
- * @author  woobewoo
+ * @author woobewoo
  *
  * @version 2.4.0
  */
