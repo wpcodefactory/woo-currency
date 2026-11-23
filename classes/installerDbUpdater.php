@@ -2,9 +2,9 @@
 /**
  * WBW Currency Switcher for WooCommerce - installerDbUpdaterWcu Class
  *
- * @version 2.4.0
+ * @author woobewoo
  *
- * @author  woobewoo
+ * @package WooBeWoo\WC_Currency_Switcher\Classes
  */
 
 defined( 'ABSPATH' ) || exit;

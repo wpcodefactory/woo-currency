@@ -6,7 +6,7 @@ Stable tag: 2.3.2
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-WBW Currency Switcher: allows customers to switch products prices to any currencies. Get rates converted in the real-time with dynamic currency switcher.
+WBW Currency Switcher allows customers to switch product prices to any currency. Get rates converted in real-time with the dynamic currency switcher.
 
 == Description ==
 [WBW Currency Switcher for WooCommerce Plugin](https://woobewoo.com/plugins/woo-currency?utm_source=wordpress&utm_medium=description&utm_campaign=currency "WBW Currency Switcher for WooCommerce WordPress plugin") allows you to display prices in multiple currencies, use the unlimited number of currencies and set the exchange rate for each currency manually or automatically. The plugin makes full use of Cryptocompare and Free Converter platforms, providing the latest exchange rates, and converting displayed prices in real-time. Currency switcher can be changed automatically according to the customer’s IP.
@@ -19,7 +19,7 @@ You can use Currency Switcher with additional modules - [Currency Rates, Convert
 You can convert any currency you want and add as many currencies as you need. Select the currency from a list and with simple settings add it to the Currency switcher straight away to your online store.
 
 * [Manual/ automatic exchange rate for each currency](https://woobewoo.com/feature/manual-automatic-exchange-rate?utm_source=wordpress&utm_medium=exchangerate&utm_campaign=currency "Manual/ automatic exchange rate for each currency")
-Currency switcher uses Cryptocompare and Free Converter aggregatots. The plugin allows setting exchange rates manually and automatically. Besides, the Pro version has a feature of an automatic exchange rate updates available for a certain period: every minute, hourly, twice a day, daily, weekly. You can set the option “Notify admin by email” about the last exchange rate values every time when it updates..
+Currency switcher uses CryptoCompare and Free Converter aggregators. The plugin allows setting exchange rates manually and automatically. Besides, the Pro version has a feature of an automatic exchange rate updates available for a certain period: every minute, hourly, twice a day, daily, weekly. You can set the option “Notify admin by email” about the last exchange rate values every time when it updates..
 
 * [Checkout in selected currency](https://woobewoo.com/documentation/change-currency-at-checkout/ "Checkout in selected currency")
 Plugin provides an opportunity to change the currency at checkout and allow customers to pay with their selected (preferred) currency.
@@ -151,19 +151,15 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
-= 2.4.0 - 20/11/2026 =
+= 2.4.0 - 23/11/2026 =
 * Fix - Currency rates and currency converter frontend display issue.
 * Fix - Security - Improved output escaping and AJAX response handling.
 * Fix - Admin controls - Replaced the old Chosen controls with SelectWoo.
 * Fix - WordPress compatibility - Updated PHP, date, filesystem, random-number, HTTP API, and request-handling functions.
 * Dev - Security - Sanitized GET, POST, cookie, session, server, and file inputs.
 * Dev - Improved coding standards and cleaned up the plugin code.
-Tested up to: 7.1.
-WC tested up to: 11.3.
-
-= 2.3.2 - 28/07/2026 =
-* Dev - Code cleaned up.
-* WC tested up to: 11.0.
+* Tested up to: 7.1.
+* WC tested up to: 11.3.
 
 = 2.3.2 - 28/07/2026 =
 * Fix - Shipping tax (VAT) not converting on currency switch when using inclusive-VAT rates like Flat Rate.

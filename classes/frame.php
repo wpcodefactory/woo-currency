@@ -3,6 +3,10 @@
  * WBW Currency Switcher for WooCommerce - frameWcu Class
  *
  * @version 2.4.0
+ *
+ * @author woobewoo
+ *
+ * @package WooBeWoo\WC_Currency_Switcher\Classes
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -119,6 +123,11 @@ class frameWcu {
 		}
 	}
 
+	/**
+	 * Init.
+	 *
+	 * @version 2.4.0
+	 */
 	public function init() {
 		reqWcu::init();
 		$this->_extractTables();

@@ -4,7 +4,9 @@
  *
  * @version 2.4.0
  *
- * @author  woobewoo
+ * @author woobewoo
+ *
+ * @package WooBeWoo\WC_Currency_Switcher\Functions
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -15,22 +17,22 @@ defined( 'ABSPATH' ) || exit;
  * @param string $str string to modify
  * @return string string with first Uppercase letter
  */
-if(!function_exists('strFirstUp')) {
-	function strFirstUp($str) {
-		return strtoupper(substr($str, 0, 1)).strtolower(substr($str, 1, strlen($str)));
+if ( ! function_exists( 'strFirstUp' ) ) {
+	function strFirstUp( $str ) {
+		return strtoupper( substr( $str, 0, 1 ) ) . strtolower( substr( $str, 1, strlen( $str ) ) );
 	}
 }
 
 /**
  * Deprecated - class must be created.
  */
-if(!function_exists('dateToTimestampWcu')) {
-	function dateToTimestampWcu($date) {
-		if(empty($a)) {
+if ( ! function_exists( 'dateToTimestampWcu' ) ) {
+	function dateToTimestampWcu( $date ) {
+		if ( empty( $a ) ) {
 			return false;
 		}
-		$a = explode(WCU_DATE_DL, $date);
-		return mktime(0, 0, 0, $a[1], $a[0], $a[2]);
+		$a = explode( WCU_DATE_DL, $date );
+		return mktime( 0, 0, 0, $a[1], $a[0], $a[2] );
 	}
 }
 
@@ -43,13 +45,13 @@ if(!function_exists('dateToTimestampWcu')) {
  * @param int $lenTo max len
  * @return string random string with length from $lenFrom to $lenTo
  */
-if(!function_exists('getRandName')) {
-	function getRandName($lenFrom = 6, $lenTo = 9) {
+if ( ! function_exists( 'getRandName' ) ) {
+	function getRandName( $lenFrom = 6, $lenTo = 9 ) {
 		$res = '';
-		$len = wp_rand($lenFrom, $lenTo);
-		if($len) {
-			for($i = 0; $i < $len; $i++) {
-				$res .= chr(wp_rand(97, 122)); /*rand symbol from a to z*/
+		$len = wp_rand( $lenFrom, $lenTo );
+		if ( $len ) {
+			for ( $i = 0; $i < $len; $i++ ) {
+				$res .= chr( wp_rand( 97, 122 ) ); /*rand symbol from a to z*/
 			}
 		}
 		return $res;
@@ -59,10 +61,10 @@ if(!function_exists('getRandName')) {
 /**
  * importWcu.
  */
-if(!function_exists('importWcu')) {
-	function importWcu($path) {
-		if(file_exists($path)) {
-			require($path);
+if ( ! function_exists( 'importWcu' ) ) {
+	function importWcu( $path ) {
+		if ( file_exists( $path ) ) {
+			require $path;
 			return true;
 		}
 		return false;
@@ -72,10 +74,10 @@ if(!function_exists('importWcu')) {
 /**
  * setDefaultParams.
  */
-if(!function_exists('setDefaultParams')) {
-	function setDefaultParams($params, $default) {
-		foreach($default as $k => $v) {
-			$params[$k] = isset($params[$k]) ? $params[$k] : $default[$k];
+if ( ! function_exists( 'setDefaultParams' ) ) {
+	function setDefaultParams( $params, $default ) {
+		foreach ( $default as $k => $v ) {
+			$params[ $k ] = isset( $params[ $k ] ) ? $params[ $k ] : $default[ $k ];
 		}
 		return $params;
 	}
@@ -84,17 +86,17 @@ if(!function_exists('setDefaultParams')) {
 /**
  * importClassWcu.
  */
-if(!function_exists('importClassWcu')) {
-	function importClassWcu($class, $path = '') {
-		if(!class_exists($class)) {
-			if(!$path) {
+if ( ! function_exists( 'importClassWcu' ) ) {
+	function importClassWcu( $class, $path = '' ) {
+		if ( ! class_exists( $class ) ) {
+			if ( ! $path ) {
 				$classFile = $class;
-				if(strpos(strtolower($classFile), WCU_CODE) !== false) {
-					$classFile = preg_replace('/'. WCU_CODE. '/i', '', $classFile);
+				if ( strpos( strtolower( $classFile ), WCU_CODE ) !== false ) {
+					$classFile = preg_replace( '/' . WCU_CODE . '/i', '', $classFile );
 				}
-				$path = WCU_CLASSES_DIR. $classFile. '.php';
+				$path = WCU_CLASSES_DIR . $classFile . '.php';
 			}
-			return importWcu($path);
+			return importWcu( $path );
 		}
 		return false;
 	}
@@ -106,13 +108,13 @@ if(!function_exists('importClassWcu')) {
  * @param string $class preferred class name
  * @return string existing class name
  */
-if(!function_exists('toeGetClassNameWcu')) {
-	function toeGetClassNameWcu($class) {
+if ( ! function_exists( 'toeGetClassNameWcu' ) ) {
+	function toeGetClassNameWcu( $class ) {
 		$className = '';
-		if(class_exists($class. strFirstUp(WCU_CODE))) {
-			$className = $class. strFirstUp(WCU_CODE);
-		} else if(class_exists(WCU_CLASS_PREFIX. $class)) {
-			$className = WCU_CLASS_PREFIX. $class;
+		if ( class_exists( $class . strFirstUp( WCU_CODE ) ) ) {
+			$className = $class . strFirstUp( WCU_CODE );
+		} elseif ( class_exists( WCU_CLASS_PREFIX . $class ) ) {
+			$className = WCU_CLASS_PREFIX . $class;
 		} else {
 			$className = $class;
 		}
@@ -127,20 +129,20 @@ if(!function_exists('toeGetClassNameWcu')) {
  * @param array $params array of arguments for class __construct function
  * @return object new object of specified class
  */
-if(!function_exists('toeCreateObjWcu')) {
-	function toeCreateObjWcu($class, $params) {
-		$className = toeGetClassNameWcu($class);
-		$obj = NULL;
-		if(class_exists('ReflectionClass')) {
-			$reflection = new ReflectionClass($className);
+if ( ! function_exists( 'toeCreateObjWcu' ) ) {
+	function toeCreateObjWcu( $class, $params ) {
+		$className = toeGetClassNameWcu( $class );
+		$obj       = null;
+		if ( class_exists( 'ReflectionClass' ) ) {
+			$reflection = new ReflectionClass( $className );
 			try {
-				$obj = $reflection->newInstanceArgs($params);
-			} catch (ReflectionException $e) { // If class have no constructor
+				$obj = $reflection->newInstanceArgs( $params );
+			} catch ( ReflectionException $e ) { // If class have no constructor
 				$obj = $reflection->newInstanceArgs();
 			}
 		} else {
 			$obj = new $className();
-			call_user_func_array(array($obj, '__construct'), $params);
+			call_user_func_array( array( $obj, '__construct' ), $params );
 		}
 		return $obj;
 	}
@@ -167,17 +169,17 @@ if ( ! function_exists( 'redirectWcu' ) ) {
 /**
  * in_array_array.
  */
-if(!function_exists('in_array_array')) {
-	function in_array_array($needle, $haystack) {
-		if(is_array($needle)) {
-			foreach($needle as $n) {
-				if(in_array($n, $haystack)) {
+if ( ! function_exists( 'in_array_array' ) ) {
+	function in_array_array( $needle, $haystack ) {
+		if ( is_array( $needle ) ) {
+			foreach ( $needle as $n ) {
+				if ( in_array( $n, $haystack ) ) {
 					return true;
 				}
 			}
 			return false;
 		} else {
-			return in_array_array($needle, $haystack);
+			return in_array_array( $needle, $haystack );
 		}
 	}
 }
@@ -185,54 +187,54 @@ if(!function_exists('in_array_array')) {
 /**
  * json_encode_utf_normal.
  */
-if(!function_exists('json_encode_utf_normal')) {
-	function json_encode_utf_normal($value) {
-		if (is_int($value)) {
-			return (string)$value;
-		} elseif (is_string($value)) {
-			$value = str_replace(
-				array('\\', '/', '"', "\r", "\n", "\b", "\f", "\t"),
-				array('\\\\', '\/', '\"', '\r', '\n', '\b', '\f', '\t'),
+if ( ! function_exists( 'json_encode_utf_normal' ) ) {
+	function json_encode_utf_normal( $value ) {
+		if ( is_int( $value ) ) {
+			return (string) $value;
+		} elseif ( is_string( $value ) ) {
+			$value   = str_replace(
+				array( '\\', '/', '"', "\r", "\n", "\b", "\f", "\t" ),
+				array( '\\\\', '\/', '\"', '\r', '\n', '\b', '\f', '\t' ),
 				$value
 			);
-			$convmap = array(0x80, 0xFFFF, 0, 0xFFFF);
-			$result = "";
-			for ($i = strlen($value) - 1; $i >= 0; $i--) {
-				$mb_char = substr($value, $i, 1);
-				$result = $mb_char . $result;
+			$convmap = array( 0x80, 0xFFFF, 0, 0xFFFF );
+			$result  = '';
+			for ( $i = strlen( $value ) - 1; $i >= 0; $i-- ) {
+				$mb_char = substr( $value, $i, 1 );
+				$result  = $mb_char . $result;
 			}
 			return '"' . $result . '"';
-		} elseif (is_float($value)) {
-			return str_replace(",", ".", $value);
-		} elseif (is_null($value)) {
+		} elseif ( is_float( $value ) ) {
+			return str_replace( ',', '.', $value );
+		} elseif ( is_null( $value ) ) {
 			return 'null';
-		} elseif (is_bool($value)) {
+		} elseif ( is_bool( $value ) ) {
 			return $value ? 'true' : 'false';
-		} elseif (is_array($value)) {
+		} elseif ( is_array( $value ) ) {
 			$with_keys = false;
-			$n = count($value);
-			for ($i = 0, reset($value); $i < $n; $i++, next($value)) {
-				if (key($value) !== $i) {
+			$n         = count( $value );
+			for ( $i = 0, reset( $value ); $i < $n; $i++, next( $value ) ) {
+				if ( key( $value ) !== $i ) {
 					$with_keys = true;
 					break;
 				}
 			}
-		} elseif (is_object($value)) {
+		} elseif ( is_object( $value ) ) {
 			$with_keys = true;
 		} else {
 			return '';
 		}
 		$result = array();
-		if ($with_keys) {
-			foreach ($value as $key => $v) {
-				$result[] = json_encode_utf_normal((string)$key) . ':' . json_encode_utf_normal($v);
+		if ( $with_keys ) {
+			foreach ( $value as $key => $v ) {
+				$result[] = json_encode_utf_normal( (string) $key ) . ':' . json_encode_utf_normal( $v );
 			}
-			return '{' . implode(',', $result) . '}';
+			return '{' . implode( ',', $result ) . '}';
 		} else {
-			foreach ($value as $key => $v) {
-				$result[] = json_encode_utf_normal($v);
+			foreach ( $value as $key => $v ) {
+				$result[] = json_encode_utf_normal( $v );
 			}
-			return '[' . implode(',', $result) . ']';
+			return '[' . implode( ',', $result ) . ']';
 		}
 	}
 }
@@ -245,30 +247,33 @@ if(!function_exists('json_encode_utf_normal')) {
  * @param array $d $_POST array
  * @return array
  */
-if(!function_exists('prepareParamsWcu')) {
-	function prepareParamsWcu(&$d=array(), &$options = array()) {
-		if (!empty($d['params'])) {
-			if (isset($d['params']['options'])) {
+if ( ! function_exists( 'prepareParamsWcu' ) ) {
+	function prepareParamsWcu( &$d = array(), &$options = array() ) {
+		if ( ! empty( $d['params'] ) ) {
+			if ( isset( $d['params']['options'] ) ) {
 				$options = $d['params']['options'];
 			}
-			if (is_array($d['params'])) {
-				$params = utilsWcu::jsonEncode($d['params']);
-				$params = str_replace(array('\n\r', "\n\r", '\n', "\r", '\r', "\r"), '<br />', $params);
-				$params = str_replace(array('<br /><br />', '<br /><br /><br />'), '<br />', $params);
+			if ( is_array( $d['params'] ) ) {
+				$params      = utilsWcu::jsonEncode( $d['params'] );
+				$params      = str_replace( array( '\n\r', "\n\r", '\n', "\r", '\r', "\r" ), '<br />', $params );
+				$params      = str_replace( array( '<br /><br />', '<br /><br /><br />' ), '<br />', $params );
 				$d['params'] = $params;
 			}
-		} elseif(isset($d['params'])) {
+		} elseif ( isset( $d['params'] ) ) {
 			$d['params']['attr']['class'] = '';
-			$d['params']['attr']['id'] = '';
-			$params = utilsWcu::jsonEncode($d['params']);
-			$d['params'] = $params;
+			$d['params']['attr']['id']    = '';
+			$params                       = utilsWcu::jsonEncode( $d['params'] );
+			$d['params']                  = $params;
 		}
-		if(empty($options)) {
-			$options = array('value' => array('EMPTY'), 'data' => array());
+		if ( empty( $options ) ) {
+			$options = array(
+				'value' => array( 'EMPTY' ),
+				'data'  => array(),
+			);
 		}
-		if(isset($d['code'])) {
-			if ($d['code'] == '') {
-				$d['code'] = prepareFieldCodeWcu($d['label']).'_'.wp_rand(0, 9999999);
+		if ( isset( $d['code'] ) ) {
+			if ( $d['code'] == '' ) {
+				$d['code'] = prepareFieldCodeWcu( $d['label'] ) . '_' . wp_rand( 0, 9999999 );
 			}
 		}
 		return $d;
@@ -280,16 +285,16 @@ if(!function_exists('prepareParamsWcu')) {
  *
  * @version 2.4.0
  */
-if(!function_exists('prepareFieldCodeWcu')) {
-	function prepareFieldCodeWcu($string) {
-		$string = preg_replace("/[^a-zA-Z0-9\s]/"," ",$string);
-		$string = preg_replace("/\s+/", " ", $string);
-		$string = preg_replace('/ /','',$string);
+if ( ! function_exists( 'prepareFieldCodeWcu' ) ) {
+	function prepareFieldCodeWcu( $string ) {
+		$string = preg_replace( '/[^a-zA-Z0-9\s]/', ' ', $string );
+		$string = preg_replace( '/\s+/', ' ', $string );
+		$string = preg_replace( '/ /', '', $string );
 
-		$code = substr($string, 0, 8);
-		$code = strtolower($code);
-		if ($code == '') {
-			$code = 'field_'.wp_date('dhis');
+		$code = substr( $string, 0, 8 );
+		$code = strtolower( $code );
+		if ( $code == '' ) {
+			$code = 'field_' . wp_date( 'dhis' );
 		}
 		return $code;
 	}
@@ -302,23 +307,23 @@ if(!function_exists('prepareFieldCodeWcu')) {
  * @param array $array array to implode
  * @return string imploded array in string
  */
-if(!function_exists('recImplode')) {
-	function recImplode($glue, $array) {
-		$res = '';
-		$i = 0;
-		$count = count($array);
-		foreach($array as $el) {
+if ( ! function_exists( 'recImplode' ) ) {
+	function recImplode( $glue, $array ) {
+		$res   = '';
+		$i     = 0;
+		$count = count( $array );
+		foreach ( $array as $el ) {
 			$str = '';
-			if(is_array($el)) {
-				$str = recImplode('', $el);
+			if ( is_array( $el ) ) {
+				$str = recImplode( '', $el );
 			} else {
 				$str = $el;
 			}
 			$res .= $str;
-			if($i < ($count-1)) {
+			if ( $i < ( $count - 1 ) ) {
 				$res .= $glue;
 			}
-			$i++;
+			++$i;
 		}
 		return $res;
 	}
@@ -327,21 +332,21 @@ if(!function_exists('recImplode')) {
 /**
  * toeObjectToArray.
  */
-if(!function_exists('toeObjectToArray')) {
-	function toeObjectToArray($data) {
-		if ((! is_array($data)) and (! is_object($data))) {
+if ( ! function_exists( 'toeObjectToArray' ) ) {
+	function toeObjectToArray( $data ) {
+		if ( ( ! is_array( $data ) ) and ( ! is_object( $data ) ) ) {
 			return $data;
 		}
 		$result = array();
-		$data = (array) $data;
-		foreach ($data as $key => $value) {
-			if (is_object($value)) {
+		$data   = (array) $data;
+		foreach ( $data as $key => $value ) {
+			if ( is_object( $value ) ) {
 				$value = (array) $value;
 			}
-			if (is_array($value)) {
-				$result[$key] = toeObjectToArray($value);
+			if ( is_array( $value ) ) {
+				$result[ $key ] = toeObjectToArray( $value );
 			} else {
-				$result[$key] = $value;
+				$result[ $key ] = $value;
 			}
 		}
 		return $result;
@@ -354,18 +359,18 @@ if(!function_exists('toeObjectToArray')) {
  * @param array $array - input array
  * @return array - result array with array_map applied
  */
-if(!function_exists('toeMultArrayMap')) {
-	function toeMultArrayMap($callback, $array) {
-		if(is_array($array)) {
-			foreach($array as $k => $v) {
-				if(is_array($v)) {
-					$array[ $k ] = toeMultArrayMap($callback, $v);
+if ( ! function_exists( 'toeMultArrayMap' ) ) {
+	function toeMultArrayMap( $callback, $array ) {
+		if ( is_array( $array ) ) {
+			foreach ( $array as $k => $v ) {
+				if ( is_array( $v ) ) {
+					$array[ $k ] = toeMultArrayMap( $callback, $v );
 				} else {
-					$array[ $k ] = call_user_func($callback, $v);
+					$array[ $k ] = call_user_func( $callback, $v );
 				}
 			}
 		} else {
-			$array = call_user_func($callback, $array);
+			$array = call_user_func( $callback, $array );
 		}
 		return $array;
 	}
@@ -374,25 +379,25 @@ if(!function_exists('toeMultArrayMap')) {
 /**
  * Twig require this function, but it is present not on all servers.
  */
-if(!function_exists('hash')) {
-	function hash($method, $data) {
-		return md5($data);
+if ( ! function_exists( 'hash' ) ) {
+	function hash( $method, $data ) {
+		return md5( $data );
 	}
 }
 
 /**
  * ctype_alpha.
  */
-if(!function_exists('ctype_alpha')) {
-	function ctype_alpha($text) {
-		return (bool) preg_match('/[^\pL]+/', $text);
+if ( ! function_exists( 'ctype_alpha' ) ) {
+	function ctype_alpha( $text ) {
+		return (bool) preg_match( '/[^\pL]+/', $text );
 	}
 }
 
 /**
  * escHtmlRecursively.
  */
-if(!function_exists('escHtmlRecursively')) {
+if ( ! function_exists( 'escHtmlRecursively' ) ) {
 	function escHtmlRecursively( $options ) {
 		foreach ( $options as $key => $value ) {
 			if ( is_array( $value ) ) {

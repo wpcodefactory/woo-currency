@@ -4,11 +4,10 @@
  *
  * @version 2.4.0
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
-
 
 /**
  * Shell - class to work with $wpdb global object
@@ -25,6 +24,7 @@ class dbWcu {
 
 	/**
 	 * get.
+	 *
 	 * @version 2.4.0
 	 */
     static public function get($query, $get = 'all', $outputType = ARRAY_A, $args = array() ) {
