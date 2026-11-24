@@ -86,6 +86,11 @@ class frameWcu {
 		return $this->_action;
 	}
 
+	/**
+	 * _extractModules.
+	 *
+	 * @version 2.4.0
+	 */
 	protected function _extractModules() {
 		$activeModules = $this->getTable('modules')
 				->innerJoin( $this->getTable('modules_type'), 'type_id' )
@@ -95,7 +100,10 @@ class frameWcu {
 			foreach($activeModules as $m) {
 				$code = $m['code'];
 				$moduleLocationDir = WCU_MODULES_DIR;
-				if(!empty($m['ex_plug_dir'])) {
+				if (
+					! empty( $m['ex_plug_dir'] ) &&
+					apply_filters( 'woobewoo_cs_is_pro', false )
+				) {
 					$moduleLocationDir = utilsWcu::getExtModDir( $m['ex_plug_dir'] );
 				}
 				if(is_dir($moduleLocationDir. $code)) {

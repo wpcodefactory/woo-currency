@@ -44,7 +44,7 @@ if ( ! empty( $moduleIsPro ) && $moduleIsPro ) {
         <?php $opt['row_hide_with_all'] = !empty($opt['row_hide_with_all']) ? $opt['row_hide_with_all'] : '' ?>
         <tr valign="top" class="single_select_page <?php echo esc_attr( $opt['row_classes'] ); ?>" data-target-show="<?php echo esc_attr( $opt['row_show'] ); ?>" data-target-hide="<?php echo esc_attr( $opt['row_hide'] ); ?>" data-hide-with-all="<?php echo esc_attr( $opt['row_hide_with_all'] ); ?>" style="<?php echo esc_attr( $display ); ?>">
             <th scope="row" class="col-md-3 titledesc">
-                <div><?php echo esc_html( $opt['label'] ); ?></div>
+                <div><?php echo wp_kses_post( $opt['label'] ); ?></div>
             </th>
             <td class="col-md-1 forminp">
 	            <?php if ( $opt['tooltip'] ) { ?>
