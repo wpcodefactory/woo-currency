@@ -5,6 +5,8 @@
  * @version 2.4.0
  *
  * @author woobewoo
+ *
+ * @package WooBeWoo\WC_Currency_Switcher\Classes
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -33,7 +35,6 @@ class dbWcu {
         $query = self::prepareQuery($query);
         self::$query = $query;
 
-	    $query = self::prepareQuery( $query );
 	    if ( ! empty( $args ) ) {
 		    $query = $wpdb->prepare( $query, $args ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- This adapter accepts query templates and passes caller values separately through $args.
 	    }
@@ -97,7 +98,7 @@ class dbWcu {
     static public function prepareQuery($query) {
         global $wpdb;
         return str_replace(
-                array('#__', '^__', '@__'), 
+                array('#__', '^__', '@__'),
                 array($wpdb->prefix, WCU_DB_PREF, $wpdb->prefix. WCU_DB_PREF),
                 $query);
     }
@@ -106,7 +107,7 @@ class dbWcu {
         return $wpdb->last_error;
     }
     static public function lastID() {
-        global $wpdb;        
+        global $wpdb;
         return $wpdb->insert_id;
     }
 
