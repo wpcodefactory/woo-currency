@@ -558,11 +558,6 @@ class htmlWcu {
             }
         }
         $out .= '</select>';
-       /* $out .= '<script type="text/javascript">
-                jQuery(document).ready(function(){
-                    wcuSelectMultipleSortableFunction("'.$id.'");
-                });
-                </script>';*/
         return $out;
     }
 	static public function file($name, $params = array()) {

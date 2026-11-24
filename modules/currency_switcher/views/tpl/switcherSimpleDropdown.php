@@ -30,7 +30,7 @@ foreach($this->displayRulesTab as $p) {
 	.wcuCurrencySwitcher {
 		display:none !important;
 	}
-@media ( <?php echo esc_attr( $show_on_screen_compare ) ?>:<?php echo esc_attr( $show_on_screen_value ) ?>px ) {
+	@media ( <?php echo esc_attr( $show_on_screen_compare ) ?>:<?php echo esc_attr( $show_on_screen_value ) ?>px ) {
 		.wcuCurrencySwitcher {
 			display:inline-block !important;
 		}

@@ -12,11 +12,10 @@ defined( 'ABSPATH' ) || exit;
 class optionsWcu extends moduleWcu {
 	private $_tabs = array();
 	private $_options = array();
-	private $_optionsToCategoires = array();	// For faster search
-	
+	private $_optionsToCategoires = array(); // For faster search
+
 	public function init() {
-		//dispatcherWcu::addAction('afterModulesInit', array($this, 'initAllOptValues'));
-		add_action('init', array($this, 'initAllOptValues'), 99);	// It should be init after all languages was inited (frame::connectLang)
+		add_action('init', array($this, 'initAllOptValues'), 99); // It should be init after all languages was inited (frame::connectLang)
 		dispatcherWcu::addFilter('mainAdminTabs', array($this, 'addAdminTab'));
 	}
 	public function initAllOptValues() {
@@ -53,9 +52,9 @@ class optionsWcu extends moduleWcu {
 	 */
 	public function getAdminPage() {
 		if(!installerWcu::isUsed()) {
-			installerWcu::setUsed();    // Show this welcome page - only one time
+			installerWcu::setUsed(); // Show this welcome page - only one time
 			frameWcu::_()->getModule( 'promo' )->getModel()->bigStatAdd( 'Welcome Show' );
-			frameWcu::_()->getModule( 'options' )->getModel()->save( 'plug_welcome_show', time() );    // Remember this
+			frameWcu::_()->getModule( 'options' )->getModel()->save( 'plug_welcome_show', time() ); // Remember this
 		}
 		return $this->getView()->getAdminPage();
 	}

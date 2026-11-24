@@ -145,7 +145,7 @@ class utilsWcu {
     }
 
 	/**
-	 * getReferalUrl.
+	 * getFilesystem.
 	 *
 	 * @version 2.4.0
 	 * @since   2.4.0
@@ -335,7 +335,8 @@ class utilsWcu {
     }
 
 	/**
-	 * getReferalUrl.
+	 * getRandStr.
+	 *
 	 * @version 2.4.0
 	 */
     static public function getRandStr($length = 10, $allowedChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', $params = array()) {
@@ -458,7 +459,7 @@ class utilsWcu {
 	}
 
 	/**
-	 * getReferalUrl.
+	 * isWritable.
 	 *
 	 * @version 2.4.0
 	 */

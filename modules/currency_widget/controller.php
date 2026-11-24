@@ -10,6 +10,7 @@
 defined( 'ABSPATH' ) || exit;
 
 class currency_widgetControllerWcu extends controllerWcu { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
+
 	/**
 	 * getCurrencyRate.
 	 *
@@ -47,6 +48,7 @@ class currency_widgetControllerWcu extends controllerWcu { // phpcs:ignore WordP
 
 		return $res->ajaxExec();
 	}
+
 	/**
 	 * woobewoo_cs_get_currency_rates_list.
 	 *

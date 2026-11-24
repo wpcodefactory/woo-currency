@@ -45,7 +45,6 @@ if ( ! $this->moduleFlags ) {
 
 ?>
 
-
 	<div id="wcuCurrencySwitcherWidget_<?php echo absint( $this->randId ); ?>" class="wcuCurrencySwitcherWidget" style="<?php echo esc_attr( $formStyles ); ?>">
 
 		<?php if ( ! empty( $this->instance['title'] ) ) { ?>

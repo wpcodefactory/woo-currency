@@ -180,7 +180,7 @@ class reqWcu {
 	/**
 	 * get.
 	 *
-	 * @version 3.2.0
+	 * @version 2.4.0
 	 */
 	static public function get( $what ) {
 		if ( self::$_requestWithNonce ) {
@@ -260,7 +260,7 @@ class reqWcu {
 	/**
 	 * getMethod.
 	 *
-	 * @version @2.4.0
+	 * @version 2.4.0
 	 */
 	static public function getMethod() {
 		if ( ! self::$_requestMethod ) {
