@@ -2,15 +2,18 @@
 /**
  * WBW Currency Switcher for WooCommerce - userWcu Class
  *
+ * @version 2.4.0
+ *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
+
 class userWcu extends moduleWcu {
 	protected $_data = array();
     protected $_curentID = 0;
 	protected $_dataLoaded = false;
-	
+
     public function loadUserData() {
         return $this->getCurrent();
     }
@@ -25,13 +28,13 @@ class userWcu extends moduleWcu {
 			return WCU_ADMIN;
 		else if($this->getCurrentID())
 			return WCU_LOGGED;
-		else 
+		else
 			return WCU_GUEST;
 	}
     public function getCurrent() {
 		return wp_get_current_user();
     }
-	
+
     public function getCurrentID() {
 		$this->_loadUserData();
 		return $this->_curentID;

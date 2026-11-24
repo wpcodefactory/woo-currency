@@ -18,6 +18,7 @@ class adminmenuWcu extends moduleWcu {
 		$plugName = plugin_basename(WCU_DIR. WCU_MAIN_FILE);
 		add_filter('plugin_action_links_'. $plugName, array($this, 'addSettingsLinkForPlug') );
     }
+
 	/**
 	 * addSettingsLinkForPlug.
 	 *

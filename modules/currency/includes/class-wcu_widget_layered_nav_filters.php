@@ -9,10 +9,12 @@
 
 defined( 'ABSPATH' ) || exit;
 
-
 class Wcu_Widget_Layered_Nav_Filters extends WC_Widget_Layered_Nav_Filters {
+
 	/**
 	 * Output widget.
+	 *
+	 * @version 2.4.0
 	 *
 	 * @see WP_Widget
 	 * @param array $args     Arguments.

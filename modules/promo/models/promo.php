@@ -7,7 +7,6 @@
  * @author woobewoo
  */
 
-
 defined( 'ABSPATH' ) || exit;
 
 class promoModelWcu extends modelWcu { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
@@ -151,7 +150,6 @@ class promoModelWcu extends modelWcu { // phpcs:ignore WordPress.NamingConventio
 				$opts['consumer'] = 'socket';
 			}
 
-
 			if ( class_exists( 'Mixpanel' ) ) {
 				$this->_bigCli = Mixpanel::getInstance( '42c98b181f5d91000464d0677b80c103', $opts );
 			}
@@ -182,7 +180,7 @@ class promoModelWcu extends modelWcu { // phpcs:ignore WordPress.NamingConventio
 			'temporary' => 'Temporary',
 			'other' => 'Other',
 		);
-		$deactivateParams['Reason'] = isset($d['deactivate_reason']) && $d['deactivate_reason'] 
+		$deactivateParams['Reason'] = isset($d['deactivate_reason']) && $d['deactivate_reason']
 			? $reasonsLabels[ $d['deactivate_reason'] ]
 			: 'No reason';
 		if(isset($d['deactivate_reason']) && $d['deactivate_reason']) {
@@ -200,8 +198,8 @@ class promoModelWcu extends modelWcu { // phpcs:ignore WordPress.NamingConventio
 		if($startUsage) {
 			$usedTime = time() - $startUsage;
 			$this->bigStatAdd('Used Time', array(
-				'Seconds' => $usedTime, 
-				'Hours' => round($usedTime / 60 / 60), 
+				'Seconds' => $usedTime,
+				'Hours' => round($usedTime / 60 / 60),
 				'Days' => round($usedTime / 60 / 60 / 24)
 			));
 		}
