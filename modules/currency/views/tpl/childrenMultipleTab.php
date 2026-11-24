@@ -23,7 +23,7 @@ if ( ! empty( $moduleIsPro ) && $moduleIsPro ) {
  <?php if ($showPreviewAjax) { ?>
      <div class="container-fluid" style="display:block;position:relative;float:left;width:100%;">
      <div class="row" style="display:block;position:relative;float:left;width:100%;">
-     <div class="col-md-8 wcuTabContentChildOptions">
+     <div class="col-md-8 wcuTabContentChildOptions" data-preview-module="<?php echo esc_attr( $moduleName ); ?>">
  <?php } ?>
 
 <table class="form-table moduleName<?php echo esc_attr( $moduleName ); ?>">
@@ -86,45 +86,5 @@ if ( ! empty( $moduleIsPro ) && $moduleIsPro ) {
     </div>
     </div>
     </div>
-    <script type="text/javascript">
-    jQuery(document).ready(function () {
-        wcuLookPreviewAjax('<?php echo esc_attr( $moduleName ); ?>');
-
-        var wcuCanSendAjax = true;
-
-        function wcuLookPreviewAjaxHandler() {
-            if (wcuCanSendAjax == true) {
-                wcuCanSendAjax = false;
-                setTimeout(function () {
-                    wcuLookPreviewAjax('<?php echo esc_attr( $moduleName ); ?>');
-                    wcuCanSendAjax = true;
-                }, 1500);
-            }
-        }
-
-        jQuery(".moduleName<?php echo esc_attr( $moduleName ); ?> .ui-sortable-handle").on("click", function (e) {
-            wcuLookPreviewAjaxHandler();
-        });
-
-        jQuery(".moduleName<?php echo esc_attr( $moduleName ); ?> .ui-sortable").on("sortupdate", function (event, ui) {
-            wcuLookPreviewAjaxHandler();
-        });
-
-        jQuery( '.moduleName<?php echo esc_attr( $moduleName ); ?> .woobewoo-cs-color-picker' ).wpColorPicker( {
-            change: function ( event, ui ) {
-                wcuLookPreviewAjaxHandler();
-            },
-        } );
-
-        jQuery(".moduleName<?php echo esc_attr( $moduleName ); ?> input").on("change paste keyup", function (e) {
-            wcuLookPreviewAjaxHandler();
-        });
-
-        jQuery(".moduleName<?php echo esc_attr( $moduleName ); ?> select").on("change paste keyup", function () {
-            wcuLookPreviewAjaxHandler();
-        });
-
-    });
-    </script>
 <?php }
 // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

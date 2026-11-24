@@ -315,7 +315,7 @@ if ( ! $this->moduleFlags ) {
 				htmlWcu::echo_escaped_html(
 					htmlWcu::button(
 						array(
-							'value' => esc_html( 'Convert', 'woo-currency' ),
+							'value' => esc_html__( 'Convert', 'woo-currency' ),
 							'attrs' => 'class="wcuCurrencyConvertBtn wcuCol-md-12 wcuCol-xs-12 wcuMargin"',
 						)
 					)

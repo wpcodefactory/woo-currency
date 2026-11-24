@@ -5,7 +5,7 @@
  *
  * @author woobewoo
  */
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
     var currenciesShell = jQuery('.wcuCurrenciesShell'),
         targetToggle = jQuery('[data-target-toggle]');
 
@@ -426,6 +426,33 @@ jQuery(document).ready(function() {
     jQuery(".wcuTabContentInner .wcuProPreviewLink").click(function(e){
         e.stopPropagation();
     });
+
+    /**
+     * AJAX module preview.
+     *
+     * @version 2.4.0
+     */
+    $( '.wcuTabContentChildOptions[data-preview-module]' ).each( function () {
+        let options = $( this ),
+            moduleName = options.data( 'preview-module' ),
+            previewTimer;
+
+        function schedulePreview() {
+            window.clearTimeout( previewTimer );
+            previewTimer = window.setTimeout( function () {
+                wcuLookPreviewAjax( moduleName );
+            }, 1500 );
+        }
+
+        wcuLookPreviewAjax( moduleName );
+
+        options.on( 'click', '.ui-sortable-handle', schedulePreview );
+        options.on( 'sortupdate', '.ui-sortable', schedulePreview );
+        options.on( 'input change paste keyup', 'input, select', schedulePreview );
+        options.find( '.woobewoo-cs-color-picker' ).wpColorPicker( {
+            change: schedulePreview
+        } );
+    } );
 });
 
 function wcuLookPreviewAjax( moduleName ) {
@@ -473,5 +500,5 @@ function wcuLookPreviewAjax( moduleName ) {
             }
         }
     } );
-};
+}
 
