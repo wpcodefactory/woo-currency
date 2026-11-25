@@ -77,7 +77,7 @@ $proFlagsSup =  !$showFlags ? '<sup>PRO</sup>' : '' ;
 		)
 	);
 	?>
-	<span><?php esc_html_e("Flags", 'woo-currency')?> <?php echo esc_html( $proFlagsSup ); ?></span>
+	<span><?php esc_html_e("Flags", 'woo-currency')?> <?php echo wp_kses_post( $proFlagsSup ); ?></span>
 </div>
 <div class="wcuWidgetRow">
 	<label for="<?php echo esc_attr( $this->widget->get_field_id('currency_display') ); ?>"><?php esc_html_e('Currency Dropdown Options Text', 'woo-currency') ?></label>
@@ -111,7 +111,7 @@ $proFlagsSup =  !$showFlags ? '<sup>PRO</sup>' : '' ;
 		)
 	);
 	?>
-	<label for="<?php echo esc_attr( $this->widget->get_field_id('show_flag_dropdown') ); ?>"><?php esc_html_e('show flag in dropdown', 'woo-currency') ?> <?php echo esc_html( $proFlagsSup ); ?></label>
+	<label for="<?php echo esc_attr( $this->widget->get_field_id('show_flag_dropdown') ); ?>"><?php esc_html_e('show flag in dropdown', 'woo-currency') ?> <?php echo wp_kses_post( $proFlagsSup ); ?></label>
 </div>
 <div class="wcwuWidgetRow">
 	<label for="<?php echo esc_attr(  $this->widget->get_field_id('exclude') ); ?>"><?php esc_html_e('Excluded currencies', 'woo-currency') ?></label><br>

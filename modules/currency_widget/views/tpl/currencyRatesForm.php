@@ -80,7 +80,7 @@ defined( 'ABSPATH' ) || exit;
 		)
 	);
 	?>
-	<label for="<?php echo esc_attr( $this->widget->get_field_id('show_flag_dropdown') ); ?>"><?php esc_html_e('show flag in dropdown', 'woo-currency') ?> <?php echo esc_html( $proFlagsSup ); ?></label>
+	<label for="<?php echo esc_attr( $this->widget->get_field_id('show_flag_dropdown') ); ?>"><?php esc_html_e('show flag in dropdown', 'woo-currency') ?> <?php echo wp_kses_post( $proFlagsSup ); ?></label>
 </div>
 <div class="wcuWidgetRow">
 	<?php
@@ -95,7 +95,7 @@ defined( 'ABSPATH' ) || exit;
 		)
 	);
 	?>
-	<label for="<?php echo esc_attr( $this->widget->get_field_id('show_flag_currency_list') ); ?>"><?php esc_html_e('show flags in currency list', 'woo-currency') ?> <?php echo esc_html( $proFlagsSup ); ?></label>
+	<label for="<?php echo esc_attr( $this->widget->get_field_id('show_flag_currency_list') ); ?>"><?php esc_html_e('show flags in currency list', 'woo-currency') ?> <?php echo wp_kses_post( $proFlagsSup ); ?></label>
 </div>
 <div class="wcwuWidgetRow">
 	<label for="<?php echo esc_attr( $this->widget->get_field_id('exclude') ); ?>"><?php esc_html_e('Excluded currencies', 'woo-currency') ?></label><br>

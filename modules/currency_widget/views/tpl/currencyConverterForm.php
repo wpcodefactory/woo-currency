@@ -129,7 +129,7 @@ $proFlagsSup      = ! $showFlags ? '<sup>PRO</sup>' : '';
 		);
 		?>
 		<label for="<?php echo esc_attr( $this->widget->get_field_id( 'show_flag_dropdown' ) ); ?>">
-			<?php esc_html_e( 'show flag in dropdown', 'woo-currency' ) ?><?php echo esc_html( $proFlagsSup ); ?>
+			<?php esc_html_e( 'show flag in dropdown', 'woo-currency' ) ?><?php echo wp_kses_post( $proFlagsSup ); ?>
 		</label>
 	</div>
 	<div class="wcwuWidgetRow">
@@ -185,7 +185,7 @@ $proFlagsSup      = ! $showFlags ? '<sup>PRO</sup>' : '';
 			)
 		);
 		?>
-		<span><?php esc_html_e( "Horizontal", 'woo-currency' ) ?><?php htmlWcu::echo_escaped_html( $proFlagsSup ); ?></span>
+		<span><?php esc_html_e( "Horizontal", 'woo-currency' ) ?><?php echo wp_kses_post( $proFlagsSup ); ?></span>
 	</div>
 	<div class="wcuWidgetRow">
 		<label for="<?php echo esc_attr( $this->widget->get_field_id( 'btn_txt_color' ) ); ?>">
