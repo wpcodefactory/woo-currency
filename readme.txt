@@ -2,7 +2,7 @@
 Contributors: woobewoo
 Tags: currency switcher, multi currency, currency converter, currency, woocommerce
 Tested up to: 7.1
-Stable tag: 2.3.2
+Stable tag: 2.4.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -151,7 +151,7 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
-= 2.4.0 - 24/11/2026 =
+= 2.4.0 - 25/11/2026 =
 * Fix - Currency rates and currency converter frontend display issue.
 * Fix - Security - Improved output escaping and AJAX response handling.
 * Fix - Admin controls - Replaced the old Chosen controls with SelectWoo.

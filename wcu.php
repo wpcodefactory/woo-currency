@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Currency Switcher for WooCommerce by WBW
  * Description: Currency Switcher for WooCommerce by WBW allows the customers switch products prices to any currencies. Get rates converted in the real time with dynamic currency switcher.
- * Version: 2.4.0-dev
+ * Version: 2.4.0
  * Author: woobewoo
  * Author URI: https://woobewoo.com
  * WC tested up to: 11.3
