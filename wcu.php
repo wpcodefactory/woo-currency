@@ -72,6 +72,15 @@ importClassWcu( 'installerDbUpdaterWcu' );
 importClassWcu( 'dateWcu' );
 
 /**
+ * Register activation/deactivation/uninstall hooks.
+ *
+ * @version 2.4.1
+ */
+register_activation_hook( __FILE__, array( 'utilsWcu', 'activatePlugin' ) );
+register_uninstall_hook( __FILE__, array( 'utilsWcu', 'deletePlugin' ) );
+register_deactivation_hook( __FILE__, array( 'utilsWcu', 'deactivatePlugin' ) );
+
+/**
  * Check plugin version - maybe we need to update database, and check global errors in request.
  */
 installerWcu::update();
@@ -85,5 +94,4 @@ errorsWcu::init();
 add_action( 'plugins_loaded', function () {
 	frameWcu::_()->parseRoute();
 	frameWcu::_()->init();
-	frameWcu::_()->exec();
 } );

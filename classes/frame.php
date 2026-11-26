@@ -2,7 +2,7 @@
 /**
  * WBW Currency Switcher for WooCommerce - frameWcu Class
  *
- * @version 2.4.0
+ * @version 2.4.1
  *
  * @author woobewoo
  *
@@ -134,7 +134,7 @@ class frameWcu {
 	/**
 	 * Init.
 	 *
-	 * @version 2.4.0
+	 * @version 2.4.1
 	 */
 	public function init() {
 		reqWcu::init();
@@ -153,10 +153,6 @@ class frameWcu {
 
 		add_action($addAssetsAction, array($this, 'addScripts'));
 		add_action($addAssetsAction, array($this, 'addStyles'));
-
-		register_activation_hook(  WCU_DIR. DS. WCU_MAIN_FILE, array('utilsWcu', 'activatePlugin')  ); //See classes/install.php file
-		register_uninstall_hook(WCU_DIR. DS. WCU_MAIN_FILE, array('utilsWcu', 'deletePlugin'));
-		register_deactivation_hook(WCU_DIR. DS. WCU_MAIN_FILE, array( 'utilsWcu', 'deactivatePlugin' ) );
 	}
 
 	/**
