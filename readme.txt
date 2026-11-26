@@ -151,6 +151,10 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
+= 2.4.1 - 26/11/2026 =
+* Fix - Initialize plugin modules after all plugins load.
+* Fix - Enqueue SelectWoo assets on the admin enqueue hook.
+
 = 2.4.0 - 25/11/2026 =
 * Fix - Currency rates and currency converter frontend display issue.
 * Fix - Security - Improved output escaping and AJAX response handling.

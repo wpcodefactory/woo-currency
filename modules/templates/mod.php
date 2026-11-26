@@ -2,7 +2,7 @@
 /**
  * WBW Currency Switcher for WooCommerce - templatesWcu Class
  *
- * @version 2.4.0
+ * @version 2.4.1
  *
  * @author woobewoo
  */
@@ -15,7 +15,7 @@ class templatesWcu extends moduleWcu {
 	/**
 	 * init.
 	 *
-	 * @version 2.4.0
+	 * @version 2.4.1
 	 */
     public function init() {
         if (is_admin()) {
@@ -23,7 +23,7 @@ class templatesWcu extends moduleWcu {
 				$this->loadCoreJs();
 				$this->loadAdminCoreJs();
 				$this->loadCoreCss();
-				$this->load_selectwoo();
+				add_action( 'admin_enqueue_scripts', array( $this, 'load_selectwoo' ) );
 				frameWcu::_()->addScript('adminOptionsWcu', WCU_JS_PATH. 'admin.options.js', array(), false, true);
 				add_action('admin_enqueue_scripts', array($this, 'loadMediaScripts'));
 				add_action('init', array($this, 'connectAdditionalAdminAssets'));
