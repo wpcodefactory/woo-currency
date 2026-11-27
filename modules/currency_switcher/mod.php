@@ -2,7 +2,7 @@
 /**
  * WBW Currency Switcher for WooCommerce - currency_switcherWcu Class
  *
- * @version 2.4.0
+ * @version 2.4.2
  *
  * @author woobewoo
  */
@@ -35,9 +35,12 @@ class currency_switcherWcu extends moduleWcu
 	/**
 	 * showModule.
 	 *
-	 * @version 2.4.0
+	 * @version 2.4.2
 	 */
 	public function showModule() {
+		if ( is_admin() || wp_doing_ajax() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+			return;
+		}
 		htmlWcu::echo_escaped_html( $this->drawModule() );
 	}
 

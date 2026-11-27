@@ -2,7 +2,7 @@
 /**
  * WBW Currency Switcher for WooCommerce - Currency Rates Form
  *
- * @version 2.4.0
+ * @version 2.4.2
  *
  * @author woobewoo
  */
@@ -74,7 +74,7 @@ defined( 'ABSPATH' ) || exit;
 			$this->widget->get_field_name( 'show_flag_dropdown' ),
 			array(
 				'attrs'   => "style='float:left; margin-top:0px; margin-right:5px;' id='" . esc_attr( $this->widget->get_field_id( 'show_flag_dropdown' ) ) . "' " . $proFlagsDisabled . " ",
-				'value'   => ( $showFlags && isset( $this->data['show_flag_dropdown'] ) ) ? '1' : '0',
+				'value'   => '1',
 				'checked' => ( $showFlags && isset( $this->data['show_flag_dropdown'] ) ) ? 'checked' : '',
 			)
 		)
@@ -89,7 +89,7 @@ defined( 'ABSPATH' ) || exit;
 			$this->widget->get_field_name( 'show_flag_currency_list' ),
 			array(
 				'attrs'   => "style='float:left; margin-top:0px; margin-right:5px;' id='" . esc_attr( $this->widget->get_field_id( 'show_flag_currency_list' ) ) . "' " . $proFlagsDisabled . " ",
-				'value'   => ( $showFlags && isset( $this->data['show_flag_currency_list'] ) ) ? '1' : '0',
+				'value'   => '1',
 				'checked' => ( $showFlags && isset( $this->data['show_flag_currency_list'] ) ) ? 'checked' : '',
 			)
 		)
@@ -140,7 +140,7 @@ defined( 'ABSPATH' ) || exit;
 			$this->widget->get_field_name( 'show_on_widths' ),
 			array(
 				'attrs'   => "style='float:left; margin-top: 6px; margin-right:5px;' id='" . esc_attr( $this->widget->get_field_id( 'show_on_widths' ) ) . "' ",
-				'value'   => isset( $this->data['show_on_widths'] ) ? '1' : '0',
+				'value'   => '1',
 				'checked' => isset( $this->data['show_on_widths'] ) ? 'checked' : '',
 			)
 		)

@@ -151,6 +151,11 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
+= 2.4.2 - 27/11/2026 =
+* Fix - Fixed the default widget layouts for the Currency Switcher and Currency Converter.
+* Fix - Fixed checkbox values not saving correctly in widget settings.
+* Fix - Fixed the Currency Switcher being displayed in the admin widget area.
+
 = 2.4.1 - 27/11/2026 =
 * Fix - Initialize plugin modules after all plugins load.
 * Fix - Enqueue SelectWoo assets on the admin enqueue hook.

@@ -2,7 +2,7 @@
 /**
  * WBW Currency Switcher for WooCommerce - Currency Converter Widget Form
  *
- * @version 2.4.0
+ * @version 2.4.2
  *
  * @author woobewoo
  */
@@ -122,7 +122,7 @@ $proFlagsSup      = ! $showFlags ? '<sup>PRO</sup>' : '';
 				$this->widget->get_field_name( 'show_flag_dropdown' ),
 				array(
 					'attrs'   => "style='float:left; margin-top:0px; margin-right:5px;' id='" . esc_attr( $this->widget->get_field_id( 'show_flag_dropdown' ) ) . "' " . $proFlagsDisabled . " ",
-					'value'   => ( $showFlags && isset( $this->data['show_flag_dropdown'] ) ) ? '1' : '0',
+					'value'   => '1',
 					'checked' => ( $showFlags && isset( $this->data['show_flag_dropdown'] ) ) ? 'checked' : '',
 				)
 			)
@@ -166,7 +166,7 @@ $proFlagsSup      = ! $showFlags ? '<sup>PRO</sup>' : '';
 					'attrs'   => 'class="wcuSwitcherRadioLabel" id="layout_vertical" ',
 					'no_br'   => true,
 					'value'   => 'vertical',
-					'checked' => ( ! $showFlags || ( isset( $this->data['layout'] ) && ( $this->data['layout'] === 'vertical' ) ) ) ? 'checked' : '',
+					'checked' => ( ! $showFlags || ! $this->data['layout'] || ( isset( $this->data['layout'] ) && ( $this->data['layout'] === 'vertical' ) ) ) ? 'checked' : '',
 				)
 			)
 		);
@@ -262,7 +262,7 @@ $proFlagsSup      = ! $showFlags ? '<sup>PRO</sup>' : '';
 				$this->widget->get_field_name( 'show_on_widths' ),
 				array(
 					'attrs'   => "style='float:left; margin-top: 6px; margin-right:5px;' id='" . esc_attr( $this->widget->get_field_id( 'show_on_widths' ) ) . "' ",
-					'value'   => isset( $this->data['show_on_widths'] ) ? '1' : '0',
+					'value'   => '1',
 					'checked' => isset( $this->data['show_on_widths'] ) ? 'checked' : '',
 				)
 			)
