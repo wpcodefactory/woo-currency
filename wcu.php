@@ -91,7 +91,10 @@ errorsWcu::init();
  *
  * @version 2.4.1
  */
-add_action( 'plugins_loaded', function () {
-	frameWcu::_()->parseRoute();
-	frameWcu::_()->init();
-} );
+add_action(
+	'plugins_loaded',
+	function () {
+		frameWcu::_()->parseRoute();
+		frameWcu::_()->init();
+	}
+);

@@ -151,7 +151,7 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
-= 2.4.1 - 26/11/2026 =
+= 2.4.1 - 27/11/2026 =
 * Fix - Initialize plugin modules after all plugins load.
 * Fix - Enqueue SelectWoo assets on the admin enqueue hook.
 
