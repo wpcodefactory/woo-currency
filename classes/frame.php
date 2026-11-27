@@ -18,12 +18,14 @@ class frameWcu {
 	private $_allModules = array();
 
 	/**
-	 * bool Uses to know if we are on one of the plugin pages
+	 * Used to know if we are on one of the plugin pages.
+	 *
+	 * @var bool
 	 */
 	private $_inPlugin = false;
 
 	/**
-	 * Array to hold all scripts and add them in one time in addScripts method
+	 * Array to hold all scripts and add them in one time in addScripts method.
 	 */
 	private $_scripts            = array();
 	private $_scriptsInitialized = false;
@@ -36,7 +38,7 @@ class frameWcu {
 	private $_action      = '';
 
 	/**
-	 * Object with result of executing non-ajax module request
+	 * Object with result of executing non-ajax module request.
 	 */
 	private $_res    = null;
 	private $_orders = array();
@@ -58,7 +60,7 @@ class frameWcu {
 	}
 
 	public function parseRoute() {
-		// Check plugin
+		// Check plugin.
 		$pl = reqWcu::getVar( 'pl' );
 		if ( $pl == WCU_CODE ) {
 			$mod = reqWcu::getMode();
@@ -162,9 +164,10 @@ class frameWcu {
 	 *
 	 * @version 2.4.0
 	 *
-	 * @param string $code Code of controller that need to be checked
-	 * @param string $action Action that need to be checked
-	 * @return bool true if ok, else - should exit from application
+	 * @param string $code   Code of controller that need to be checked.
+	 * @param string $action Action that need to be checked.
+	 *
+	 * @return bool true if ok, else - should exit from application.
 	 */
 	public function checkPermissions( $code, $action ) {
 		if ( $this->havePermissions( $code, $action ) ) {
@@ -179,9 +182,10 @@ class frameWcu {
 	 *
 	 * @version 2.4.0
 	 *
-	 * @param string $code Code of controller that need to be checked
-	 * @param string $action Action that need to be checked
-	 * @return bool true if ok, else - false
+	 * @param string $code   Code of controller that need to be checked.
+	 * @param string $action Action that need to be checked.
+	 *
+	 * @return bool true if ok, else - false.
 	 */
 	public function havePermissions( $code, $action ) {
 		$res    = false;
@@ -189,14 +193,14 @@ class frameWcu {
 		$action = strtolower( $action );
 		if ( $mod ) {
 			$permissions = $mod->getController()->getPermissions();
-			if ( ! empty( $permissions ) ) {  // Special permissions
+			if ( ! empty( $permissions ) ) {  // Special permissions.
 				if ( isset( $permissions[ WCU_METHODS ] )
 					&& ! empty( $permissions[ WCU_METHODS ] )
 				) {
-					foreach ( $permissions[ WCU_METHODS ] as $method => $permissions ) {   // Make case-insensitive
+					foreach ( $permissions[ WCU_METHODS ] as $method => $permissions ) { // Make case-insensitive.
 						$permissions[ WCU_METHODS ][ strtolower( $method ) ] = $permissions;
 					}
-					if ( array_key_exists( $action, $permissions[ WCU_METHODS ] ) ) {        // Permission for this method exists
+					if ( array_key_exists( $action, $permissions[ WCU_METHODS ] ) ) { // Permission for this method exists.
 						$currentUserPosition = self::_()->getModule( 'user' )->getCurrentUserPosition();
 						if ( ( is_array( $permissions[ WCU_METHODS ][ $action ] ) && in_array( $currentUserPosition, $permissions[ WCU_METHODS ][ $action ] ) )
 							|| ( ! is_array( $permissions[ WCU_METHODS ][ $action ] ) && $permissions[ WCU_METHODS ][ $action ] === $currentUserPosition )
@@ -209,22 +213,22 @@ class frameWcu {
 					&& ! empty( $permissions[ WCU_USERLEVELS ] )
 				) {
 					$currentUserPosition = self::_()->getModule( 'user' )->getCurrentUserPosition();
-					// For multi-sites network admin role is undefined, let's do this here
+					// For multi-sites network admin role is undefined, let's do this here.
 					if ( is_multisite() && is_admin() && is_super_admin() ) {
 						$currentUserPosition = WCU_ADMIN;
 					}
 					foreach ( $permissions[ WCU_USERLEVELS ] as $userlevel => $methods ) {
 						if ( is_array( $methods ) ) {
-							$lowerMethods = array_map( 'strtolower', $methods );          // Make case-insensitive
-							if ( in_array( $action, $lowerMethods ) ) {                      // Permission for this method exists
+							$lowerMethods = array_map( 'strtolower', $methods ); // Make case-insensitive.
+							if ( in_array( $action, $lowerMethods ) ) { // Permission for this method exists.
 								if ( $currentUserPosition === $userlevel ) {
 									$res = true;
 								}
 								break;
 							}
 						} else {
-							$lowerMethod = strtolower( $methods );            // Make case-insensitive
-							if ( $lowerMethod == $action ) {                   // Permission for this method exists
+							$lowerMethod = strtolower( $methods ); // Make case-insensitive.
+							if ( $lowerMethod == $action ) { // Permission for this method exists.
 								if ( $currentUserPosition === $userlevel ) {
 									$res = true;
 								}
@@ -234,7 +238,7 @@ class frameWcu {
 					}
 				}
 			}
-			if ( $res ) { // Additional check for nonces
+			if ( $res ) { // Additional check for nonces.
 				$noncedMethods = $mod->getController()->getNoncedMethods();
 				if ( ! empty( $noncedMethods ) ) {
 					$noncedMethods = array_map( 'strtolower', $noncedMethods );
@@ -271,10 +275,10 @@ class frameWcu {
 				if ( isset( $permissions[ WCU_METHODS ] )
 					&& ! empty( $permissions[ WCU_METHODS ] )
 				) {
-					foreach ( $permissions[ WCU_METHODS ] as $method => $permissions ) {   // Make case-insensitive
+					foreach ( $permissions[ WCU_METHODS ] as $method => $permissions ) { // Make case-insensitive.
 						$permissions[ WCU_METHODS ][ strtolower( $method ) ] = $permissions;
 					}
-					if ( array_key_exists( $action, $permissions[ WCU_METHODS ] ) ) {        // Permission for this method exists
+					if ( array_key_exists( $action, $permissions[ WCU_METHODS ] ) ) { // Permission for this method exists.
 						$res = true;
 					}
 				}
@@ -290,7 +294,7 @@ class frameWcu {
 
 	protected function _execModules() {
 		if ( $this->_mod ) {
-			// If module exist and is active
+			// If module exist and is active.
 			$mod = $this->getModule( $this->_mod );
 			if ( $mod && ! empty( $this->_action ) ) {
 				if ( $this->_execOnlyAfterWpInit() ) {
@@ -332,7 +336,7 @@ class frameWcu {
 	}
 
 	/**
-	 * public alias for _extractTables method
+	 * Public alias for _extractTables method.
 	 *
 	 * @see _extractTables
 	 */
@@ -353,10 +357,12 @@ class frameWcu {
 	}
 
 	/**
-	 * Return table by name
+	 * Return table by name.
 	 *
-	 * @param string $tableName table name in database
-	 * @return object table
+	 * @param string $tableName table name in database.
+	 *
+	 * @return object table.
+	 *
 	 * @example frameWcu::_()->getTable('products')->getAll()
 	 */
 	public function getTable( $tableName ) {
@@ -400,7 +406,7 @@ class frameWcu {
 	}
 
 	/**
-	 * Push data to script array to use it all in addScripts method
+	 * Push data to script array to use it all in addScripts method.
 	 *
 	 * @see wp_enqueue_script definition
 	 */
@@ -424,7 +430,7 @@ class frameWcu {
 	}
 
 	/**
-	 * Add all scripts from _scripts array to worwcuess
+	 * Add all scripts from _scripts array to worwcuess.
 	 */
 	public function addScripts() {
 		if ( ! empty( $this->_scripts ) ) {
@@ -525,9 +531,17 @@ class frameWcu {
 		$page = reqWcu::getVar( 'page' );
 		$tab  = reqWcu::getVar( 'tab' );
 
-		if ( is_admin() && ! empty( $page )
-			&& ( strpos( $page, self::_()->getModule( 'adminmenu' )->getMainSlug() ) !== false
-				|| ( strpos( $page, 'wc-settings' ) !== false && ! empty( $tab ) && strpos( $tab, self::_()->getModule( 'currency' )->getCurrencyTabSlug() ) !== false ) )
+		if (
+			is_admin() &&
+			! empty( $page ) &&
+			(
+				strpos( $page, self::_()->getModule( 'adminmenu' )->getMainSlug() ) !== false ||
+				(
+					strpos( $page, 'wc-settings' ) !== false &&
+					! empty( $tab ) &&
+					strpos( $tab, self::_()->getModule( 'currency' )->getCurrencyTabSlug() ) !== false
+				)
+			)
 		) {
 			return true;
 		}

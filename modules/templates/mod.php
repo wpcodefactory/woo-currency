@@ -12,10 +12,11 @@
 defined( 'ABSPATH' ) || exit;
 
 class templatesWcu extends moduleWcu {
+
 	protected $_styles = array();
 
 	/**
-	 * init.
+	 * Init.
 	 *
 	 * @version 2.4.1
 	 */
@@ -29,23 +30,26 @@ class templatesWcu extends moduleWcu {
 				frameWcu::_()->addScript( 'adminOptionsWcu', WCU_JS_PATH . 'admin.options.js', array(), false, true );
 				add_action( 'admin_enqueue_scripts', array( $this, 'loadMediaScripts' ) );
 				add_action( 'init', array( $this, 'connectAdditionalAdminAssets' ) );
-				// Some common styles - that need to be on all admin pages - be careful with them
+				// Some common styles - that need to be on all admin pages - be careful with them.
 				frameWcu::_()->addStyle( 'woobewoo-for-all-admin-' . WCU_CODE, WCU_CSS_PATH . 'woobewoo-for-all-admin.css' );
 			}
 			frameWcu::_()->addScript( 'adminStartWcu', WCU_JS_PATH . 'admin.wcu.start.js', array(), false, true );
 		}
 		parent::init();
 	}
+
 	public function connectAdditionalAdminAssets() {
 		if ( is_rtl() ) {
 			frameWcu::_()->addStyle( 'styleWcu-rtl', WCU_CSS_PATH . 'style-rtl.css' );
 		}
 	}
+
 	public function loadMediaScripts() {
 		if ( function_exists( 'wp_enqueue_media' ) ) {
 			wp_enqueue_media();
 		}
 	}
+
 	public function loadAdminCoreJs() {
 		frameWcu::_()->addScript( 'jquery-ui-dialog' );
 		frameWcu::_()->addScript( 'jquery-ui-slider' );
@@ -53,6 +57,7 @@ class templatesWcu extends moduleWcu {
 		frameWcu::_()->addScript( 'icheck', WCU_JS_PATH . 'icheck.min.js' );
 		$this->loadTooltipster();
 	}
+
 	public function loadCoreJs() {
 		static $loaded = false;
 		if ( ! $loaded ) {
@@ -71,8 +76,6 @@ class templatesWcu extends moduleWcu {
 				'ajaxurl'  => $ajaxurl,
 				'options'  => frameWcu::_()->getModule( 'options' )->getAllowedPublicOptions(),
 				'WCU_CODE' => WCU_CODE,
-				// 'ball_loader'             => WCU_IMG_PATH. 'ajax-loader-ball.gif',
-				// 'ok_icon'                 => WCU_IMG_PATH. 'ok-icon.png',
 				'jsPath'   => WCU_JS_PATH,
 			);
 			if ( is_admin() ) {
@@ -85,10 +88,12 @@ class templatesWcu extends moduleWcu {
 			$loaded = true;
 		}
 	}
+
 	public function loadTooltipster() {
 		frameWcu::_()->addScript( 'tooltipster', FrameWcu::_()->getModule( 'templates' )->getModPath() . 'lib/tooltipster/jquery.tooltipster.min.js' );
 		frameWcu::_()->addStyle( 'tooltipster', FrameWcu::_()->getModule( 'templates' )->getModPath() . 'lib/tooltipster/tooltipster.css' );
 	}
+
 	public function loadSlimscroll() {
 		frameWcu::_()->addScript( 'jquery.slimscroll', WCU_JS_PATH . 'slimscroll.min.js' );
 	}
@@ -112,7 +117,6 @@ class templatesWcu extends moduleWcu {
 				'path' => WCU_CSS_PATH . 'jquery.icheck.css',
 				'for'  => 'admin',
 			),
-			// 'uniform'         => array('path' => WCU_CSS_PATH. 'uniform.default.css', 'for' => 'admin'),
 			'wp-color-picker'  => array( 'for' => 'admin' ),
 		);
 		foreach ( $this->_styles as $s => $sInfo ) {
@@ -124,6 +128,7 @@ class templatesWcu extends moduleWcu {
 		}
 		$this->loadFontAwesome();
 	}
+
 	public function loadJqueryUi() {
 		static $loaded = false;
 		if ( ! $loaded ) {
@@ -134,6 +139,7 @@ class templatesWcu extends moduleWcu {
 			$loaded = true;
 		}
 	}
+
 	public function loadJqGrid() {
 		static $loaded = false;
 		if ( ! $loaded ) {
@@ -149,12 +155,13 @@ class templatesWcu extends moduleWcu {
 			$loaded = true;
 		}
 	}
+
 	public function loadFontAwesome() {
 		frameWcu::_()->addStyle( 'font-awesomeWcu', FrameWcu::_()->getModule( 'templates' )->getModPath() . 'css/font-awesome.min.css' );
 	}
 
 	/**
-	 * load_selectwoo.
+	 * Load selectWoo.
 	 *
 	 * @version 2.4.0
 	 * @since   2.4.0
@@ -167,9 +174,11 @@ class templatesWcu extends moduleWcu {
 		wp_enqueue_script( 'selectWoo' );
 		wp_enqueue_style( 'select2' );
 	}
+
 	public function loadDatePicker() {
 		frameWcu::_()->addScript( 'jquery-ui-datepicker' );
 	}
+
 	public function loadJqplot() {
 		static $loaded = false;
 		if ( ! $loaded ) {
@@ -191,6 +200,7 @@ class templatesWcu extends moduleWcu {
 			$loaded = true;
 		}
 	}
+
 	public function loadSortable() {
 		static $loaded = false;
 		if ( ! $loaded ) {
@@ -203,6 +213,7 @@ class templatesWcu extends moduleWcu {
 			$loaded = true;
 		}
 	}
+
 	public function loadMagicAnims() {
 		static $loaded = false;
 		if ( ! $loaded ) {
@@ -210,6 +221,7 @@ class templatesWcu extends moduleWcu {
 			$loaded = true;
 		}
 	}
+
 	public function loadBootstrapSimple() {
 		static $loaded = false;
 		if ( ! $loaded ) {
