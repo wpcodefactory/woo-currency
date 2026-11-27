@@ -74,7 +74,7 @@ define( 'WCU_CURRENT', 'current' );
 define( 'WCU_EOL', "\n" );
 
 define( 'WCU_PLUGIN_INSTALLED', true );
-define( 'WCU_VERSION', '2.4.1-dev-20261127-0734' );
+define( 'WCU_VERSION', '2.4.1' );
 define( 'WCU_DEV_VER', 1 );
 define( 'WCU_USER', 'user' );
 
